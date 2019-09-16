@@ -73,6 +73,7 @@ const FreeThink =() => {
                 onHide={() => setWriteShow(false)}
                 dialogClassName="modal-90w"
                 aria-labelledby="example-custom-modal-styling-title"
+                z
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="example-custom-modal-styling-title">

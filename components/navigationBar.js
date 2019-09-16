@@ -43,7 +43,7 @@ const NavigationBar = () => {
               </Form>
               <Nav.Link onClick={()=>setLoginShow(true)}>로그인</Nav.Link>
               <Nav.Link onClick={()=>setSignupShow(true)}>회원가입</Nav.Link>
-              <Nav.Link href="/mypage">MyPage</Nav.Link>
+              <Nav.Link href="/mypage/dashBoard">MyPage</Nav.Link>
           </Navbar>
           <Modal
               show={loginShow}

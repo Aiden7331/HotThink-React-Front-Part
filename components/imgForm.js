@@ -82,7 +82,7 @@ class ImgForm extends React.Component {
                 >
                     {fileList.length >= 8 ? null : uploadButton}
                 </Upload>
-                <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+                <Modal zIndex={3} visible={previewVisible} footer={null} onCancel={this.handleCancel}>
                     <img alt="example" style={{ width: '100%' }} src={previewImage} />
                 </Modal>
             </div>
