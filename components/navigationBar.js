@@ -28,7 +28,6 @@ const NavigationBar = () => {
                   {'HotThink'}
               </Navbar.Brand>
               <Nav className="mr-auto">
-                  <Nav.Link href="/">Home</Nav.Link>
                   <NavDropdown title="Think게시판" id="basic-nav-dropdown">
                       <NavDropdown.Item href="/freeThink">FreeThink</NavDropdown.Item>
                       <NavDropdown.Item href="/hotThink" num={{num}}>HotThink</NavDropdown.Item>
@@ -44,6 +43,7 @@ const NavigationBar = () => {
               <Nav.Link onClick={()=>setLoginShow(true)}>로그인</Nav.Link>
               <Nav.Link onClick={()=>setSignupShow(true)}>회원가입</Nav.Link>
               <Nav.Link href="/mypage/dashBoard">MyPage</Nav.Link>
+              <Nav.Link href="/mypage/dashBoard">결제</Nav.Link>
           </Navbar>
           <Modal
               show={loginShow}

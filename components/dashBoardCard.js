@@ -1,10 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Card,Typography,CardContent,CardActions,Button,makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles({
     card: {
         minWidth: 275,
-        margin:20,
+        margin:10,
         width:'45%',
         display:'inline-block',
     },
@@ -32,6 +32,7 @@ const DashBoardCard = ({title}) => {
                     {title}
                 </Typography>
                 <Typography variant="body2" component="p">
+                    <br />
                     <br />
                     <br />
                     <br />
