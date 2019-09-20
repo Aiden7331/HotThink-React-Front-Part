@@ -34,13 +34,10 @@ const MyPageBar = ({num}) => {
                 }
             >
                 <Menu.Item key="1">홈</Menu.Item>
-                <Menu.Item key="2">내가 쓴 글</Menu.Item>
-                <Menu.Item key="3">쪽지</Menu.Item>
-                <Menu.Item key="4">관심Tihnk</Menu.Item>
-                <Menu.Item key="5">스크랩</Menu.Item>
-                <Menu.Item key="6">신고 접수 내용</Menu.Item>
-                <Menu.Item key="7">거래 내역</Menu.Item>
-                <Menu.Item key="8">Q&A</Menu.Item>
+                <Menu.Item key="2">쪽지</Menu.Item>
+                <Menu.Item key="3">신고 접수 내용</Menu.Item>
+                <Menu.Item key="4">거래 내역</Menu.Item>
+                <Menu.Item key="5">Q&A</Menu.Item>
             </SubMenu>
             <SubMenu
                 key="sub2"
@@ -51,8 +48,8 @@ const MyPageBar = ({num}) => {
             </span>
                 }
             >
-                <Menu.Item key="7">프로필 설정</Menu.Item>
-                <Menu.Item key="8">알림 설정</Menu.Item>
+                <Menu.Item key="6">프로필 설정</Menu.Item>
+                <Menu.Item key="7">알림 설정</Menu.Item>
             </SubMenu>
         </Menu>
     );

@@ -73,7 +73,7 @@ const FreeThink =() => {
                 onHide={() => setWriteShow(false)}
                 dialogClassName="modal-90w"
                 aria-labelledby="example-custom-modal-styling-title"
-                z
+
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="example-custom-modal-styling-title">
@@ -84,20 +84,15 @@ const FreeThink =() => {
                     <PostForm/>
                 </Modal.Body>
             </Modal>
+
             <Modal
                 show={readShow}
                 onHide={() => setReadShow(false)}
                 dialogClassName="modal-90w"
                 aria-labelledby="example-custom-modal-styling-title"
+                size={'xl'}
             >
-                <Modal.Header closeButton>
-                    <Modal.Title id="example-custom-modal-styling-title">
-                        FreeThink 글 읽기
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <FreeThinkRead/>
-                </Modal.Body>
+                <FreeThinkRead/>
             </Modal>
         </>
     )
