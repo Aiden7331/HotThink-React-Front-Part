@@ -1,6 +1,9 @@
-import React from 'react';
-import {Col, Icon, List, Row} from "antd";
+import React, {useState} from 'react';
+import {Col, Icon, List, Pagination, Row} from "antd";
 import ThinkBar from "../container/thinkBar";
+import FreeThinkCard from "../components/freeThinkCard";
+import {Modal} from "react-bootstrap";
+import PostForm from "../container/PostForm";
 
 const listData =[];
 for (let i = 0; i < 23; i++) {
@@ -29,39 +32,28 @@ const HotThink = () => {
                 <Col span={4}><ThinkBar/></Col>
                 <Col span={16}>
                     <h3>핫띵크 > IT</h3>
-                    <List
-                        itemLayout="vertical"
-                        size="large"
-                        pagination={{
-                            onChange: page => {
-                                console.log(page);
-                            },
-                            pageSize: 10,
-                        }}
-                        dataSource={listData}
-                        renderItem={item => (
-                            <List.Item
-                                key={item.title}
-                                actions={[
-                                    <IconText type="star-o" text="156" key="list-vertical-star-o" />,
-                                    <IconText type="like-o" text="156" key="list-vertical-like-o" />,
-                                    <IconText type="message" text="2" key="list-vertical-message" />,
-                                ]}
-                                extra={
-                                    <img
-                                        width={272}
-                                        alt="logo"
-                                        src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                                    />
-                                }
-                            >
-                                {item.content}
-                            </List.Item>
-                        )}
-                    />
+                    <FreeThinkCard />
+                    <FreeThinkCard />
+                    <FreeThinkCard />
+                    <FreeThinkCard />
+                    <FreeThinkCard />
+                    <FreeThinkCard />
+                    <FreeThinkCard />
+                    <FreeThinkCard />
+                    <Pagination style={{textAlign:'center', margin:'30px'}} defaultCurrent={6} total={500} />
                 </Col>
                 <Col span={4}></Col>
             </Row>
+            <Modal>
+                <Modal.Header closeButton>
+                    <Modal.Title id="example-custom-modal-styling-title">
+                        FreeThink 글 작성
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <PostForm/>
+                </Modal.Body>
+            </Modal>
         </>
     )
 };
