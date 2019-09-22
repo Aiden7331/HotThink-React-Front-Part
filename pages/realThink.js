@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Icon} from 'antd'
+import {Row, Col, Icon,Pagination} from 'antd'
 import PostCard from "../container/postCard";
 import ThinkBar from "../container/thinkBar";
 
@@ -24,6 +24,7 @@ const RealThink = () => {
                     <PostCard/>
                     <PostCard/>
                     <PostCard/>
+                    <Pagination style={{textAlign:'center', margin:'30px'}} defaultCurrent={6} total={500} />
                 </Col>
                 <Col span={4}></Col>
             </Row>

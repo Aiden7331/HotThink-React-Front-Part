@@ -3,6 +3,8 @@ import {Col, Row, Button, Avatar,Rate,Tabs} from "antd";
 import {Image} from 'react-bootstrap';
 import MyPageBar from "../../container/myPageBar";
 import TagGroup from "../../components/tag";
+import UserWrote from "../../container/userWrote";
+import Notice from "../../container/notice";
 
 const {TabPane} = Tabs;
 
@@ -61,16 +63,16 @@ const DashBoard = () => {
                         <div>
                         <Tabs defaultActiveKey="1" size={"large"} tabBarStyle={{width:'100%', textAlign:'center'}} onChange={callback}>
                             <TabPane style={{width:'100%'}} tab="내가 쓴 글" key="1">
-                                Content of Tab Pane 1
+                                <UserWrote/>
                             </TabPane>
                             <TabPane style={{width:'100%'}} tab="관심 Think" key="2">
-                                Content of Tab Pane 2
+                                <UserWrote/>
                             </TabPane>
                             <TabPane style={{width:'100%'}} tab="스크랩" key="3">
-                                Content of Tab Pane 3
+                                <UserWrote/>
                             </TabPane>
                             <TabPane style={{width:'100%'}} tab="알림" key="4">
-                                Content of Tab Pane 4
+                                <Notice/>
                             </TabPane>
                         </Tabs>
                         </div>

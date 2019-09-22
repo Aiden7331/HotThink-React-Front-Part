@@ -5,26 +5,6 @@ import {Modal} from 'react-bootstrap';
 import PostForm from "../container/PostForm";
 import FreeThinkCard from "../components/freeThinkCard";
 
-const listData =[];
-for (let i = 0; i < 23; i++) {
-    listData.push({
-        href: 'http://ant.design',
-        title: `ant design part ${i}`,
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        description:
-            'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-            '너무너무 좋은 아이디어입니다.',
-    });
-}
-
-const IconText = ({ type, text }) => (
-    <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-        {text}
-  </span>
-);
-
 const FreeThink =() => {
     const [writeShow,setWriteShow] = useState(false);
     return(

@@ -8,7 +8,7 @@ const CardSlick = () => {
         <Carousel
         nextIcon={<Icon type="right" style={{color:'black'}} />}
         prevIcon={<Icon type="left" style={{color:'black'}} />}
-        style={{paddingLeft:'150px',paddingRight:'150px'}}
+        style={{paddingLeft:'150px',paddingRight:'150px', marginLeft:'10px'}}
         >
             <Carousel.Item>
                 <CardDeck>

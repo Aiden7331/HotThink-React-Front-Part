@@ -33,11 +33,11 @@ const MyPageBar = ({num}) => {
             </span>
                 }
             >
-                <Menu.Item key="1">홈</Menu.Item>
-                <Menu.Item key="2">쪽지</Menu.Item>
-                <Menu.Item key="3">신고 접수 내용</Menu.Item>
-                <Menu.Item key="4">거래 내역</Menu.Item>
-                <Menu.Item key="5">Q&A</Menu.Item>
+                <Menu.Item key="1" ><a href='/mypage/dashboard'>홈</a></Menu.Item>
+                <Menu.Item key="2"><a href='/mypage/messages'>쪽지</a></Menu.Item>
+                <Menu.Item key="3"><a href='/mypage/report'>신고 접수 내용</a></Menu.Item>
+                <Menu.Item key="4"><a href='/mypage/mytrade'>거래 내역</a></Menu.Item>
+                <Menu.Item key="5"><a href='/mypage/qna'>Q&A</a></Menu.Item>
             </SubMenu>
             <SubMenu
                 key="sub2"

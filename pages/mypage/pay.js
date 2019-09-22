@@ -16,23 +16,19 @@ const Pay = () => {
                                 <Form.Check
                                     type="radio"
                                     name="formHorizontalRadios"
-                                    id="formHorizontalRadios1"
-                                    label={
-                                        <div style={{backgroundColor: 'red', width: '100%'}}>
-                                        <Card bg="danger" bsPrefix="card" text="white"
-                                        style={{width: '100%', marginBottom: '30px'}}>
-                                        <Card.Header>1개월권</Card.Header>
-                                        <Card.Body>
-                                        <Card.Title>1개월 결제권</Card.Title>
-                                        <Card.Text>
-                                        10,000원
-                                        </Card.Text>
-                                        </Card.Body>
-                                        </Card>
-                                        </div>
-                                    }
-                                    style={{width:'100%'}}
+                                    id="formHorizontalRadios2"
                                 >
+                                    <div style={{backgroundColor: 'red', width: '100%'}}>
+                                        <Card bg="danger" text="white" style={{width: '100%', marginBottom: '30px'}}>
+                                            <Card.Header>1개월권</Card.Header>
+                                            <Card.Body>
+                                                <Card.Title>1개월 결제권</Card.Title>
+                                                <Card.Text>
+                                                    10,000원
+                                                </Card.Text>
+                                            </Card.Body>
+                                        </Card>
+                                    </div>
                                 </Form.Check>
                                 <Form.Check
                                     type="radio"
@@ -56,7 +52,7 @@ const Pay = () => {
                                     name="formHorizontalRadios"
                                     id="formHorizontalRadios3"
                                 >
-                                    <div >
+                                    <div>
                                         <Card bg="success" text="white" style={{width: '100%', marginBottom: '30px'}}>
                                             <Card.Header>6개월권</Card.Header>
                                             <Card.Body>
@@ -86,7 +82,7 @@ const Pay = () => {
                                     </div>
                                 </Form.Check>
                             </Form.Group>
-                            <Button variant="primary" type="submit" style={{position:'relative', left:'45%'}}>
+                            <Button variant="primary" type="submit" style={{position: 'relative', left: '45%'}}>
                                 결제하기
                             </Button>
                         </Form>
@@ -114,7 +110,7 @@ const Pay = () => {
                                     </div>
                                 </Form.Check>
                             </Form.Group>
-                            <Button variant="primary" type="submit" style={{position:'relative', left:'45%'}}>
+                            <Button variant="primary" type="submit" style={{position: 'relative', left: '45%'}}>
                                 결제하기
                             </Button>
                         </Form>

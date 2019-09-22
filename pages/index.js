@@ -1,7 +1,9 @@
 import React from 'react';
+import {Carousel} from 'react-bootstrap';
 import Introduce from "../components/introduce";
 import CardSlick from "../components/cardSlick";
 import Footer from "../container/footer";
+import HoogieCard from "../components/HoogieCard";
 
 const Home = () => {
     return(
@@ -33,7 +35,17 @@ const Home = () => {
             </div>
             <div style={{backgroundColor:'#E0F2F7',height:'500px', marginTop:'100px', textAlign:'center'}}>
                 <h1>후기</h1>
-                <CardSlick/>
+                <Carousel style={{paddingLeft:'50px', paddingRight:'50px',}}>
+                    <Carousel.Item>
+                        <HoogieCard/>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <HoogieCard/>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <HoogieCard/>
+                    </Carousel.Item>
+                </Carousel>
             </div>
             <Footer/>
         </>
