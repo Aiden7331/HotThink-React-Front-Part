@@ -1,6 +1,8 @@
 import React from 'react';
 import {Col, Row,Tabs} from "antd";
 import MyPageBar from "../../container/myPageBar";
+import MessageList from "../../container/messageList";
+import ChatRoom from "../../components/ChatRoom";
 
 const Messages = () => {
     return (
@@ -9,10 +11,11 @@ const Messages = () => {
                 <Col span={2}></Col>
                 <Col span={4}><MyPageBar/></Col>
                 <Col span={12}>
-
+                    <ChatRoom/>
                 </Col>
-                <Col span={4}></Col>
-                <Col span={2}></Col>
+                <Col span={6} style={{borderLeft:'1px solid #E6E6E6'}}>
+                    <MessageList/>
+                </Col>
             </Row>
 
         </>

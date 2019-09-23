@@ -21,6 +21,7 @@ const FreeThink =() => {
                     <FreeThinkCard />
                     <FreeThinkCard />
                     <FreeThinkCard />
+
                     <Pagination style={{textAlign:'center', margin:'30px'}} defaultCurrent={6} total={500} />
                 </Col>
                 <Col span={4}></Col>
