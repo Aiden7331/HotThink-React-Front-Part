@@ -1,5 +1,5 @@
 {
-  "parser": "babel-selint",
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2019,
     "sourceType": "module",

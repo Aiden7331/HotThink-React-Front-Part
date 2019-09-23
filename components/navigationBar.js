@@ -33,7 +33,6 @@ const NavigationBar = () => {
                       <NavDropdown.Item href="/hotThink" num={{num}}>HotThink</NavDropdown.Item>
                       <NavDropdown.Item href="/realThink">RealTihnk</NavDropdown.Item>
                   </NavDropdown>
-                  <Nav.Link href="/postScript">후기</Nav.Link>
                   <Nav.Link href="/finished">판매완료</Nav.Link>
               </Nav>
               <Form inline>

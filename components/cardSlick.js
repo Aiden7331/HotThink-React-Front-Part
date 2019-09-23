@@ -8,17 +8,16 @@ const CardSlick = () => {
         <Carousel
         nextIcon={<Icon type="right" style={{color:'black'}} />}
         prevIcon={<Icon type="left" style={{color:'black'}} />}
-        style={{paddingLeft:'150px',paddingRight:'150px', marginLeft:'10px'}}
+        style={{paddingLeft:'150px',paddingRight:'150px', marginLeft:'10px', height:'200px'}}
         >
             <Carousel.Item>
                 <CardDeck>
                     <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
+                        <Card.Img variant="top" src="/static/images/image4.jpg" />
                         <Card.Body>
-                            <Card.Title>Card title</Card.Title>
+                            <Card.Title>아이디어 공유사이트</Card.Title>
                             <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
+                                아이디어를 사고 파는 사이트 라는 생각을 해보았다.
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
@@ -26,12 +25,11 @@ const CardSlick = () => {
                         </Card.Footer>
                     </Card>
                     <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
+                        <Card.Img variant="top" src="/static/images/image5.jpg" />
                         <Card.Body>
-                            <Card.Title>Card title</Card.Title>
+                            <Card.Title>TFT</Card.Title>
                             <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
+                                팀 매칭 시스템
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
@@ -39,12 +37,11 @@ const CardSlick = () => {
                         </Card.Footer>
                     </Card>
                     <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
+                        <Card.Img variant="top" src="/static/images/image6.jpg" />
                         <Card.Body>
-                            <Card.Title>Card title</Card.Title>
+                            <Card.Title>학사정보시스템</Card.Title>
                             <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
+                                새롭게 발전한 학사정보시스템
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
@@ -52,12 +49,11 @@ const CardSlick = () => {
                         </Card.Footer>
                     </Card>
                     <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
+                        <Card.Img variant="top" src="/static/images/image7.jpg" />
                         <Card.Body>
-                            <Card.Title>Card title</Card.Title>
+                            <Card.Title>마리오 승익</Card.Title>
                             <Card.Text>
-                                This card has supporting text below as a natural lead-in to additional
-                                content.{' '}
+                                승익이가 마리오네트가 된다.
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
@@ -65,153 +61,11 @@ const CardSlick = () => {
                         </Card.Footer>
                     </Card>
                     <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
+                        <Card.Img variant="top" src="/static/images/image7.png" />
                         <Card.Body>
-                            <Card.Title>Card title</Card.Title>
+                            <Card.Title>강의실 예약 시스템</Card.Title>
                             <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This card has even longer content than the first to
-                                show that equal height action.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer>
-                    </Card>
-                </CardDeck>
-            </Carousel.Item>
-            <Carousel.Item>
-                <CardDeck>
-                    <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
-                        <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer>
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
-                        <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This card has supporting text below as a natural lead-in to additional
-                                content.{' '}
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer>
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
-                        <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer>
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
-                        <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer>
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
-                        <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This card has even longer content than the first to
-                                show that equal height action.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer>
-                    </Card>
-                </CardDeck>
-            </Carousel.Item>
-            <Carousel.Item>
-                <CardDeck>
-                    <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
-                        <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer>
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
-                        <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer>
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
-                        <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer>
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
-                        <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This card has supporting text below as a natural lead-in to additional
-                                content.{' '}
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
-                        </Card.Footer>
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" />
-                        <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This card has even longer content than the first to
-                                show that equal height action.
+                                강의실이 모바일 환경에서 예약이 된다????
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>

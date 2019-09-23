@@ -9,16 +9,16 @@ const PostCard = () => {
                 <Row type="flex" justify="center">
                     <Col span={18}>
                         <Card.Body>
-                            <Card.Title>제목</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">부제목</Card.Subtitle>
+                            <Card.Title>아이디어 공유 사이트</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">핫 띵크</Card.Subtitle>
                             <Card.Text>
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                                아이디어를 공유하고 판매하는 사이트를 생각중입니다.
                             </Card.Text>
                             <Card.Link href="/realThinkRead">내용보기</Card.Link>
                         </Card.Body>
                     </Col>
                     <Col span={6}>
-                        <Card.Img variant="top" src="/static/images/image1.jpg" style={{width:'100%',height:'auto'}} />
+                        <Card.Img variant="top" src="/static/images/image4.jpg" style={{width:'100%',height:'auto'}} />
                     </Col>
                 </Row>
             </Card>
