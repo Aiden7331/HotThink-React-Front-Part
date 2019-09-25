@@ -10,7 +10,6 @@ const Trade = () => {
                 </Col>
                 <Col span={16}>
                     <img src='/static/images/image9.jpg' style={{width:'100%'}}/>
-                    aaa
                 </Col>
                 <Col span={4}>
 

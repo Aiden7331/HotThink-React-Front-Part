@@ -28,11 +28,12 @@ const NavigationBar = () => {
                   {'HotThink'}
               </Navbar.Brand>
               <Nav className="mr-auto">
-                  <NavDropdown title="Think게시판" id="basic-nav-dropdown">
-                      <NavDropdown.Item href="/freeThink">FreeThink</NavDropdown.Item>
-                      <NavDropdown.Item href="/hotThink" num={{num}}>HotThink</NavDropdown.Item>
-                      <NavDropdown.Item href="/realThink">RealTihnk</NavDropdown.Item>
-                  </NavDropdown>
+                  <Nav.Link href="/freeThink">아이디어 공유</Nav.Link>
+                  {/*<NavDropdown title="Think게시판" id="basic-nav-dropdown" href='/freeThink'>*/}
+                  {/*    <NavDropdown.Item href="/freeThink">FreeThink</NavDropdown.Item>*/}
+                  {/*    <NavDropdown.Item href="/hotThink" num={{num}}>HotThink</NavDropdown.Item>*/}
+                  {/*    <NavDropdown.Item href="/realThink">RealTihnk</NavDropdown.Item>*/}
+                  {/*</NavDropdown>*/}
                   <Nav.Link href="/finished">판매완료</Nav.Link>
               </Nav>
               <Form inline>
