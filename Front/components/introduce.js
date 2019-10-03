@@ -15,7 +15,7 @@ const Introduce = () => {
             <Carousel.Item>
                 <img style={{height:'500px'}}
                     className="d-block w-100"
-                    src="/static/images/image1.jpg"
+                    src="/Front/static/images/image1.jpg"
                     alt="First slide"
                 />
                 <Carousel.Caption>
@@ -28,7 +28,7 @@ const Introduce = () => {
             <Carousel.Item>
                 <img style={{height:'500px'}}
                     className="d-block w-100"
-                    src="/static/images/image2.jpg"
+                    src="/Front/static/images/image2.jpg"
                     alt="Second slide"
                 />
 
@@ -42,7 +42,7 @@ const Introduce = () => {
             <Carousel.Item>
                 <img style={{height:'500px'}}
                     className="d-block w-100"
-                    src="/static/images/image3.jpg"
+                    src="/Front/static/images/image3.jpg"
                     alt="Third slide"
                 />
 

@@ -15,21 +15,21 @@ const ControlledCarousel = () => {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="/static/images/logo.png"
+                    src="/Front/static/images/logo.png"
                     alt="First slide"
                 />
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="/static/images/logo.png"
+                    src="/Front/static/images/logo.png"
                     alt="Second slide"
                 />
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="/static/images/logo.png"
+                    src="/Front/static/images/logo.png"
                     alt="Third slide"
                 />
             </Carousel.Item>

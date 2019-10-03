@@ -48,7 +48,7 @@ const HoogieCard = () => {
     return (
         <>
             <Card className={classes.card} width={1} style={{margin: '10px'}}>
-                <img src='/static/images/image10.jpg' style={{width:'100%', height:'auto'}}/>
+                <img src='/Front/static/images/image10.jpg' style={{width:'100%', height:'auto'}}/>
             </Card>
         </>
     );

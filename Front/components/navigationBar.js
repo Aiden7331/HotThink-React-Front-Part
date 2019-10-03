@@ -19,7 +19,7 @@ const NavigationBar = () => {
               bg="light" variant="light" sticky="top">
               <Navbar.Brand href="/">
                   <img
-                      src='/static/images/logo.png'
+                      src='/Front/static/images/logo.png'
                       width="30"
                       height="30"
                       className="d-inline-block align-top"
