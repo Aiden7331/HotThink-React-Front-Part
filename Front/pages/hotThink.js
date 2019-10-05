@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Col, Icon, List, Pagination, Row} from "antd";
-import ThinkBar from "../container/thinkBar";
-import FreeThinkCard from "../components/freeThinkCard";
+import ThinkBar from "../components/bars/thinkBar";
+import FreeThinkCard from "../components/cards/freeThinkCard";
 import {Modal} from "react-bootstrap";
 import PostForm from "../container/PostForm";
 

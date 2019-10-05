@@ -1,6 +1,6 @@
 import React from 'react';
 import {Col, Divider, Row, Table, Tabs, Tag} from "antd";
-import MyPageBar from "../../container/myPageBar";
+import MyPageBar from "../../components/bars/myPageBar";
 
 const columns = [
     {

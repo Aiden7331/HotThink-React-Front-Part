@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Row, Button, Avatar,Rate,Tabs} from "antd";
 import {Image} from 'react-bootstrap';
-import MyPageBar from "../../container/myPageBar";
+import MyPageBar from "../../components/bars/myPageBar";
 import TagGroup from "../../components/tag";
 import UserWrote from "../../container/userWrote";
 import Notice from "../../container/notice";

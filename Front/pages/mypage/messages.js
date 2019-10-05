@@ -1,6 +1,6 @@
 import React from 'react';
 import {Col, Row,Tabs} from "antd";
-import MyPageBar from "../../container/myPageBar";
+import MyPageBar from "../../components/bars/myPageBar";
 import MessageList from "../../container/messageList";
 import ChatRoom from "../../components/ChatRoom";
 

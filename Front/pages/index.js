@@ -3,7 +3,7 @@ import {Carousel} from 'react-bootstrap';
 import Introduce from "../components/introduce";
 import CardSlick from "../components/cardSlick";
 import Footer from "../container/footer";
-import HoogieCard from "../components/HoogieCard";
+import HoogieCard from "../components/cards/HoogieCard";
 
 const Home = () => {
     return(

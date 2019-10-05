@@ -1,9 +1,9 @@
 import React,{useState} from 'react';
-import ThinkBar from "../container/thinkBar";
+import ThinkBar from "../components/bars/thinkBar";
 import {Row,Col,List,Avatar,Icon,Pagination} from 'antd';
 import {Modal} from 'react-bootstrap';
 import PostForm from "../container/PostForm";
-import FreeThinkCard from "../components/freeThinkCard";
+import FreeThinkCard from "../components/cards/freeThinkCard";
 
 const FreeThink =() => {
     const [writeShow,setWriteShow] = useState(false);

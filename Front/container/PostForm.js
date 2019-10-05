@@ -41,7 +41,6 @@ const PostForm = () => {
                     height: "auto",
                     overflow: "hidden",
                     background: 'white',
-                    paddingBottom: '5px',
                     border: '1px solid #e6e6e6'
                 }}>
                     <div style={{overflow: 'hidden', height: 'auto'}}>
@@ -49,7 +48,7 @@ const PostForm = () => {
                             style={{
                                 margin: '5px',
                                 resize: 'none',
-                                lineHeight: '30px',
+                                lineHeight: '20px',
                                 overflowY: 'hidden',
                                 border: 'none',
                                 width: '98.5%',
@@ -64,10 +63,11 @@ const PostForm = () => {
                             borderWidth: '1px 0px 0px 0px',
                             borderColor: '#e6e6e6',
                             width: '98%',
-                            align: 'center'
+                            align: 'center',
+                            margin:'0px 0px 0px 0px',
                         }}/>
 
-                        <div style={{marginBottom: '5px', marginTop: '5px'}}>
+                        <div style={{margin:'5px'}}>
                             <input type="file" multiple hidden ref={imageInput} onChange={onChangeImages}/>
                             <ImgForm/>
                         </div>

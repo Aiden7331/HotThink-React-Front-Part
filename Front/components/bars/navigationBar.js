@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
 import {Navbar,Nav,Form,FormControl,Button,NavDropdown} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
-import Login from "../container/login";
-import SignUp from "../container/signup";
+import Login from "../../container/login";
+import SignUp from "../../container/signup";
 import Link from 'next/Link';
 
 const NavigationBar = () => {
@@ -18,7 +18,7 @@ const NavigationBar = () => {
                   boxShadow:'0px 0px 5px 0px rgba(0,0,0,0.15)',
               }}
               bg="light" variant="light" sticky="top">
-              <Navbar.Brand href="/">
+              <Navbar.Brand>
                   <img
                       src='/Front/static/images/logo.png'
                       width="30"
@@ -26,7 +26,7 @@ const NavigationBar = () => {
                       className="d-inline-block align-top"
                       alt=""
                   />
-                  {'HotThink'}
+                  <Link href='/'>{'HotThink'}</Link>
               </Navbar.Brand>
               <Nav className="mr-auto">
                   <Nav.Link><Link href="/freeThink">아이디어 공유</Link></Nav.Link>
@@ -35,7 +35,7 @@ const NavigationBar = () => {
                   {/*    <NavDropdown.Item href="/hotThink" num={{num}}>HotThink</NavDropdown.Item>*/}
                   {/*    <NavDropdown.Item href="/realThink">RealTihnk</NavDropdown.Item>*/}
                   {/*</NavDropdown>*/}
-                  <Nav.Link href="/finished">판매완료</Nav.Link>
+                  <Nav.Link><Link href="/finished">판매완료</Link></Nav.Link>
               </Nav>
               <Form inline>
                   <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -43,8 +43,8 @@ const NavigationBar = () => {
               </Form>
               <Nav.Link onClick={()=>setLoginShow(true)}>로그인</Nav.Link>
               <Nav.Link onClick={()=>setSignupShow(true)}>회원가입</Nav.Link>
-              <Nav.Link href="/mypage/dashBoard">MyPage</Nav.Link>
-              <Nav.Link href="/mypage/pay">결제</Nav.Link>
+              <Nav.Link><Link href="/mypage/dashBoard">MyPage</Link></Nav.Link>
+              <Nav.Link><Link href="/mypage/pay">결제</Link></Nav.Link>
           </Navbar>
           <Modal
               show={loginShow}
