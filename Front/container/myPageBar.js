@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Menu, Icon} from 'antd';
+import Link from 'next/Link';
 
 const {SubMenu} = Menu;
 
@@ -33,10 +34,10 @@ const MyPageBar = ({num}) => {
             </span>
                 }
             >
-                <Menu.Item key="1" ><a href='/mypage/dashboard'>홈</a></Menu.Item>
-                <Menu.Item key="2"><a href='/mypage/messages'>쪽지</a></Menu.Item>
-                <Menu.Item key="3"><a href='/mypage/report'>신고 접수 내용</a></Menu.Item>
-                <Menu.Item key="4"><a href='/mypage/mytrade'>거래 내역</a></Menu.Item>
+                <Menu.Item key="1" ><Link href='/mypage/dashboard'>홈</Link></Menu.Item>
+                <Menu.Item key="2"><Link href='/mypage/messages'>쪽지</Link></Menu.Item>
+                <Menu.Item key="3"><Link href='/mypage/report'>신고 접수 내용</Link></Menu.Item>
+                <Menu.Item key="4"><Link href='/mypage/mytrade'>거래 내역</Link></Menu.Item>
             </SubMenu>
             <SubMenu
                 key="sub2"

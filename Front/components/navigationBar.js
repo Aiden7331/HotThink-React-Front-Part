@@ -3,6 +3,7 @@ import {Navbar,Nav,Form,FormControl,Button,NavDropdown} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 import Login from "../container/login";
 import SignUp from "../container/signup";
+import Link from 'next/Link';
 
 const NavigationBar = () => {
     const [loginShow,setLoginShow] = useState(false);
@@ -28,7 +29,7 @@ const NavigationBar = () => {
                   {'HotThink'}
               </Navbar.Brand>
               <Nav className="mr-auto">
-                  <Nav.Link href="/freeThink">아이디어 공유</Nav.Link>
+                  <Nav.Link><Link href="/freeThink">아이디어 공유</Link></Nav.Link>
                   {/*<NavDropdown title="Think게시판" id="basic-nav-dropdown" href='/freeThink'>*/}
                   {/*    <NavDropdown.Item href="/freeThink">FreeThink</NavDropdown.Item>*/}
                   {/*    <NavDropdown.Item href="/hotThink" num={{num}}>HotThink</NavDropdown.Item>*/}

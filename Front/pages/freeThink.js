@@ -35,7 +35,7 @@ const FreeThink =() => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="example-custom-modal-styling-title">
-                        FreeThink 글 작성
+                        FreeThink 글 작성1
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
