@@ -87,8 +87,8 @@ const MyTrade = () => {
     return (
         <>
             <Row type="flex" justify="center">
-                <Col span={2}></Col>
                 <Col span={4}><MyPageBar/></Col>
+                <Col span={2}></Col>
                 <Col span={12}>
                     <h1>구매내역</h1>
                     <Table columns={columns} dataSource={data} style={{marginBottom:'30px'}}/>

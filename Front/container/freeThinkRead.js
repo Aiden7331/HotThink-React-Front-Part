@@ -45,15 +45,37 @@ const FreeThinkRead = () => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
+    const img = <img src="/static/images/image1.jpg"/>;
+
     function handleExpandClick() {
         setExpanded(!expanded);
     }
 
     return (
-        <Card className={classes.card} style={{width:'100%',height:'600px'}}>
+        <Card className={classes.card} style={{maxWidth:'100%',height:'auto'}}>
             <Row>
                 <Col span={12}>
-                    <img src={'/static/images/image1.jpg'} style={{width:'100%'}}/>
+                    {document.getElementsByClassName('img').naturalHeight>document.getElementsByClassName('box').naturalHeight
+                        ?
+                        <div className='box' style={{margin:'5px', width:'100%', float:"left", height:'90vh', background:'#F2F2F2', textAlign:'center'}}>
+                            <img className='img' src={`/static/images/image1.jpg`} style={{
+                                width: 'auto',
+                                height: '100%',
+                            }}/>
+                        </div>
+                        :
+                        <div className='box' style={{ height:"90vh", width:'100%', background:'#000000', display:'table'}}>
+                        <div style={{ display:'table-cell', width:'100%', verticalAlign:'middle'}}>
+                        <img className='img' src={`/static/images/image1.jpg`}
+                        style={{
+                        width: '100%',
+                        height: 'auto',
+                        margin:'0 auto'
+                    }}
+                        />
+                        </div>
+                        </div>
+                    }
                 </Col>
                 <Col span={12}>
                     <CardHeader

@@ -16,9 +16,8 @@ const DashBoard = () => {
     return (
         <>
             <Row type="flex" justify="center">
-                <Col span={2}></Col>
                 <Col span={4}><MyPageBar/></Col>
-                <Col span={12}>
+                <Col span={14}>
                     <Row>
                         <div style={{overflow:'hidden',height:'auto'}}>
                             <Image src="/static/images/image1.jpg"

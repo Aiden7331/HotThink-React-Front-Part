@@ -26,25 +26,25 @@ const NavigationBar = () => {
                       className="d-inline-block align-top"
                       alt=""
                   />
-                  <Link href='/'>{'HotThink'}</Link>
+                  <Link href='/'><a style={{textDecoration:'none'}}>{'HotThink'}</a></Link>
               </Navbar.Brand>
               <Nav className="mr-auto">
-                  <Nav.Link><Link href="/freeThink">아이디어 공유</Link></Nav.Link>
+                  <Nav.Link><Link href="/freeThink"><a style={{textDecoration:'none'}}>아이디어 공유</a></Link></Nav.Link>
                   {/*<NavDropdown title="Think게시판" id="basic-nav-dropdown" href='/freeThink'>*/}
                   {/*    <NavDropdown.Item href="/freeThink">FreeThink</NavDropdown.Item>*/}
                   {/*    <NavDropdown.Item href="/hotThink" num={{num}}>HotThink</NavDropdown.Item>*/}
                   {/*    <NavDropdown.Item href="/realThink">RealTihnk</NavDropdown.Item>*/}
                   {/*</NavDropdown>*/}
-                  <Nav.Link><Link href="/finished">판매완료</Link></Nav.Link>
+                  <Nav.Link><Link href="/finished"><a style={{textDecoration:'none'}}>판매완료</a></Link></Nav.Link>
               </Nav>
               <Form inline>
                   <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                   <Button variant="outline-info">Search</Button>
               </Form>
-              <Nav.Link onClick={()=>setLoginShow(true)}>로그인</Nav.Link>
-              <Nav.Link onClick={()=>setSignupShow(true)}>회원가입</Nav.Link>
-              <Nav.Link><Link href="/mypage/dashBoard">MyPage</Link></Nav.Link>
-              <Nav.Link><Link href="/mypage/pay">결제</Link></Nav.Link>
+              <Nav.Link onClick={()=>setLoginShow(true)}><a style={{textDecoration:'none'}}>로그인</a></Nav.Link>
+              <Nav.Link onClick={()=>setSignupShow(true)}><a style={{textDecoration:'none'}}>회원가입</a></Nav.Link>
+              <Nav.Link><Link href="/mypage/dashBoard"><a style={{textDecoration:'none'}}>MyPage</a></Link></Nav.Link>
+              <Nav.Link><Link href="/mypage/pay"><a style={{textDecoration:'none'}}>결제</a></Link></Nav.Link>
           </Navbar>
           <Modal
               show={loginShow}

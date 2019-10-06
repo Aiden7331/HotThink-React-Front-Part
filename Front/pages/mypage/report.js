@@ -86,8 +86,8 @@ const Report = () => {
     return (
         <>
             <Row type="flex" justify="center">
-                <Col span={2}></Col>
                 <Col span={4}><MyPageBar/></Col>
+                <Col span={2}></Col>
                 <Col span={12}>
                     <h1>신고 접수 내용</h1>
                     <Table columns={columns} dataSource={data} />

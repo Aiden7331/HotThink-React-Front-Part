@@ -1,19 +1,21 @@
 import React, {useState} from 'react';
 import {Menu, Icon} from 'antd';
+import Link from 'next/Link';
 
 const {SubMenu} = Menu;
 
-const ThinkBar = ({num}) => {
+const ThinkBar = () => {
     const rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
     const [openKeys, setOpenKeys] = useState(['sub1']);
 
 
-    const onOpenChange = (openKeys) => {
+    const onOpenChange = openKeys => {
         const latestOpenKey = openKeys.find(key => openKeys.indexOf(key) === -1);
         if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
             setOpenKeys(openKeys);
         } else {
             setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+            console.log('haha');
         }
     };
 
@@ -33,7 +35,7 @@ const ThinkBar = ({num}) => {
             </span>
                 }
             >
-                <Menu.Item key="1">IT</Menu.Item>
+                <Menu.Item key="1"><Link href='/freeThink'>IT</Link></Menu.Item>
                 <Menu.Item key="2">기계</Menu.Item>
                 <Menu.Item key="3">화학</Menu.Item>
                 <Menu.Item key="4">의류</Menu.Item>
@@ -49,7 +51,7 @@ const ThinkBar = ({num}) => {
             </span>
                 }
             >
-                <Menu.Item key="7">IT</Menu.Item>
+                <Menu.Item key="7"><Link href='/HotThink'>IT</Link></Menu.Item>
                 <Menu.Item key="8">기계</Menu.Item>
                 <Menu.Item key="9">화학</Menu.Item>
                 <Menu.Item key="10">의류</Menu.Item>
@@ -66,7 +68,7 @@ const ThinkBar = ({num}) => {
             </span>
                 }
             >
-                <Menu.Item key="13">IT</Menu.Item>
+                <Menu.Item key="13"><Link href='/RealThink'>IT</Link></Menu.Item>
                 <Menu.Item key="14">기계</Menu.Item>
                 <Menu.Item key="15">화학</Menu.Item>
                 <Menu.Item key="16">의류</Menu.Item>
