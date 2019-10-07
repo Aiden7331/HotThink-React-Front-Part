@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useCallback,useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,13 +12,16 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {useDispatch, useSelector} from 'react-redux';
+import {SIGN_UP_REQUEST,SIGN_UP_RESET} from '../reducer/user';
+import Router from 'next/router';
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+                Hot Think
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -51,8 +54,77 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+export const useInput = (initValue = null) =>{
+    const [value,setValue] = useState(initValue);
+    const handler = useCallback((e) =>{//useCallback-> 함수 내부에서 쓰는 state를 deps 배열에 넣는다.
+        setValue(e.target.value);
+    },[]);
+    return [value,handler,setValue];
+};
+
 const SignUp = () => {
     const classes = useStyles();
+    const [term,setTerm] = useState(false);
+    const [passwordError,setPasswordError] = useState(false);
+    const [termError,setTermError] = useState(false);
+
+    const [id, onChangeId, setId] = useInput('');
+    const [nick, onChangeNick, setNick] = useInput('');
+    const [password, onChangePassword, setPassword] = useInput('');
+    const [passwordCheck,setPasswordCheck] = useState('');
+    const dispatch = useDispatch();
+    const {isSigningUp,isSignedUp, me} = useSelector(state=>state.user);
+
+    useEffect(() => {
+        if (me) {
+            alert('로그인 했으니 메인 페이지로 이동합니다.');
+            Router.push('/');//해당 페이지로 이동
+        }
+    },[me && me.id]);
+
+    useEffect(() => {
+        if (isSignedUp) {
+            alert('회원가입 성공');
+            dispatch({
+                type: SIGN_UP_RESET
+            });
+        }
+    },[isSignedUp]);
+
+    const onSubmit = useCallback((e) => {
+        e.preventDefault();
+        if(password!==passwordCheck){
+            return setPasswordError(true);
+        }
+        if(!term){
+            return setTermError(true);
+        }
+        dispatch({
+            type: SIGN_UP_REQUEST,
+            data:{
+                userId: id,
+                password,
+                nickname:nick,
+            }
+        });
+        if(!isSignedUp){
+            setId('');
+            setNick('');
+            setPassword('');
+            setPasswordCheck('');
+            setTerm(false);
+        }
+    },[id, nick, password, passwordCheck, term]);
+
+    const onChangePasswordCheck = useCallback((e) => {
+        setPasswordError(e.target.value !== password);
+        setPasswordCheck(e.target.value);
+    },[password]);
+
+    const onChangeTerm = useCallback((e) => {
+        setTermError(false);
+        setTerm(e.target.checked);
+    },[]);
 
     return (
         <Container component="main" maxWidth="xs">
@@ -66,29 +138,6 @@ const SignUp = () => {
                 </Typography>
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="fname"
-                                name="firstName"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="firstName"
-                                label="First Name"
-                                autoFocus
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="lastName"
-                                label="Last Name"
-                                name="lastName"
-                                autoComplete="lname"
-                            />
-                        </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
@@ -105,17 +154,51 @@ const SignUp = () => {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                name="password"
+                                id="nickName"
+                                label="Nick Name"
+                                name="nickName"
+                                autoComplete="Nname"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="name"
+                                label="Name"
+                                name="name"
+                                autoComplete="name"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                name="pw"
                                 label="Password"
-                                type="password"
-                                id="password"
+                                type="pw"
+                                id="pw"
                                 autoComplete="current-password"
                             />
                         </Grid>
                         <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                name="pwCheck"
+                                label="Password Check"
+                                type="pwCheck"
+                                id="pwCheck"
+                                autoComplete="current-password-check"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
                             <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                label="I want to receive inspiration, marketing promotions and updates via email."
+                                control={<Checkbox value="allowTerms" color="primary" />}
+                                label="가입시 약관에 동의합니다."
                             />
                         </Grid>
                     </Grid>
@@ -126,12 +209,12 @@ const SignUp = () => {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign Up
+                        회원가입
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
                             <Link href="#" variant="body2">
-                                Already have an account? Sign in
+                                가입약관
                             </Link>
                         </Grid>
                     </Grid>
@@ -142,5 +225,5 @@ const SignUp = () => {
             </Box>
         </Container>
     );
-}
+};
 export default SignUp;

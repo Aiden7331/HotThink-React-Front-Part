@@ -62,7 +62,7 @@ const Login = ({show}) => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Login
+                    로그인
                 </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
@@ -89,7 +89,7 @@ const Login = ({show}) => {
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
+                        label="로그인 상태 유지"
                     />
                     <Button
                         type="submit"
@@ -98,17 +98,17 @@ const Login = ({show}) => {
                         color="primary"
                         className={classes.submit}
                     >
-                        Login
+                        로그인
                     </Button>
                     <Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">
-                                Forgot password?
+                                비밀번호 찾기
                             </Link>
                         </Grid>
                         <Grid item>
                             <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                                {'회원가입'}
                             </Link>
                         </Grid>
                     </Grid>
