@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect,useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {useDispatch, useSelector} from "react-redux";
+import {changeField, initializeForm,login} from "../modules/reducer/auth";
+import {check} from '../modules/reducer/user'
+import Router from 'next/router';
+import styled from 'styled-components';
 
 function Copyright() {
     return (
@@ -25,6 +30,13 @@ function Copyright() {
         </Typography>
     );
 }
+
+const ErrorMessage = styled.div`
+    color: red;
+    text-align: center;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+`;
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -51,8 +63,58 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Login = ({show}) => {
+const Login = () => {
+    const[error, setError] =  useState(null);
+
+    const dispatch = useDispatch();
     const classes = useStyles();
+
+    const {form,auth, authError,user} = useSelector(({auth,user})=>({
+        form: auth.register,
+        auth: auth.auth,
+        authError: auth.authError,
+        user: user.user
+    }));
+
+    const onChange = e =>{
+        const {value,name} = e.target;
+        dispatch(
+            changeField({
+                form:'login',
+                key: name,
+                value
+            })
+        );
+    };
+
+    const onSubmit = e => {
+        e.preventDefault();
+        const {id,pw} = form;
+        dispatch(login({id,pw}));
+    };
+
+    useEffect(()=>{
+        dispatch(initializeForm('login'));
+    },[dispatch]);
+
+    useEffect(()=>{
+        if(authError){
+            console.log('오류발생');
+            console.log(authError);
+            setError('로그인 실패');
+            return;
+        }
+        if(auth){
+            console.log('로그인 성공');
+            dispatch(check());
+        }
+    },[auth,authError,dispatch]);
+
+    useEffect(()=>{
+        if(user){
+            //로그인 성공시 이벤트
+        }
+    },[user]);
 
     return (
         <Container component="main" maxWidth="xs">
@@ -64,7 +126,7 @@ const Login = ({show}) => {
                 <Typography component="h1" variant="h5">
                     로그인
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={onSubmit}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -75,6 +137,7 @@ const Login = ({show}) => {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        onChange={onChange}
                     />
                     <TextField
                         variant="outlined"
@@ -84,13 +147,15 @@ const Login = ({show}) => {
                         name="password"
                         label="Password"
                         type="password"
-                        id="password"
+                        id="pw"
                         autoComplete="current-password"
+                        onChange={onChange}
                     />
                     <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
+                        control={<Checkbox color="primary" />}
                         label="로그인 상태 유지"
                     />
+                    {error && <ErrorMessage>{error}</ErrorMessage>}
                     <Button
                         type="submit"
                         fullWidth

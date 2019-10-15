@@ -13,8 +13,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useDispatch, useSelector} from 'react-redux';
-import {SIGN_UP_REQUEST,SIGN_UP_RESET} from '../reducer/user';
+import {changeField, initializeForm,register} from "../modules/reducer/auth";
+import {check} from '../modules/reducer/user'
 import Router from 'next/router';
+import styled from "styled-components";
 
 function Copyright() {
     return (
@@ -54,77 +56,87 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const useInput = (initValue = null) =>{
-    const [value,setValue] = useState(initValue);
-    const handler = useCallback((e) =>{//useCallback-> 함수 내부에서 쓰는 state를 deps 배열에 넣는다.
-        setValue(e.target.value);
-    },[]);
-    return [value,handler,setValue];
-};
+const ErrorMessage = styled.div`
+    color: red;
+    text-align: center;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+`;
 
 const SignUp = () => {
     const classes = useStyles();
-    const [term,setTerm] = useState(false);
-    const [passwordError,setPasswordError] = useState(false);
-    const [termError,setTermError] = useState(false);
-
-    const [id, onChangeId, setId] = useInput('');
-    const [nick, onChangeNick, setNick] = useInput('');
-    const [password, onChangePassword, setPassword] = useInput('');
-    const [passwordCheck,setPasswordCheck] = useState('');
+    const [error,setError] = useState(null);
     const dispatch = useDispatch();
-    const {isSigningUp,isSignedUp, me} = useSelector(state=>state.user);
 
-    useEffect(() => {
-        if (me) {
-            alert('로그인 했으니 메인 페이지로 이동합니다.');
-            Router.push('/');//해당 페이지로 이동
-        }
-    },[me && me.id]);
+    const {form,auth, authError,user} = useSelector(({auth,user})=>({
+        form: auth.register,
+        auth: auth.auth,
+        authError: auth.authError,
+        user: user.user
+    }));
 
-    useEffect(() => {
-        if (isSignedUp) {
-            alert('회원가입 성공');
-            dispatch({
-                type: SIGN_UP_RESET
-            });
-        }
-    },[isSignedUp]);
+    const onChange = e =>{
+        const {value,name} = e.target;
+        dispatch(
+            changeField({
+                form:'register',
+                key: name,
+                value
+            })
+        );
+    };
 
-    const onSubmit = useCallback((e) => {
+    const onSubmit = e => {
         e.preventDefault();
-        if(password!==passwordCheck){
-            return setPasswordError(true);
+        const {id,pw,pwck} = form;
+        //하나라도 비어있을 시
+        if([id,pw,pwck].includes('')){
+            setError('빈칸을 모두 입력하세요.');
+            return;
         }
-        if(!term){
-            return setTermError(true);
+        //비번 비번확인 불일치시
+        if(pw!==pwck){
+            setError('비밀번호가 일치하지 않습니다.');
+            changeField({form:'register',key:'pw',value:''});
+            changeField({form:'register',key:'pwck',value:''});
+            return;
         }
-        dispatch({
-            type: SIGN_UP_REQUEST,
-            data:{
-                userId: id,
-                password,
-                nickname:nick,
+        dispatch(register({id,pw}));
+    };
+
+    useEffect(()=>{
+        dispatch(initializeForm('register'));
+    },[dispatch]);
+
+    //회원가입 성공/실패처리
+    useEffect(()=>{
+        if(authError){
+            //이미 존재하는 이메일 일 때
+            if(authError.response.status===409){
+                setError('이미 존재하는 계정명입니다.');
+                return;
             }
-        });
-        if(!isSignedUp){
-            setId('');
-            setNick('');
-            setPassword('');
-            setPasswordCheck('');
-            setTerm(false);
+            //이미 존재하는 닉네임 일 때
+            if(authError.response.status===408){
+                setError('이미 존재하는 닉네임입니다.');
+                return;
+            }
         }
-    },[id, nick, password, passwordCheck, term]);
+        if(auth){
+            console.log('회원가입 성공');
+            console.log(auth);
+            dispatch(check());
+        }
+    },[auth,authError,dispatch]);
 
-    const onChangePasswordCheck = useCallback((e) => {
-        setPasswordError(e.target.value !== password);
-        setPasswordCheck(e.target.value);
-    },[password]);
-
-    const onChangeTerm = useCallback((e) => {
-        setTermError(false);
-        setTerm(e.target.checked);
-    },[]);
+    //user값이 잘 설정되었는지 확인
+    useEffect(()=>{
+        if(user){
+            console.log('checkAPI성공');
+            console.log('user');
+            //회원가입 성공시 이벤트
+        }
+    },[user]);
 
     return (
         <Container component="main" maxWidth="xs">
@@ -136,17 +148,18 @@ const SignUp = () => {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={onSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="email"
+                                id="id"
                                 label="Email Address"
-                                name="email"
+                                name="id"
                                 autoComplete="email"
+                                onChange={onChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -158,6 +171,7 @@ const SignUp = () => {
                                 label="Nick Name"
                                 name="nickName"
                                 autoComplete="Nname"
+                                onChange={onChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -169,6 +183,7 @@ const SignUp = () => {
                                 label="Name"
                                 name="name"
                                 autoComplete="name"
+                                onChange={onChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -178,9 +193,10 @@ const SignUp = () => {
                                 fullWidth
                                 name="pw"
                                 label="Password"
-                                type="pw"
+                                type="password"
                                 id="pw"
                                 autoComplete="current-password"
+                                onChange={onChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -188,11 +204,12 @@ const SignUp = () => {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                name="pwCheck"
+                                name="pwck"
                                 label="Password Check"
-                                type="pwCheck"
-                                id="pwCheck"
+                                type="password"
+                                id="pwck"
                                 autoComplete="current-password-check"
+                                onChange={onChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -202,6 +219,7 @@ const SignUp = () => {
                             />
                         </Grid>
                     </Grid>
+                    {error && <ErrorMessage>{error}</ErrorMessage>}
                     <Button
                         type="submit"
                         fullWidth

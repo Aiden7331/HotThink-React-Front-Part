@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import NavigationBar from "../components/bars/navigationBar";
 import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import reducer from '../reducer';
-import rootSaga from '../saga';
+import rootReducer,{rootSaga} from '../modules/reducer/index';
 import withReduxSaga from "next-redux-saga";
 import withRedux from 'next-redux-wrapper';
 import { Provider } from 'react-redux';
@@ -61,7 +60,7 @@ const configureStore = (initialState, options) => {
             applyMiddleware(...middlewares),
             !options.isServer && typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined' ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
         );
-    const store = createStore(reducer, initialState, enhancer);
+    const store = createStore(rootReducer, initialState, enhancer);
     store.sagaTask = sagaMiddleware.run(rootSaga);
     return store;
 };
