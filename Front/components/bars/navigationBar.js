@@ -5,7 +5,7 @@ import Login from "../../container/login";
 import SignUp from "../../container/signup";
 import Link from 'next/Link';
 
-const NavigationBar = () => {
+const NavigationBar = ({user}) => {
     const [loginShow,setLoginShow] = useState(false);
     const [signupShow,setSignupShow] = useState(false);
     const [num,setNum] = useState(['sub1']);
@@ -41,8 +41,22 @@ const NavigationBar = () => {
                   <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                   <Button variant="outline-info">Search</Button>
               </Form>
-              <Nav.Link onClick={()=>setLoginShow(true)}><a style={{textDecoration:'none'}}>로그인</a></Nav.Link>
-              <Nav.Link onClick={()=>setSignupShow(true)}><a style={{textDecoration:'none'}}>회원가입</a></Nav.Link>
+              {
+                  user
+                      ? <div style={{float: "right"}}>
+                          <Button size={"small"}
+                                  style={{marginTop: '4px', marginRight:'10px'}}
+                                  shape={"round"}
+                                  // onClick={onLogout}
+                          >
+                              <b style={{color: '#13c276'}}>로그아웃</b>
+                          </Button>
+                      </div>
+                      :<>
+                          <Nav.Link onClick={()=>setLoginShow(true)}><a style={{textDecoration:'none'}}>로그인</a></Nav.Link>
+                          <Nav.Link onClick={()=>setSignupShow(true)}><a style={{textDecoration:'none'}}>회원가입</a></Nav.Link>
+                      </>
+              }
               <Nav.Link><Link href="/mypage/dashBoard"><a style={{textDecoration:'none'}}>MyPage</a></Link></Nav.Link>
               <Nav.Link><Link href="/mypage/pay"><a style={{textDecoration:'none'}}>결제</a></Link></Nav.Link>
           </Navbar>

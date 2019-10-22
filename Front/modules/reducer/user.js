@@ -41,6 +41,11 @@ export function* userSaga() {
     yield takeLatest(LOGOUT, logoutSaga);
 }
 
+const dummyUser = {
+    Nname:'이문혁',
+    id:1,
+};
+
 const initialState = {
     user: null,
     checkError: null,
