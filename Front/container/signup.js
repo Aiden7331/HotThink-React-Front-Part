@@ -88,9 +88,9 @@ const SignUp = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        const {id,pw,pwck} = form;
+        const {email,pw,pwck,name,nickName,tel} = form;
         //하나라도 비어있을 시
-        if([id,pw,pwck].includes('')){
+        if([email,pw,pwck,name,nickName,tel].includes('')){
             setError('빈칸을 모두 입력하세요.');
             return;
         }
@@ -101,7 +101,7 @@ const SignUp = () => {
             changeField({form:'register',key:'pwck',value:''});
             return;
         }
-        dispatch(register({id,pw}));
+        dispatch(register({email,pw,name,nickName,tel}));
     };
 
     useEffect(()=>{
@@ -111,6 +111,7 @@ const SignUp = () => {
     //회원가입 성공/실패처리
     useEffect(()=>{
         if(authError){
+            console.log(authError);
             //이미 존재하는 이메일 일 때
             if(authError.response.status===409){
                 setError('이미 존재하는 계정명입니다.');
@@ -123,8 +124,7 @@ const SignUp = () => {
             }
         }
         if(auth){
-            console.log('회원가입 성공');
-            console.log(auth);
+            //회원가입 성공
             dispatch(check());
         }
     },[auth,authError,dispatch]);
@@ -132,9 +132,12 @@ const SignUp = () => {
     //user값이 잘 설정되었는지 확인
     useEffect(()=>{
         if(user){
-            console.log('checkAPI성공');
-            console.log('user');
             //회원가입 성공시 이벤트
+        }
+        try{
+            localStorage.setItem('user',JSON.stringify(user));
+        } catch(e) {
+            console.log('localStorage is not working2');
         }
     },[user]);
 
@@ -148,17 +151,43 @@ const SignUp = () => {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <form className={classes.form} noValidate onSubmit={onSubmit}>
+                <form onSubmit={onSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="id"
+                                id="email"
                                 label="Email Address"
-                                name="id"
+                                name="email"
                                 autoComplete="email"
+                                onChange={onChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                name="pw"
+                                label="Password"
+                                type="password"
+                                id="pw"
+                                autoComplete="current-password"
+                                onChange={onChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                name="pwck"
+                                label="Password Check"
+                                type="password"
+                                id="pwck"
+                                autoComplete="current-password-check"
                                 onChange={onChange}
                             />
                         </Grid>
@@ -191,33 +220,14 @@ const SignUp = () => {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                name="pw"
-                                label="Password"
-                                type="password"
-                                id="pw"
-                                autoComplete="current-password"
+                                id="tel"
+                                label="Tel"
+                                name="tel"
+                                autoComplete="tel"
                                 onChange={onChange}
                             />
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="pwck"
-                                label="Password Check"
-                                type="password"
-                                id="pwck"
-                                autoComplete="current-password-check"
-                                onChange={onChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Checkbox value="allowTerms" color="primary" />}
-                                label="가입시 약관에 동의합니다."
-                            />
-                        </Grid>
+                        {/*여기에 선호도 체크박스 추가해야함 */}
                     </Grid>
                     {error && <ErrorMessage>{error}</ErrorMessage>}
                     <Button

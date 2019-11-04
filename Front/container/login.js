@@ -69,11 +69,11 @@ const Login = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const {form,auth, authError,user} = useSelector(({auth,user})=>({
-        form: auth.register,
+    const {form, auth, authError, user} = useSelector(({auth,user})=>({
+        form: auth.login,
         auth: auth.auth,
         authError: auth.authError,
-        user: user.user
+        user: user.user,
     }));
 
     const onChange = e =>{
@@ -89,8 +89,8 @@ const Login = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        const {id,pw} = form;
-        dispatch(login({id,pw}));
+        const {email, pw} = form;
+        dispatch(login({email, pw}));
     };
 
     useEffect(()=>{
@@ -99,20 +99,27 @@ const Login = () => {
 
     useEffect(()=>{
         if(authError){
-            console.log('오류발생');
-            console.log(authError);
             setError('로그인 실패');
             return;
         }
         if(auth){
             console.log('로그인 성공');
+            localStorage.setItem('token',auth.token);
+            console.log(localStorage.getItem('token'));
             dispatch(check());
+            console.log('check success');
         }
     },[auth,authError,dispatch]);
 
     useEffect(()=>{
         if(user){
             //로그인 성공시 이벤트
+            console.log('로그인 성공시 이벤트');
+            try{
+                localStorage.setItem('user',JSON.stringify(user));
+            } catch(e) {
+                console.log('localStorage is not working1');
+            }
         }
     },[user]);
 
@@ -144,7 +151,7 @@ const Login = () => {
                         margin="normal"
                         required
                         fullWidth
-                        name="password"
+                        name="pw"
                         label="Password"
                         type="password"
                         id="pw"

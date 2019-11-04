@@ -1,5 +1,6 @@
 import { List, Avatar, Icon } from 'antd';
 import React from 'react';
+import {useSelector} from "react-redux";
 
 const listData = [];
 for (let i = 0; i < 23; i++) {
@@ -21,19 +22,19 @@ const IconText = ({ type, text }) => (
   </span>
 );
 
-const UserWrote = () => {
+const UserWrote = ({user}) => {
     return(
         <>
             <List
                 itemLayout="vertical"
                 size="large"
-                dataSource={listData}
-                renderItem={item => (
+                dataSource={user}
+                renderItem={ item=> (
                     <List.Item
-                        key={item.title}
+                        key={item}
                         actions={[
-                            <IconText type="star-o" text="156" key="list-vertical-star-o" />,
-                            <IconText type="like-o" text="156" key="list-vertical-like-o" />,
+                            <IconText type="star-o" text={item.hits} key="list-vertical-star-o" />,
+                            <IconText type="like-o" text={item.good} key="list-vertical-like-o" />,
                             <IconText type="message" text="2" key="list-vertical-message" />,
                         ]}
                         extra={
@@ -49,7 +50,7 @@ const UserWrote = () => {
                             title={<a href={item.href}>{item.title}</a>}
                             description={item.description}
                         />
-                        {item.content}
+                        {item.contents}
                     </List.Item>
                 )}
             />

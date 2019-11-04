@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Carousel} from 'react-bootstrap';
 import Introduce from "../components/introduce";
 import CardSlick from "../components/cardSlick";

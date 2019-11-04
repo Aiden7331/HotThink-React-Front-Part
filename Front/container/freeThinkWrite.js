@@ -1,22 +1,67 @@
-import React, {useCallback, useState, useRef} from 'react';
-import {Form, Button} from 'antd';
+import React, {useCallback, useState, useRef, useEffect} from 'react';
+import {Form, Button,Input} from 'antd';
 import TextareaAutosize from "react-textarea-autosize";
 import ImgForm from "../components/imgForm";
+import {useDispatch, useSelector} from "react-redux";
+import {initialize, changeField, writeFreeThink} from "../modules/reducer/freeThink";
 
-const PostForm = () => {
-    const [text, setText] = useState('');
+const FreeThinkWrite = () => {
     const imageInput = useRef();
+    const dispatch = useDispatch();
+    const {title,contents,image,post,error,category} = useSelector(({freeThink})=>({
+        title:freeThink.title,
+        contents:freeThink.contents,
+        image:freeThink.image,
+        post:freeThink.freeThink,
+        error:freeThink.freeThinkError,
+        category:freeThink.category,
+    }));
 
     const onSubmitForm = useCallback((e) => {
         e.preventDefault();
-        if (!text || !text.trim()) {
+        if (!title || !title.trim()) {
+            return alert('제목을 작성하세요.');
+        }
+        if (!contents || !contents.trim()) {
             return alert('게시글을 작성하세요.');
         }
-    },[]);
+        dispatch(
+            writeFreeThink({
+                title,
+                contents,
+                image,
+                category,
+            })
+        )
+    },[dispatch,title,contents,image,category]);
 
-    const onChangeText = useCallback((e) => {
-        setText(e.target.value);
-    }, []);
+    //성공 혹은 실패시 작업
+    useEffect(()=>{
+       if(post){
+           //success
+       }
+
+       if(error){
+           console.log(error);
+       }
+    },[post,error]);
+
+    const onChangeField = useCallback(payload=>dispatch(changeField(payload)),[
+        dispatch
+    ]);
+
+    const onChangeTitle = e =>{
+        onChangeField({key:'title',value:e.target.value})
+    };
+    const onChangeContents = e =>{
+        onChangeField({key:'contents',value:e.target.value})
+    };
+    //언마운트될때 초기화
+    useEffect(()=>{
+        return()=>{
+            dispatch(initialize());
+        };
+    },[dispatch]);
 
     const onChangeImages = useCallback((e) => {
         console.log(e.target.files);
@@ -37,6 +82,7 @@ const PostForm = () => {
     return (
         <>
             <Form style={{margin: '0px 0 10px'}} encType="multipart/form-data" onSubmit={onSubmitForm}>
+                <Input style={{marginBottom:'3px'}} id="title" value={title} onChange={onChangeTitle} placeholder="제목" />
                 <div style={{
                     height: "auto",
                     overflow: "hidden",
@@ -56,8 +102,9 @@ const PostForm = () => {
                                 height: 'auto'
                             }}
                             placeholder="당신의 아이디어를 발휘하세요!"
-                            value={text}
-                            onChange={onChangeText}
+                            value={contents}
+                            id="contents"
+                            onChange={onChangeContents}
                             autoFocus={true}/>
                         <hr style={{
                             borderWidth: '1px 0px 0px 0px',
@@ -68,7 +115,7 @@ const PostForm = () => {
                         }}/>
 
                         <div style={{margin:'5px'}}>
-                            <input type="file" multiple hidden ref={imageInput} onChange={onChangeImages}/>
+                            <input type="file" id="image" value={image} multiple hidden ref={imageInput} onChange={onChangeImages}/>
                             <ImgForm/>
                         </div>
                     </div>
@@ -80,4 +127,4 @@ const PostForm = () => {
     );
 };
 
-export default PostForm;
+export default FreeThinkWrite;

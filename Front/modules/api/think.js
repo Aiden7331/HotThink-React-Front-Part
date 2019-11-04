@@ -1,22 +1,64 @@
 import axios from 'axios';
+import qs from 'qs';
 
 axios.defaults.baseURL='http://localhost:8080/';
 
 //freeThink 게시글 읽기
-export const readFreeThink = ({sb,sz,pg,category,ob}) => axios.get(`/api/freethink?sb=${sb}&sz=${sz}&pg=${pg}&category=${category}&ob=${ob}`, {
+export const listFreeThinks = ({sb,sz,pg,category,ob}) => {
+    const queryString = qs.stringify({
+        sb,
+        sz,
+        pg,
+        category,
+        ob,
+    });
+    return axios.get(`/api/freethink?${queryString}`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    });
+};
+
+//freeThink 게시글 작성
+export const writeFreeThink = ({title,contents,image,category}) => {
+    return axios.post(`/api/freethink/${category}`, {
+        title,
+        contents,
+        image,
+    },{
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    });
+};
+
+//freeThink 게시글 수정
+export const updateFreeThink = ({id,title,contents,image}) => axios.put(`/api/freethink/${id}`, {title,contents,image},{
     headers: {
-        'Authorization':'Bearer '+localStorage.getItem('token')
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
 });
 
-//freeThink 게시글 작성
-export const createFreeThink = () => axios.post('/api/freethink');
-
-//freeThink 게시글 수정
-export const updateFreeThink = () => axios.put('/api/freethink');
-
 //freeThink 게시글 삭제
-export const deleteFreeThink = () => axios.delete('/api/freethink');
+export const deleteFreeThink = (id) => axios.delete(`/api/freethink/${id}`,{
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
+});
+
+// export const deleteFreeThink = function(id) {
+//     console.log(id);
+//     axios.delete(`/api/freethink/${id}`,{
+//         headers: {
+//             'Authorization': 'Bearer ' + localStorage.getItem('token')
+//         }});
+// };
+//     // ({id}) => axios.delete(`/api/freethink/${id}`,{
+//     //     headers: {
+//     //         'Authorization': 'Bearer ' + localStorage.getItem('token')
+//     //     }
+//     // });
+// // }
 
 
 //hotThink 게시글 읽기

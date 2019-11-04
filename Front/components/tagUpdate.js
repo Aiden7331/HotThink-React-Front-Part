@@ -2,7 +2,7 @@ import React from 'react';
 import { Tag, Input, Icon } from 'antd';
 import { TweenOneGroup } from 'rc-tween-one';
 
-class TagGroup extends React.Component {
+class TagGroupUpdate extends React.Component {
     state = {
         tags: this.props.userPrefer,
         inputVisible: false,
@@ -92,9 +92,14 @@ class TagGroup extends React.Component {
                         onPressEnter={this.handleInputConfirm}
                     />
                 )}
+                {!inputVisible && (
+                    <Tag onClick={this.showInput} style={{ background: '#fff', borderStyle: 'dashed',display:'inline-block' }}>
+                        <Icon type="plus" /> New Tag
+                    </Tag>
+                )}
             </div>
         );
     }
 }
 
-export default TagGroup;
+export default TagGroupUpdate;

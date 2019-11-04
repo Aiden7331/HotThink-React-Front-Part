@@ -3,7 +3,7 @@ import {Col, Icon, List, Pagination, Row} from "antd";
 import ThinkBar from "../components/bars/thinkBar";
 import FreeThinkCard from "../components/cards/freeThinkCard";
 import {Modal} from "react-bootstrap";
-import PostForm from "../container/PostForm";
+import FreeThinkWrite from "../container/freeThinkWrite";
 
 const listData =[];
 for (let i = 0; i < 23; i++) {
@@ -51,7 +51,7 @@ const HotThink = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <PostForm/>
+                    <FreeThinkWrite/>
                 </Modal.Body>
             </Modal>
         </>

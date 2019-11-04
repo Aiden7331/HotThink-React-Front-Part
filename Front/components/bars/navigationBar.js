@@ -1,14 +1,44 @@
-import React,{useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Navbar,Nav,Form,FormControl,Button,NavDropdown} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 import Login from "../../container/login";
 import SignUp from "../../container/signup";
 import Link from 'next/Link';
+import {useSelector,useDispatch} from "react-redux";
+import {logout} from '../../modules/reducer/user'
+import {authNull} from "../../modules/reducer/auth";
 
-const NavigationBar = ({user}) => {
+const NavigationBar = () => {
     const [loginShow,setLoginShow] = useState(false);
     const [signupShow,setSignupShow] = useState(false);
     const [num,setNum] = useState(['sub1']);
+    const {user} = useSelector(({user}) => ({user:user.user}));
+    const dispatch = useDispatch();
+    const onLogout = () => {
+        try{
+            dispatch(logout());
+            dispatch(authNull());
+            localStorage.clear();
+            console.log(localStorage.getItem('user'));
+            console.log(localStorage.getItem('token'));
+        } catch(e) {
+            console.log('localStorage is not working1');
+        }
+    };
+    useEffect(()=>{
+        if(!user){
+            //로그아웃 성공시 이벤트
+            console.log('로그아웃 성공시 이벤트');
+            try{
+                localStorage.setItem('user',null);
+                localStorage.setItem('token',null);
+                dispatch(logout());
+                dispatch(authNull());
+            } catch(e) {
+                console.log('localStorage is not working1');
+            }
+        }
+    },[user,dispatch]);
   return(
       <>
           <Navbar
@@ -29,7 +59,7 @@ const NavigationBar = ({user}) => {
                   <Link href='/'><a style={{textDecoration:'none'}}>{'HotThink'}</a></Link>
               </Navbar.Brand>
               <Nav className="mr-auto">
-                  <Nav.Link><Link href="/freeThink"><a style={{textDecoration:'none'}}>아이디어 공유</a></Link></Nav.Link>
+                  <Nav.Link><Link href={{ pathname: 'freeThink', query: { sb:0,sz:10,pg:1,category:'IT서비스',ob:0 }}}><a style={{textDecoration:'none'}}>아이디어 공유</a></Link></Nav.Link>
                   {/*<NavDropdown title="Think게시판" id="basic-nav-dropdown" href='/freeThink'>*/}
                   {/*    <NavDropdown.Item href="/freeThink">FreeThink</NavDropdown.Item>*/}
                   {/*    <NavDropdown.Item href="/hotThink" num={{num}}>HotThink</NavDropdown.Item>*/}
@@ -47,7 +77,7 @@ const NavigationBar = ({user}) => {
                           <Button size={"small"}
                                   style={{marginTop: '4px', marginRight:'10px'}}
                                   shape={"round"}
-                                  // onClick={onLogout}
+                                  onClick={onLogout}
                           >
                               <b style={{color: '#13c276'}}>로그아웃</b>
                           </Button>

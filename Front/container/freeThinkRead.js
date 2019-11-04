@@ -12,10 +12,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import CheckIcon from '@material-ui/icons/Check';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CommentModal from "../components/comment";
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -41,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const FreeThinkRead = () => {
+const FreeThinkRead = ({think}) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
@@ -89,21 +90,23 @@ const FreeThinkRead = () => {
                                 <MoreVertIcon />
                             </IconButton>
                         }
-                        title="Shrimp and Chorizo Paella"
-                        subheader="September 14, 2016"
+                        title={think.title}
+                        subheader={think.createAt}
                     />
                     <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            This impressive paella is a perfect party dish and a fun meal to cook together with your
-                            guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                            {think.contents}
                         </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
                         <IconButton aria-label="add to favorites">
-                            <FavoriteIcon />
+                            <FavoriteIcon/>{think.good}
                         </IconButton>
                         <IconButton aria-label="share">
-                            <ShareIcon />
+                            <CheckIcon/>{think.hits}
+                        </IconButton>
+                        <IconButton aria-label="comment">
+                            <ChatBubbleOutlineIcon/>{think.replies.length}
                         </IconButton>
                         <IconButton
                             className={clsx(classes.expand, {
@@ -118,7 +121,7 @@ const FreeThinkRead = () => {
                     </CardActions>
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <CardContent>
-                            <CommentModal/>
+                            <CommentModal replies={think.replies}/>
                         </CardContent>
                     </Collapse>
                 </Col>

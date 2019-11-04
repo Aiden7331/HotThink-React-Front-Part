@@ -8,6 +8,7 @@ import rootReducer,{rootSaga} from '../modules/reducer/index';
 import withReduxSaga from "next-redux-saga";
 import withRedux from 'next-redux-wrapper';
 import { Provider } from 'react-redux';
+import {tempSetUser} from "../modules/reducer/user";
 
 const HotThink = ({Component,store,pageProps}) => {
     return (
@@ -61,7 +62,18 @@ const configureStore = (initialState, options) => {
             !options.isServer && typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined' ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
         );
     const store = createStore(rootReducer, initialState, enhancer);
+    function loadUser() {
+        try{
+            const user = localStorage.getItem('user');
+            if(!user) return;
+            store.dispatch(tempSetUser(user));
+            store.dispatch(check());
+        } catch (e) {
+
+        }
+    }
     store.sagaTask = sagaMiddleware.run(rootSaga);
+    loadUser();
     return store;
 };
 

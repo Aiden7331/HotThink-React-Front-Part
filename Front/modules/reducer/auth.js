@@ -6,6 +6,7 @@ import * as authAPI from '../api/auth';
 
 const CHANGE_FIELD = '/auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
+const AUTH_NULL = 'auth/AUTH_NULL';
 
 const [REGISTER,REGISTER_SUCCESS,REGISTER_FAILURE] = createRequestActionTypes('auth/REGISTER');
 
@@ -15,22 +16,27 @@ export const changeField = createAction(
     CHANGE_FIELD,
     ({form,key,value})=>({
         form,//register,login
-        key,//id,pw,pwck
+        key,//email,pw,pwck
         value,//실제 바꾸려는 값
     })
 );
 
 export const initializeForm = createAction(INITIALIZE_FORM,form=>form);//register/login
 
-export const register = createAction(REGISTER,({id,pw})=>({
-    id,
+export const register = createAction(REGISTER,({email, pw, name, nickName, tel})=>({
+    email,
+    pw,
+    name,
+    nickName,
+    tel,
+}));
+
+export const login = createAction(LOGIN,({email, pw})=>({
+    email,
     pw,
 }));
 
-export const login = createAction(LOGIN,({id,pw})=>({
-    id,
-    pw,
-}));
+export const authNull = createAction(AUTH_NULL);
 
 //사가생성
 const registerSaga = createRequestSaga(REGISTER,authAPI.register);
@@ -42,12 +48,15 @@ export function* authSaga() {
 
 const initialState={
     register:{
-        id:'',
+        email:'',
         pw:'',
         pwck:'',
+        name:'',
+        nickName:'',
+        tel:'',
     },
     login:{
-        id:'',
+        email:'',
         pw:'',
     },
     auth:null,
@@ -85,6 +94,10 @@ const auth = handleActions(
         [LOGIN_FAILURE]: (state,{payload:error}) => ({
             ...state,
             authError : error,
+        }),
+        [AUTH_NULL]: (state,{payload:error}) => ({
+            ...state,
+            auth: null,
         }),
     },
     initialState,
