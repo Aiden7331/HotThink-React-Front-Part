@@ -3,8 +3,8 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:8080';
 
 // 유저 업데이트
-export const updateUser = ({ nickName,pw,tel,preferences }) =>
-    axios.put('/api/user', { nickName,pw,tel,preferences }, {
+export const updateUser = ({ nickName,pw,tel,preferenceList }) =>
+    axios.put('/api/user', { nickName,pw,tel,preferenceList }, {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         }});

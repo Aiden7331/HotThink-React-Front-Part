@@ -33,7 +33,8 @@ export const writeFreeThink = ({title,contents,image,category}) => {
 };
 
 //freeThink 게시글 수정
-export const updateFreeThink = ({id,title,contents,image}) => axios.put(`/api/freethink/${id}`, {title,contents,image},{
+export const updateFreeThink = ({id,title,contents,image,category}) =>
+    axios.put(`/api/freethink/${id}/${category}`, {title,contents,image},{
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
     }

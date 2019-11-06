@@ -5,7 +5,8 @@ import TagGroupUpdate from "../components/tagUpdate";
 import {useDispatch, useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
 import { login} from "../modules/reducer/auth";
-import {updateUser,changeField} from "../modules/reducer/user";
+import {updateUser,changeField,check} from "../modules/reducer/user";
+
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -45,8 +46,9 @@ const UpdateUser = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        const {nickName, pw, tel, preferences} = form;
-        dispatch(updateUser({nickName,pw,tel,preferences}));
+        const {nickName, pw, tel, preferenceList} = form;
+        dispatch(updateUser({nickName,pw,tel,preferenceList}));
+        dispatch(check());
     };
     return(
         <>
@@ -86,7 +88,8 @@ const UpdateUser = () => {
                     onChange={onChange}
                     margin="normal"
                 />
-                <TagGroupUpdate userPrefer={user.preferenceList}/>
+
+                <TagGroupUpdate id="preferenceList" userPrefer={user.preferenceList}/>
                 <Button
                     type="submit"
                     fullWidth

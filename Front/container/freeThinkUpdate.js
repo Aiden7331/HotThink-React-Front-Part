@@ -3,19 +3,19 @@ import {Form, Button,Input} from 'antd';
 import TextareaAutosize from "react-textarea-autosize";
 import ImgForm from "../components/imgForm";
 import {useDispatch, useSelector} from "react-redux";
-import {initialize, changeField, updateFreeThink} from "../modules/reducer/freeThink";
+import {initialize, changeField, updateFreeThink, setOriginalFreeThink} from "../modules/reducer/freeThink";
 
 const FreeThinkUpdate = ({think}) => {
     const imageInput = useRef();
     const dispatch = useDispatch();
-    const {title,contents,image,post,error,category,originalPostId} = useSelector(({freeThink})=>({
+    const {title,contents,image,post,error,category,id} = useSelector(({freeThink})=>({
         title:freeThink.title,
         contents:freeThink.contents,
         image:freeThink.image,
         post:freeThink.freeThink,
         error:freeThink.freeThinkError,
         category:freeThink.category,
-        originalPostId:freeThink.originalPostId,
+        id:freeThink.originalPostId,
     }));
 
     const onSubmitForm = useCallback((e) => {
@@ -28,18 +28,14 @@ const FreeThinkUpdate = ({think}) => {
         }
         dispatch(
             updateFreeThink({
+                id,
                 title,
                 contents,
                 image,
-                id:originalPostId
+                category,
             })
         )
-    },[dispatch,title,contents,image,category]);
-
-    //update state셋팅
-    useEffect(()=>{
-
-    });
+    },[dispatch,title,contents,image,category,id]);
 
     //성공 혹은 실패시 작업
     useEffect(()=>{

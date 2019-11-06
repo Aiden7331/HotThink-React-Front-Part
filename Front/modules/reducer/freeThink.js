@@ -17,10 +17,10 @@ export const changeField = createAction(CHANGE_FIELD,({key,value})=>({
     key,value
 }));
 export const writeFreeThink = createAction(WRITE_FREE_THINK,({title,contents,image,category})=>({
-    title, contents,image,category
+    title, contents, image, category
 }));
-export const updateFreeThink = createAction(UPDATE_FREE_THINK,({id,title,contents,image})=>({
-    id, title, contents, image
+export const updateFreeThink = createAction(UPDATE_FREE_THINK,({id,title,contents,image,category})=>({
+    id, title, contents, image, category
 }));
 
 //사가생성
@@ -46,12 +46,13 @@ const initialState={
 const freeThink = handleActions(
     {
         [INITIALIZE]:state=>initialState,
-        [SET_ORIGINAL_FREE_THINK]:(state,{payload:freeThink})=>({
+        [SET_ORIGINAL_FREE_THINK]:(state,{payload:{think}})=>({
             ...state,
-            title:freeThink.title,
-            contents: freeThink.contents,
-            image:freeThink.image,
-            originalPostId: freeThink._id,
+            title:think.title,
+            contents: think.contents,
+            image:think.image,
+            originalPostId: think.bdSeq,
+            category: think.category,
         }),
         [CHANGE_FIELD]:(state,{payload:{key,value}}) =>({
             ...state,

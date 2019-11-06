@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import {Modal} from "react-bootstrap";
 import FreeThinkUpdate from "../container/freeThinkUpdate";
 import {deleteFreeThink} from "../modules/api/think";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setOriginalFreeThink} from "../modules/reducer/freeThink";
 
 const useStyles = makeStyles(theme => ({
@@ -42,10 +42,14 @@ const PostOptions = ({think}) => {
             console.log(e);
         }
     };
-    const onclickUpdate = () => {
+    const onclickUpdate = async () => {
         setUpdateShow(true);
         handleClose();
-        dispatch(setOriginalFreeThink);
+        try {
+            await dispatch(setOriginalFreeThink({think}));
+        }catch (e) {
+            console.log(e);
+        }
     };
 
     return (

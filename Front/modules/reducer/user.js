@@ -81,7 +81,7 @@ const initialState = {
         tel:'',
         pw:'',
         pwck:'',
-        preferenceList:{},
+        preferenceList:[],
     }
 };
 

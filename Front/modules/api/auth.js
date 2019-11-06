@@ -13,7 +13,7 @@ export const register = ({ email, pw, nickName, name, tel}) =>
 // 로그인 상태 확인
 export const check = () => axios.get('/api/login/check', {
         headers: {
-        'Authorization':'Bearer '+localStorage.getItem('token')
+                'Authorization':'Bearer '+localStorage.getItem('token')
         }
 });
 
