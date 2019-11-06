@@ -68,7 +68,7 @@ const NavigationBar = () => {
                   <Link href='/'><a style={{textDecoration:'none'}}>{'HotThink'}</a></Link>
               </Navbar.Brand>
               <Nav className="mr-auto">
-                  <Nav.Link><Link href={{ pathname: 'freeThink', query: { sb:0,sz:10,pg:1,category:'IT서비스',ob:0 }}}><a style={{textDecoration:'none'}}>아이디어 공유</a></Link></Nav.Link>
+                  <Nav.Link><Link href={{ pathname: '/think/freeThink/freeThink', query: { sb:0,sz:10,pg:1,category:'IT서비스',ob:0 }}}><a style={{textDecoration:'none'}}>아이디어 공유</a></Link></Nav.Link>
                   {/*홍민석 요청으로 href로 분야 보여주는것 삭제*/}
                   {/*<NavDropdown title="Think게시판" id="basic-nav-dropdown" href='/freeThink'>*/}
                   {/*    <NavDropdown.Item href="/freeThink">FreeThink</NavDropdown.Item>*/}
