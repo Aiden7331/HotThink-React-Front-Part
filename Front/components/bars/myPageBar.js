@@ -7,13 +7,10 @@ const {SubMenu} = Menu;
 //마이페이지에서의 왼쪽 내비게이션바
 const MyPageBar = ({num}) => {
     const rootSubmenuKeys = ['myInfo', 'settings'];
-    const [openKeys, setOpenKeys] = useState(['settings']);
+    const [openKeys, setOpenKeys] = useState(['myInfo']);
 
     const onOpenChange = openKeys => {
-        console.log(openKeys);
         const latestOpenKey = openKeys.find(key => openKeys.indexOf(key) === 1);
-        console.log(latestOpenKey);
-        console.log(rootSubmenuKeys.indexOf(latestOpenKey));
         if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
             setOpenKeys(openKeys);
         } else {
