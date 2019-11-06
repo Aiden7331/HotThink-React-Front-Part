@@ -3,10 +3,10 @@ import {Col, Row, Button, Avatar,Rate,Tabs} from "antd";
 import {Image, Modal} from 'react-bootstrap';
 import MyPageBar from "../../components/bars/myPageBar";
 import TagGroup from "../../components/tag";
-import UserWrote from "../../container/userWrote";
-import Notice from "../../container/notice";
-import Login from "../../container/login";
-import UpdateUser from "../../container/updateUser";
+import UserWrote from "../../container/myPage/userWrote";
+import Notice from "../../container/myPage/notice";
+import Login from "../../container/auth/login";
+import UpdateUser from "../../container/myPage/updateUser";
 import {useSelector} from "react-redux";
 
 const {TabPane} = Tabs;

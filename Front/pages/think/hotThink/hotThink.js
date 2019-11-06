@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Col, Icon, List, Pagination, Row} from "antd";
-import ThinkBar from "../components/bars/thinkBar";
-import FreeThinkCard from "../components/cards/freeThinkCard";
+import ThinkBar from "../../../components/bars/thinkBar";
+import FreeThinkCard from "../../../components/cards/freeThinkCard";
 import {Modal} from "react-bootstrap";
-import FreeThinkWrite from "../container/freeThinkWrite";
+import FreeThinkWrite from "../../../container/freeThink/freeThinkWrite";
 
 const listData =[];
 for (let i = 0; i < 23; i++) {

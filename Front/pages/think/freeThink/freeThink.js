@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react';
-import ThinkBar from "../components/bars/thinkBar";
+import ThinkBar from "../../../components/bars/thinkBar";
 import {Row,Col,List,Avatar,Icon,Pagination} from 'antd';
 import {Modal} from 'react-bootstrap';
-import FreeThinkWrite from "../container/freeThinkWrite";
-import FreeThinkCard from "../components/cards/freeThinkCard";
+import FreeThinkWrite from "../../../container/freeThink/freeThinkWrite";
+import FreeThinkCard from "../../../components/cards/freeThinkCard";
 import {useDispatch, useSelector} from "react-redux";
-import {listFreeThinks} from "../modules/reducer/freeThinks";
+import {listFreeThinks} from "../../../modules/reducer/freeThinks";
 import qs from 'qs';
 import {useRouter} from 'next/router';
 

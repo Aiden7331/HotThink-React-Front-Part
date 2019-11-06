@@ -16,7 +16,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {Col, Row} from 'antd';
 import {Modal} from 'react-bootstrap';
-import FreeThinkRead from "../../container/freeThinkRead";
+import FreeThinkRead from "../../container/freeThink/freeThinkRead";
 
 const useStyles = makeStyles(theme => ({
     card: {

@@ -4,13 +4,16 @@ import Link from 'next/Link';
 
 const {SubMenu} = Menu;
 
+//마이페이지에서의 왼쪽 내비게이션바
 const MyPageBar = ({num}) => {
-    const rootSubmenuKeys = ['sub1', 'sub2'];
-    const [openKeys, setOpenKeys] = useState(['sub1']);
+    const rootSubmenuKeys = ['myInfo', 'settings'];
+    const [openKeys, setOpenKeys] = useState(['settings']);
 
-
-    const onOpenChange = (openKeys) => {
-        const latestOpenKey = openKeys.find(key => openKeys.indexOf(key) === -1);
+    const onOpenChange = openKeys => {
+        console.log(openKeys);
+        const latestOpenKey = openKeys.find(key => openKeys.indexOf(key) === 1);
+        console.log(latestOpenKey);
+        console.log(rootSubmenuKeys.indexOf(latestOpenKey));
         if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
             setOpenKeys(openKeys);
         } else {
@@ -26,7 +29,7 @@ const MyPageBar = ({num}) => {
             style={{display: "inline-block", top: '57px', width: '100%', height: '91vh', position: 'sticky'}}
         >
             <SubMenu
-                key="sub1"
+                key="myInfo"
                 title={
                     <span>
               <Icon type="mail"/>
@@ -40,7 +43,7 @@ const MyPageBar = ({num}) => {
                 <Menu.Item key="4"><Link href='/mypage/mytrade'>거래 내역</Link></Menu.Item>
             </SubMenu>
             <SubMenu
-                key="sub2"
+                key="settings"
                 title={
                     <span>
               <Icon type="setting"/>
@@ -48,8 +51,8 @@ const MyPageBar = ({num}) => {
             </span>
                 }
             >
-                <Menu.Item key="6">프로필 설정</Menu.Item>
-                <Menu.Item key="7">알림 설정</Menu.Item>
+                <Menu.Item key="5">프로필 설정</Menu.Item>
+                <Menu.Item key="6">알림 설정</Menu.Item>
             </SubMenu>
         </Menu>
     );

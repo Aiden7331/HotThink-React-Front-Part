@@ -13,8 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useDispatch, useSelector} from 'react-redux';
-import {changeField, initializeForm,register} from "../modules/reducer/auth";
-import {check} from '../modules/reducer/user'
+import {changeField, initializeForm,register} from "../../modules/reducer/auth";
+import {check} from '../../modules/reducer/user'
 import Router from 'next/router';
 import styled from "styled-components";
 

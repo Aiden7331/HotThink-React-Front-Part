@@ -1,7 +1,7 @@
 import React from 'react';
 import {Row, Col, Icon,Pagination} from 'antd'
-import PostCard from "../components/cards/postCard";
-import ThinkBar from "../components/bars/thinkBar";
+import PostCard from "../../../components/cards/postCard";
+import ThinkBar from "../../../components/bars/thinkBar";
 
 const RealThink = () => {
     return(

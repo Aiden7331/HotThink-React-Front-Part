@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Row,Tabs} from "antd";
 import MyPageBar from "../../components/bars/myPageBar";
-import MessageList from "../../container/messageList";
+import MessageList from "../../container/myPage/messageList";
 import ChatRoom from "../../components/ChatRoom";
 
 const Messages = () => {

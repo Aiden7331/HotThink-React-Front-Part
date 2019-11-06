@@ -1,9 +1,9 @@
 import React, {useCallback, useState, useRef, useEffect} from 'react';
 import {Form, Button,Input} from 'antd';
 import TextareaAutosize from "react-textarea-autosize";
-import ImgForm from "../components/imgForm";
+import ImgForm from "../../components/imgForm";
 import {useDispatch, useSelector} from "react-redux";
-import {initialize, changeField, writeFreeThink} from "../modules/reducer/freeThink";
+import {initialize, changeField, writeFreeThink} from "../../modules/reducer/freeThink";
 
 const FreeThinkWrite = () => {
     const imageInput = useRef();
