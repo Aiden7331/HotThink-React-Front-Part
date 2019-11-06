@@ -7,6 +7,14 @@ import Link from 'next/Link';
 import {useSelector,useDispatch} from "react-redux";
 import {logout} from '../../modules/reducer/user'
 import {authNull} from "../../modules/reducer/auth";
+/*
+    기능 : 전체 메인페이지의 상단 네비게이션바
+    loginShow => 로그인 모달창 개폐에 사용되는 key state
+    signupShow => 로그인 모달창 개폐에 사용되는 key state
+    num => 초기네비게이션바 설정 state
+    onLogout => 로그아웃
+
+*/
 
 const NavigationBar = () => {
     const [loginShow,setLoginShow] = useState(false);
@@ -14,17 +22,17 @@ const NavigationBar = () => {
     const [num,setNum] = useState(['sub1']);
     const {user} = useSelector(({user}) => ({user:user.user}));
     const dispatch = useDispatch();
+
     const onLogout = () => {
         try{
             dispatch(logout());
             dispatch(authNull());
             localStorage.clear();
-            console.log(localStorage.getItem('user'));
-            console.log(localStorage.getItem('token'));
         } catch(e) {
             console.log('localStorage is not working1');
         }
     };
+
     useEffect(()=>{
         if(!user){
             //로그아웃 성공시 이벤트
@@ -39,6 +47,7 @@ const NavigationBar = () => {
             }
         }
     },[user,dispatch]);
+
   return(
       <>
           <Navbar
@@ -60,6 +69,7 @@ const NavigationBar = () => {
               </Navbar.Brand>
               <Nav className="mr-auto">
                   <Nav.Link><Link href={{ pathname: 'freeThink', query: { sb:0,sz:10,pg:1,category:'IT서비스',ob:0 }}}><a style={{textDecoration:'none'}}>아이디어 공유</a></Link></Nav.Link>
+                  {/*홍민석 요청으로 href로 분야 보여주는것 삭제*/}
                   {/*<NavDropdown title="Think게시판" id="basic-nav-dropdown" href='/freeThink'>*/}
                   {/*    <NavDropdown.Item href="/freeThink">FreeThink</NavDropdown.Item>*/}
                   {/*    <NavDropdown.Item href="/hotThink" num={{num}}>HotThink</NavDropdown.Item>*/}
