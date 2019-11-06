@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Navbar,Nav,Form,FormControl,Button,NavDropdown} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
-import Login from "../../container/login";
-import SignUp from "../../container/signup";
+import Login from "../../container/auth/login";
+import SignUp from "../../container/auth/signup";
 import Link from 'next/Link';
 import {useSelector,useDispatch} from "react-redux";
 import {logout} from '../../modules/reducer/user'

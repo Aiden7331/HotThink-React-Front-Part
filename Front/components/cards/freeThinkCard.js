@@ -16,7 +16,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import {Col, Row} from 'antd';
 import {Modal} from 'react-bootstrap';
-import FreeThinkRead from "../../container/freeThinkRead";
+import FreeThinkRead from "../../container/freeThink/freeThinkRead";
 import PostOptions from "../postOptions";
 import MoreVertIcon from "@material-ui/core/SvgIcon/SvgIcon";
 

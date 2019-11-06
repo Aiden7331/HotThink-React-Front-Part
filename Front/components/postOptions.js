@@ -5,7 +5,7 @@ import Menu from '@material-ui/core/Menu';
 import MoreVertIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import IconButton from "@material-ui/core/IconButton";
 import {Modal} from "react-bootstrap";
-import FreeThinkUpdate from "../container/freeThinkUpdate";
+import FreeThinkUpdate from "../container/freeThink/freeThinkUpdate";
 import {deleteFreeThink} from "../modules/api/think";
 import {useDispatch, useSelector} from "react-redux";
 import {setOriginalFreeThink} from "../modules/reducer/freeThink";

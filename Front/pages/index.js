@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {Carousel} from 'react-bootstrap';
 import Introduce from "../components/introduce";
-import CardSlick from "../components/cardSlick";
-import Footer from "../container/footer";
+import CardSlick from "../components/cards/cardSlick";
+import Footer from "../container/main/footer";
 import HoogieCard from "../components/cards/HoogieCard";
 
 const Home = () => {

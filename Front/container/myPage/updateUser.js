@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import TagGroupUpdate from "../components/tagUpdate";
+import TagGroupUpdate from "../../components/tagUpdate";
 import {useDispatch, useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
-import { login} from "../modules/reducer/auth";
-import {updateUser,changeField,check} from "../modules/reducer/user";
+import { login} from "../../modules/reducer/auth";
+import {updateUser,changeField,check} from "../../modules/reducer/user";
 
 
 const useStyles = makeStyles(theme => ({
