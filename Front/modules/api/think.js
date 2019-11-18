@@ -55,7 +55,7 @@ export const addLike = ({id}) => axios.post(`/api/freethink/${id}/fan`,{},{
 });
 
 //freeThink 게시글 좋아요 삭제
-export const unLike = (freeId) => axios.delete(`/api/freethink/${freeId}/fan`,{
+export const unLike = ({id}) => axios.delete(`/api/freethink/${id}/fan`,{
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
     }

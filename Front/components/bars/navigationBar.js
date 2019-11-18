@@ -82,28 +82,28 @@ const NavigationBar = () => {
                   {/*<Nav.Item style ={{marginLeft:'5px'}}><Link href="/finished"><a style={{textDecoration:'none', marginLeft:'10px',color:'gray',fontWeight:'600'}}>판매완료</a></Link></Nav.Item>*/}
               </Nav>
 
-              {/*<Form inline>*/}
-              {/*    <FormControl type="text" placeholder="Search" className="mr-sm-2" />*/}
-              {/*    <Button variant="outline-info">Search</Button>*/}
-              {/*</Form>*/}
-              {/*{*/}
-              {/*    user*/}
-              {/*        ? <div style={{float: "right"}}>*/}
-              {/*            <Button size={"small"}*/}
-              {/*                    style={{marginTop: '4px', marginRight:'10px'}}*/}
-              {/*                    shape={"round"}*/}
-              {/*                    onClick={onLogout}*/}
-              {/*            >*/}
-              {/*                <b style={{marginLeft:'5px', color: '#13c276'}}>로그아웃</b>*/}
-              {/*            </Button>*/}
-              {/*        </div>*/}
-              {/*        :<>*/}
-              {/*            <Nav.Link onClick={()=>setLoginShow(true)}><a style={{textDecoration:'none'}}>로그인</a></Nav.Link>*/}
-              {/*            <Nav.Link onClick={()=>setSignupShow(true)}><a style={{textDecoration:'none'}}>회원가입</a></Nav.Link>*/}
-              {/*        </>*/}
-              {/*}*/}
-              {/*<Nav.Link><Link href="/mypage/dashBoard"><a style={{textDecoration:'none'}}>MyPage</a></Link></Nav.Link>*/}
-              {/*<Nav.Link><Link href="/mypage/pay"><a style={{textDecoration:'none'}}>결제</a></Link></Nav.Link>*/}
+              <Form inline>
+                  <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                  <Button variant="outline-info">Search</Button>
+              </Form>
+              {
+                  user
+                      ? <div style={{float: "right"}}>
+                          <Button size={"small"}
+                                  style={{marginTop: '4px', marginRight:'10px'}}
+                                  shape={"round"}
+                                  onClick={onLogout}
+                          >
+                              <b style={{marginLeft:'5px', color: '#13c276'}}>로그아웃</b>
+                          </Button>
+                      </div>
+                      :<>
+                          <Nav.Link onClick={()=>setLoginShow(true)}><a style={{textDecoration:'none'}}>로그인</a></Nav.Link>
+                          <Nav.Link onClick={()=>setSignupShow(true)}><a style={{textDecoration:'none'}}>회원가입</a></Nav.Link>
+                      </>
+              }
+              <Nav.Link><Link href="/mypage/dashBoard"><a style={{textDecoration:'none'}}>MyPage</a></Link></Nav.Link>
+              <Nav.Link><Link href="/mypage/pay"><a style={{textDecoration:'none'}}>결제</a></Link></Nav.Link>
           </Navbar>
           <Modal
               show={loginShow}
