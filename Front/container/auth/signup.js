@@ -9,6 +9,7 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import CreateIcon from '@material-ui/icons/Create';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -16,7 +17,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {changeField, initializeForm,register} from "../../modules/reducer/auth";
 import {check} from '../../modules/reducer/user'
 import Router from 'next/router';
+
 import styled from "styled-components";
+import { red } from '@material-ui/core/colors';
 
 function Copyright() {
     return (
@@ -146,13 +149,14 @@ const SignUp = () => {
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
+                    <CreateIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
                 <form onSubmit={onSubmit}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2}
+                          style={{ marginTop:'10px'}}>
                         <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
@@ -227,6 +231,20 @@ const SignUp = () => {
                                 onChange={onChange}
                             />
                         </Grid>
+                        <Grid item xs={12}>
+                            <Checkbox color={'primary'}></Checkbox>
+                            <Link href="/usage" variant="body2" style={{marginRight:'3px'}}>
+                                이용약관
+                            </Link>
+                            및
+                            <Link href="/privacy" variant="body2" style={{
+                                marginLeft:'3px',
+                                marginRight:'2px'
+                            }}>
+                                개인정보취급방침
+                            </Link>
+                            에 동의합니다.
+                        </Grid>
                         {/*여기에 선호도 체크박스 추가해야함 */}
                     </Grid>
                     {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -234,18 +252,11 @@ const SignUp = () => {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        color="primary"
                         className={classes.submit}
+                        color="primary"
                     >
                         회원가입
                     </Button>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link href="#" variant="body2">
-                                가입약관
-                            </Link>
-                        </Grid>
-                    </Grid>
                 </form>
             </div>
             <Box mt={5}>

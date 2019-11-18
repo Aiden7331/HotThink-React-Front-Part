@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,24 +12,25 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {useDispatch, useSelector} from "react-redux";
-import {changeField, initializeForm,login} from "../../modules/reducer/auth";
-import {check} from '../../modules/reducer/user'
+import { useDispatch, useSelector } from 'react-redux';
+import { changeField, initializeForm, login } from '../../modules/reducer/auth';
+import { check } from '../../modules/reducer/user';
 import Router from 'next/router';
 import styled from 'styled-components';
+import { Modal } from 'react-bootstrap';
+import SignUp from './signup';
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
+            HotThink
+            {' '+new Date().getFullYear()}
             {'.'}
         </Typography>
     );
 }
+
 
 const ErrorMessage = styled.div`
     color: red;
@@ -64,23 +65,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = () => {
-    const[error, setError] =  useState(null);
+    const [error, setError] = useState(null);
+    const [signupShow, setSignupShow] = useState(false);
 
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const {form, auth, authError, user} = useSelector(({auth,user})=>({
+    const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
         form: auth.login,
         auth: auth.auth,
         authError: auth.authError,
         user: user.user,
     }));
 
-    const onChange = e =>{
-        const {value,name} = e.target;
+    const onChange = e => {
+        const { value, name } = e.target;
         dispatch(
             changeField({
-                form:'login',
+                form: 'login',
                 key: name,
                 value
             })
@@ -89,43 +91,46 @@ const Login = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        const {email, pw} = form;
-        dispatch(login({email, pw}));
+        const { email, pw } = form;
+        dispatch(login({
+            email,
+            pw
+        }));
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(initializeForm('login'));
-    },[dispatch]);
+    }, [dispatch]);
 
-    useEffect(()=>{
-        if(authError){
+    useEffect(() => {
+        if (authError) {
             setError('로그인 실패');
             return;
         }
-        if(auth){
-            localStorage.setItem('token',auth.token);
+        if (auth) {
+            localStorage.setItem('token', auth.token);
             dispatch(check());
         }
-    },[auth,authError,dispatch]);
+    }, [auth, authError, dispatch]);
 
-    useEffect(()=>{
-        if(user){
+    useEffect(() => {
+        if (user) {
             //로그인 성공시 이벤트
             console.log('로그인 성공시 이벤트');
-            try{
-                localStorage.setItem('user',JSON.stringify(user));
-            } catch(e) {
+            try {
+                localStorage.setItem('user', JSON.stringify(user));
+            } catch (e) {
                 console.log('localStorage is not working1');
             }
         }
-    },[user]);
+    }, [user]);
 
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
+                    <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     로그인
@@ -156,7 +161,7 @@ const Login = () => {
                         onChange={onChange}
                     />
                     <FormControlLabel
-                        control={<Checkbox color="primary" />}
+                        control={<Checkbox color="primary"/>}
                         label="로그인 상태 유지"
                     />
                     {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -171,24 +176,35 @@ const Login = () => {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
+                            <Button color="primary">
                                 비밀번호 찾기
-                            </Link>
+                            </Button>
                         </Grid>
-                        <Grid item>
-                            <Link href="#" variant="body2">
-                                {'회원가입'}
-                            </Link>
+                        <Grid item xs style={{
+                            textAlign:'end'
+                        }}>
+                            <Button color="primary" onClick={() => setSignupShow(true)}>
+                                회원가입
+                            </Button>
                         </Grid>
                     </Grid>
                 </form>
             </div>
             <Box mt={8}>
-                <Copyright />
+                <Copyright/>
             </Box>
+            <Modal
+                show={signupShow}
+                onHide={() => setSignupShow(false)}
+                dialogClassName="modal-90w"
+                aria-labelledby="example-custom-modal-styling-title"
+            >
+                <Modal.Body>
+                    <SignUp/>
+                </Modal.Body>
+            </Modal>
         </Container>
     );
 };
 
 export default Login;
-

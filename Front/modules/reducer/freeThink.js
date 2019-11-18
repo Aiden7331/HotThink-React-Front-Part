@@ -28,8 +28,8 @@ export const writeFreeThink = createAction(WRITE_FREE_THINK,({title,contents,ima
 export const updateFreeThink = createAction(UPDATE_FREE_THINK,({id,title,contents,image,category})=>({
     id, title, contents, image, category
 }));
-export const writeComment = createAction(WRITE_COMMENT,({comment, id})=>({
-    comment,id
+export const writeComment = createAction(WRITE_COMMENT,({comment, id,replies})=>({
+    comment,id,replies
 }));
 export const like = createAction(LIKE,({id})=>({
     id,
@@ -64,6 +64,7 @@ const initialState={
     isOpen:false,
     comment:'',
     commentError:'',
+    replies:[],
     likes:[],
 };
 
@@ -132,6 +133,7 @@ const freeThink = handleActions(
         }),
         [WRITE_COMMENT_SUCCESS]:(state,{payload:originalPostId})=>({
             ...state,
+            replies: 1,
         }),
         [WRITE_COMMENT_FAILURE]:(state,{payload:error})=>({
             ...state,

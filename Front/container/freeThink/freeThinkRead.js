@@ -52,7 +52,7 @@ const FreeThinkRead = ({think}) => {
     const [expanded, setExpanded] = React.useState(false);
 
     const img = <img src="/static/images/image1.jpg"/>;
-    const {title,contents,comment,image,post,error,category,isOpen,id,user,likes} = useSelector(({freeThink,user})=>({
+    const {title,contents,comment,image,post,error,category,isOpen,id,user,likes,replies} = useSelector(({freeThink,user})=>({
         title:freeThink.title,
         contents:freeThink.contents,
         image:freeThink.image,
@@ -64,6 +64,7 @@ const FreeThinkRead = ({think}) => {
         id:freeThink.originalPostId,
         user:user.user,
         likes:freeThink.likes,
+        replies:freeThink.replies,
     }));
 
     const onSubmitForm = useCallback((e) => {
@@ -71,15 +72,14 @@ const FreeThinkRead = ({think}) => {
         if (!comment || !comment.trim()) {
             return alert('댓글을 작성하세요');
         }
-        useEffect(()=>{
-            dispatch(
-                writeComment({
-                    comment,
-                    id,
-                }),
-            )
-        },[dispatch]);
-    },[dispatch,comment,id]);
+        dispatch(
+            writeComment({
+                comment,
+                id,
+                replies,
+            }),
+        )
+    },[dispatch,comment,id,replies]);
 
     const onClickLike = useCallback((e)=>{
         e.preventDefault();
@@ -103,7 +103,7 @@ const FreeThinkRead = ({think}) => {
     ]);
 
     const onChangeComment = e =>{
-        onChangeField({key:'comment',value:e.target.value})
+        onChangeField({key:'comment',value:e.target.value});
     };
 
     return (

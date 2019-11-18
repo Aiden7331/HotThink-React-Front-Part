@@ -1,53 +1,180 @@
-import React, {useEffect} from 'react';
-import {Carousel} from 'react-bootstrap';
-import Introduce from "../components/introduce";
-import CardSlick from "../components/cards/cardSlick";
-import Footer from "../container/main/footer";
-import HoogieCard from "../components/cards/HoogieCard";
+import React, { useEffect } from 'react';
+import { Container, Image, Row, Col, Carousel } from 'react-bootstrap';
+import Introduce from '../components/introduce';
+import CardSlick from '../components/cards/cardSlick';
+import BrushIcon from '@material-ui/icons/Brush';
+import HoogieCard from '../components/cards/HoogieCard';
 
 const Home = () => {
-    return(
+    return (
         <>
             <Introduce/>
-            <div style={{backgroundColor:'#F8E0E0',height:'600px', marginTop:'100px', textAlign:'center'}}>
-                <h1>IT</h1>
+
+            <div style={{
+                backgroundColor: '#F8E0E0',
+                height: '650px',
+                marginTop: '20px',
+                // textAlign: 'center'
+            }}>
                 <CardSlick/>
             </div>
 
-            <div style={{backgroundColor:'#F7F2E0',height:'600px', marginTop:'100px', textAlign:'center'}}>
-                <h1>기계</h1>
-                <CardSlick/>
-            </div>
+            <Container
+                style={{
+                    marginTop: '50px',
+                    height: '700px',
+                    paddingLeft: '50px',
+                    paddingRight: '50px',
+                }}
+            >
+                <Container style={{
+                    border: 'solid 2px',
+                    borderColor: '#ced4da',
+                    height: '30%',
+                    padding: '10px'
+                }}>
+                    <Row>
+                        <Col md={3}
+                             style={{
+                                 textAlign: 'center'
+                             }}>
+                            <Image
+                                style={{
+                                    height: '180px'
+                                }}
+                                src="/static/images/human1.jpg" roundedCircle={true}></Image>
+                        </Col>
+                        <Col
+                            style={{
+                                marginLeft: '2%',
+                            }}
+                        >
+                            <Row style={{
+                                marginTop: '40px',
+                            }}>
+                                <Col
+                                    md={2}
+                                    style={{
+                                        fontSize: '20px',
+                                        fontFamily: '고딕체',
+                                        fontWeight: 'bolder',
+                                        borderRight: 'solid 2px',
+                                        borderRightColor: '#ced4da',
+                                    }}>홍민석</Col>
+                                <Col
+                                    style={{
+                                        fontSize: '20px',
+                                        color: '#868e96',
+                                    }}>노가다꾼</Col>
+                            </Row>
+                            <Row style={{ marginTop: '5px' }}>
+                                실력 향상에 도움이 되는 핫띵크 프로젝트!<br/>
+                                데이터베이스 설계는 정말 어려웡!
+                            </Row>
 
-            <div style={{backgroundColor:'#E6F8E0',height:'600px', marginTop:'100px', textAlign:'center'}}>
-                <h1>화학</h1>
-                <CardSlick/>
-            </div>
+                        </Col>
+                    </Row>
+                </Container>
 
-            <div style={{backgroundColor:'#E0F2F7',height:'600px', marginTop:'100px', textAlign:'center'}}>
-                <h1>의류</h1>
-                <CardSlick/>
-            </div>
 
-            <div style={{backgroundColor:'#E0F2F7',height:'600px', marginTop:'100px', textAlign:'center'}}>
-                <h1>건축</h1>
-                <CardSlick/>
-            </div>
-            <div style={{backgroundColor:'#E0F2F7',height:'500px', marginTop:'100px', textAlign:'center'}}>
-                <h1>후기</h1>
-                <Carousel style={{paddingLeft:'50px', paddingRight:'50px',}}>
-                    <Carousel.Item>
-                        <HoogieCard/>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <HoogieCard/>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <HoogieCard/>
-                    </Carousel.Item>
-                </Carousel>
-            </div>
-            <Footer/>
+                <Container style={{
+                    marginTop: '5px',
+
+                    border: 'solid 2px',
+                    borderColor: '#ced4da',
+                    height: '30%',
+                    padding: '10px'
+                }}>
+                    <Row>
+                        <Col md={3}
+                             style={{
+                                 textAlign: 'center'
+                             }}>
+                            <Image
+                                style={{
+                                    height: '180px'
+                                }}
+                                src="/static/images/human2.jpg" roundedCircle={true}></Image>
+                        </Col>
+                        <Col
+                            style={{
+                                marginLeft: '2%',
+                            }}
+                        >
+                            <Row style={{
+                                marginTop: '40px',
+                            }}>
+                                <Col
+                                    md={2}
+                                    style={{
+                                        fontSize: '20px',
+                                        fontFamily: '고딕체',
+                                        fontWeight: 'bolder',
+                                        borderRight: 'solid 2px',
+                                        borderRightColor: '#ced4da',
+                                    }}>강태구</Col>
+                                <Col
+                                    style={{
+                                        fontSize: '20px',
+                                        color: '#868e96',
+                                    }}>백수</Col>
+                            </Row>
+                            <Row style={{ marginTop: '5px' }}>
+                                여러분, 저 잠수 탈게요 수고염(찡긋!)
+                            </Row>
+
+                        </Col>
+                    </Row>
+                </Container>
+                <Container style={{
+                    marginTop: '5px',
+                    border: 'solid 2px',
+                    borderColor: '#ced4da',
+                    height: '30%',
+                    padding: '10px'
+                }}>
+                    <Row>
+                        <Col md={3}
+                             style={{
+                                 textAlign: 'center'
+                             }}>
+                            <Image
+                                style={{
+                                    height: '180px',
+                                }}
+                                src="/static/images/human3.jpg" roundedCircle={true}></Image>
+                        </Col>
+                        <Col
+                            style={{
+                                marginLeft: '2%',
+                            }}
+                        >
+                            <Row style={{
+                                marginTop: '40px',
+                            }}>
+                                <Col
+                                    md={2}
+                                    style={{
+                                        fontSize: '20px',
+                                        fontFamily: '고딕체',
+                                        fontWeight: 'bolder',
+                                        borderRight: 'solid 2px',
+                                        borderRightColor: '#ced4da',
+                                    }}>이문혁</Col>
+                                <Col
+                                    style={{
+                                        fontSize: '20px',
+                                        color: '#868e96',
+                                    }}>노예</Col>
+                            </Row>
+                            <Row style={{ marginTop: '5px' }}>
+                                자살각이야
+                            </Row>
+
+                        </Col>
+                    </Row>
+                </Container>
+            </Container>
         </>
     );
 };
