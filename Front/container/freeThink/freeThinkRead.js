@@ -19,8 +19,18 @@ import CommentModal from "../../components/comment";
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import TextareaAutosize from "react-textarea-autosize";
 import {useDispatch, useSelector} from "react-redux";
-import {changeField, initialize, like, unlike, writeComment} from "../../modules/reducer/freeThink";
+import {
+    changeField,
+    initialize,
+    like,
+    setOriginalFreeThink,
+    unlike,
+    writeComment
+} from "../../modules/reducer/freeThink";
 import {Form} from "antd";
+import {useRouter} from "next/router";
+import qs from "qs";
+import {listFreeThinks} from "../../modules/reducer/freeThinks";
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -47,12 +57,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const FreeThinkRead = ({think}) => {
+    const router = useRouter();
     const classes = useStyles();
     const dispatch = useDispatch();
     const [expanded, setExpanded] = React.useState(false);
 
     const img = <img src="/static/images/image1.jpg"/>;
-    const {title,contents,comment,image,post,error,category,isOpen,id,user,likes,replies} = useSelector(({freeThink,user})=>({
+    const {title,contents,comment,image,post,error,category,isOpen,id,user,likes,replies} = useSelector(({freeThinks,freeThink,user})=>({
         title:freeThink.title,
         contents:freeThink.contents,
         image:freeThink.image,
@@ -66,6 +77,19 @@ const FreeThinkRead = ({think}) => {
         likes:freeThink.likes,
         replies:freeThink.replies,
     }));
+    useEffect(() => {
+        const {sb,sz,pg,category,ob} = qs.parse(router.query,{
+            ignoreQueryPrefix: true,
+        });
+        dispatch(listFreeThinks({
+            sb,
+            sz,
+            pg,
+            category,
+            ob,
+        }))
+    }, [dispatch,router.query,isOpen]);
+
 
     const onSubmitForm = useCallback((e) => {
         e.preventDefault();
@@ -78,8 +102,18 @@ const FreeThinkRead = ({think}) => {
                 id,
                 replies,
             }),
-        )
-    },[dispatch,comment,id,replies]);
+        );
+        const {sb,sz,pg,category,ob} = qs.parse(router.query,{
+            ignoreQueryPrefix: true,
+        });
+        dispatch(listFreeThinks({
+            sb,
+            sz,
+            pg,
+            category,
+            ob,
+        }))
+    },[dispatch,comment,id,replies,think,router.query]);
 
     const onClickLike = useCallback((e)=>{
         e.preventDefault();
@@ -89,7 +123,17 @@ const FreeThinkRead = ({think}) => {
         }else{
             dispatch(like({id}));
         }
-    },[dispatch,id,likes]);
+        const {sb,sz,pg,category,ob} = qs.parse(router.query,{
+            ignoreQueryPrefix: true,
+        });
+        dispatch(listFreeThinks({
+            sb,
+            sz,
+            pg,
+            category,
+            ob,
+        }))
+    },[dispatch,id,likes,router.query]);
 
     //언마운트될때 초기화
     useEffect(()=>{

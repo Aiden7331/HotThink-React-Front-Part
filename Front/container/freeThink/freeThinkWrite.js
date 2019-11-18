@@ -4,6 +4,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import ImgForm from "../../components/imgForm";
 import {useDispatch, useSelector} from "react-redux";
 import {initialize, changeField, writeFreeThink, closeModal} from "../../modules/reducer/freeThink";
+import {listFreeThinks} from "../../modules/reducer/freeThinks";
 
 const FreeThinkWrite = ({show}) => {
     const imageInput = useRef();
@@ -33,7 +34,7 @@ const FreeThinkWrite = ({show}) => {
                 image,
                 category,
             }),
-        )
+        );
     },[dispatch,title,contents,image,category]);
 
     //성공 혹은 실패시 작업

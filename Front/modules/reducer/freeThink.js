@@ -9,11 +9,11 @@ const SET_ORIGINAL_FREE_THINK = 'freeThink/SET_ORIGINAL_FREE_THINK';
 const CHANGE_FIELD = 'freeThink/CHANGE_FIELD';
 const OPEN_MODAL = 'freeThink/OPEN_MODAL';
 const CLOSE_MODAL = 'freeThink/CLOSE_MODAL';
-const [WRITE_FREE_THINK,WRITE_FREE_THINK_SUCCESS,WRITE_FREE_THINK_FAILURE] = createRequestActionTypes('freeThinks/WRITE_FREE_THINK');
-const [UPDATE_FREE_THINK,UPDATE_FREE_THINK_SUCCESS,UPDATE_FREE_THINK_FAILURE] = createRequestActionTypes('freeThinks/UPDATE_FREE_THINK');
-const [WRITE_COMMENT,WRITE_COMMENT_SUCCESS,WRITE_COMMENT_FAILURE] = createRequestActionTypes('freeThinks/WRITE_COMMENT');
-const [LIKE,LIKE_SUCCESS,LIKE_FAILURE] = createRequestActionTypes('freeThinks/LIKE');
-const [UNLIKE,UNLIKE_SUCCESS,UNLIKE_FAILURE] = createRequestActionTypes('freeThinks/UNLIKE');
+const [WRITE_FREE_THINK,WRITE_FREE_THINK_SUCCESS,WRITE_FREE_THINK_FAILURE] = createRequestActionTypes('freeThink/WRITE_FREE_THINK');
+const [UPDATE_FREE_THINK,UPDATE_FREE_THINK_SUCCESS,UPDATE_FREE_THINK_FAILURE] = createRequestActionTypes('freeThink/UPDATE_FREE_THINK');
+const [WRITE_COMMENT,WRITE_COMMENT_SUCCESS,WRITE_COMMENT_FAILURE] = createRequestActionTypes('freeThink/WRITE_COMMENT');
+const [LIKE,LIKE_SUCCESS,LIKE_FAILURE] = createRequestActionTypes('freeThink/LIKE');
+const [UNLIKE,UNLIKE_SUCCESS,UNLIKE_FAILURE] = createRequestActionTypes('freeThink/UNLIKE');
 
 export const initialize = createAction(INITIALIZE);
 export const setOriginalFreeThink = createAction(SET_ORIGINAL_FREE_THINK,post=>post);
@@ -88,6 +88,7 @@ const freeThink = handleActions(
             originalPostId: think.bdSeq,
             category: think.category,
             likes:think.likes,
+            replies:think.replies,
         }),
         [CHANGE_FIELD]:(state,{payload:{key,value}}) =>({
             ...state,
@@ -126,14 +127,13 @@ const freeThink = handleActions(
         [UNLIKE_SUCCESS]:(state,{payload:userEmail})=>({
             ...state,
             //해당 freeThink의 list에서 삭제
-            likes: state.likes.splice(state.likes.findIndex(v => v.user.email === userEmail), 1)
+            likes: state.likes.filter(v => v.user.email !==userEmail),
         }),
         [UNLIKE_FAILURE]:(state,{payload:userEmail})=>({
             ...state,
         }),
-        [WRITE_COMMENT_SUCCESS]:(state,{payload:originalPostId})=>({
+        [WRITE_COMMENT_SUCCESS]:(state,{payload:replies})=>({
             ...state,
-            replies: 1,
         }),
         [WRITE_COMMENT_FAILURE]:(state,{payload:error})=>({
             ...state,

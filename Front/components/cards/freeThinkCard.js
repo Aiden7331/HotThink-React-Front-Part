@@ -19,6 +19,9 @@ import PostOptions from "../postOptions";
 import {useDispatch, useSelector} from "react-redux";
 import {setOriginalFreeThink, updateFreeThink, writeFreeThink} from "../../modules/reducer/freeThink";
 import {writeComment} from "../../modules/api/think";
+import {useRouter} from "next/router";
+import qs from "qs";
+import {listFreeThinks} from "../../modules/reducer/freeThinks";
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -44,14 +47,32 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const FreeThinkCard = ({think}) => {
+    const router = useRouter();
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [readShow, setReadShow] = React.useState(false);
     const dispatch = useDispatch();
+    const {user} = useSelector(({user})=>({
+        user:user.user,
+    }));
 
     const openCard = () => {
         setReadShow(true);
         dispatch(setOriginalFreeThink({think}));
+    };
+
+    const onHide = () => {
+        setReadShow(false);
+        const {sb,sz,pg,category,ob} = qs.parse(router.query,{
+            ignoreQueryPrefix: true,
+        });
+        dispatch(listFreeThinks({
+            sb,
+            sz,
+            pg,
+            category,
+            ob,
+        }))
     };
 
 
@@ -89,10 +110,10 @@ const FreeThinkCard = ({think}) => {
                 </Row>
                 <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
-                        {think.good!==0
-                        ?
+                        {think.likes.map(v => v.user.email).includes(user.email)
+                            ?
                             <FavoriteIcon color='secondary'/>
-                        :
+                            :
                             <FavoriteIcon />
                         }
                         {think.likes.length}
@@ -107,7 +128,7 @@ const FreeThinkCard = ({think}) => {
             </Card>
             <Modal
                 show={readShow}
-                onHide={() => setReadShow(false)}
+                onHide={onHide}
                 dialogClassName="modal-90w"
                 aria-labelledby="example-custom-modal-styling-title"
                 size={'xl'}
