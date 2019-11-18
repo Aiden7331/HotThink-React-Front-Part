@@ -9,12 +9,15 @@ import withReduxSaga from "next-redux-saga";
 import withRedux from 'next-redux-wrapper';
 import { Provider } from 'react-redux';
 import {tempSetUser} from "../modules/reducer/user";
+import {setToken} from "../modules/reducer/auth";
+import {Navbar} from "react-bootstrap";
 
 const HotThink = ({Component,store,pageProps}) => {
     return (
         <>
             <Head>
-                <title>핫띵크 - Hot Think!</title>
+                <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png"/>
+                <title>핫띵크 : 핫한 당신의 생각 </title>
                 <link
                     rel="stylesheet"
                     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -36,13 +39,14 @@ const HotThink = ({Component,store,pageProps}) => {
                 <script
                     src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
                 />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/3.11.6/antd.css"/>
                 <script>var Alert = ReactBootstrap.Alert;</script>
             </Head>
-            <Provider store={store}>
-            <NavigationBar>
+            <Provider style={{minWidth:'1400px'}} store={store}>
+            <NavigationBar style={{minWidth:'1400px'}}>
             </NavigationBar>
 
-            <Component/>
+            <Component style={{minWidth:'1400px'}}/>
             </Provider>
         </>
     );
@@ -65,8 +69,10 @@ const configureStore = (initialState, options) => {
     function loadUser() {
         try{
             const user = localStorage.getItem('user');
-            if(!user) return;
-            store.dispatch(tempSetUser(user));
+            const token = localStorage.getItem('token');
+            if(!user||!token) return;
+            store.dispatch(tempSetUser(JSON.parse(user)));
+            store.dispatch(setToken(JSON.parse(token)));
             store.dispatch(check());
         } catch (e) {
 

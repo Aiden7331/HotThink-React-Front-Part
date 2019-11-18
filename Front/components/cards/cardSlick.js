@@ -10,7 +10,7 @@ const CardSlick = () => {
         prevIcon={<Icon type="left" style={{color:'black'}} />}
         style={{paddingLeft:'150px',paddingRight:'150px', marginLeft:'10px', height:'200px'}}
         >
-            <Carousel.Item>
+            <Carousel.Item style={{height:'500px'}}>
                 <CardDeck>
                     <Card>
                         <Card.Img variant="top" src="/static/images/image4.jpg" style={{width: '100%', height:'40%'}} />

@@ -7,6 +7,7 @@ import * as authAPI from '../api/auth';
 const CHANGE_FIELD = '/auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 const AUTH_NULL = 'auth/AUTH_NULL';
+const SET_TOKEN = 'auth/SET_TOKEN';
 
 const [REGISTER,REGISTER_SUCCESS,REGISTER_FAILURE] = createRequestActionTypes('auth/REGISTER');
 
@@ -20,6 +21,8 @@ export const changeField = createAction(
         value,//실제 바꾸려는 값
     })
 );
+
+export const setToken = createAction(SET_TOKEN,auth=>auth);
 
 export const initializeForm = createAction(INITIALIZE_FORM,form=>form);//register/login
 
@@ -60,6 +63,7 @@ const initialState={
         pw:'',
     },
     auth:null,
+
     authError:null,
 };
 
@@ -68,6 +72,10 @@ const auth = handleActions(
         [CHANGE_FIELD]: (state,{payload:{form,key,value}}) =>
         produce(state,draft => {
             draft[form][key]=value;
+        }),
+        [SET_TOKEN]:(state,{payload:auth})=>({
+            ...state,
+            auth,
         }),
         [INITIALIZE_FORM]: (state,{payload:{form}}) => ({
             ...state,

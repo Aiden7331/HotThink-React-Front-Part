@@ -1,8 +1,9 @@
 import React from 'react';
 import {Card} from 'react-bootstrap';
 import {Row,Col,Icon} from 'antd';
+import Link from "next/Link";
 
-const PostCard = () => {
+const RealThinkCard = () => {
     return(
         <>
             <Card style={{ width: '100%', marginTop:'10px', marginLeft:'10px',marginRight:'10px'}}>
@@ -14,7 +15,12 @@ const PostCard = () => {
                             <Card.Text>
                                 아이디어를 공유하고 판매하는 사이트를 생각중입니다.
                             </Card.Text>
-                            <Card.Link href="/realThinkRead">내용보기</Card.Link>
+                            <Link href={{
+                                pathname: '/think/realThink/RealThinkRead'}}
+                            ><a>
+                                내용보기
+                            </a>
+                            </Link>
                         </Card.Body>
                     </Col>
                     <Col span={6}>
@@ -27,4 +33,4 @@ const PostCard = () => {
     );
 };
 
-export default PostCard;
+export default RealThinkCard;

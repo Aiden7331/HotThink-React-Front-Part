@@ -4,8 +4,14 @@ import Link from 'next/Link';
 
 const {SubMenu} = Menu;
 
-//마이페이지에서의 왼쪽 내비게이션바
-const MyPageBar = ({num}) => {
+/*
+    내용:마이페이지에서의 좌측 네비게이션바
+    rootSubMenuKeys => 대분류
+    openKeys => 현재 작동중인 대분류
+    onOpenPage => 대분류를 클릭했을 때 발생하는 로직
+*/
+
+const MyPageBar = () => {
     const rootSubmenuKeys = ['myInfo', 'settings'];
     const [openKeys, setOpenKeys] = useState(['myInfo']);
 

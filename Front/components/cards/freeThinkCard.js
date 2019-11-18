@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -18,7 +16,9 @@ import {Col, Row} from 'antd';
 import {Modal} from 'react-bootstrap';
 import FreeThinkRead from "../../container/freeThink/freeThinkRead";
 import PostOptions from "../postOptions";
-import MoreVertIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import {useDispatch, useSelector} from "react-redux";
+import {setOriginalFreeThink, updateFreeThink, writeFreeThink} from "../../modules/reducer/freeThink";
+import {writeComment} from "../../modules/api/think";
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -47,10 +47,13 @@ const FreeThinkCard = ({think}) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [readShow, setReadShow] = React.useState(false);
+    const dispatch = useDispatch();
 
-    function handleExpandClick() {
-        setExpanded(!expanded);
-    }
+    const openCard = () => {
+        setReadShow(true);
+        dispatch(setOriginalFreeThink({think}));
+    };
+
 
     return (
         <>
@@ -73,7 +76,7 @@ const FreeThinkCard = ({think}) => {
                             <Typography variant="body2" color="textSecondary" component="p">
                                 {think.contents}
                             </Typography>
-                            <a onClick={() => setReadShow(true)}>자세히보기</a>
+                            <a onClick={openCard}>자세히보기</a>
                         </CardContent>
                     </Col>
                     <Col span={6}>
@@ -86,7 +89,13 @@ const FreeThinkCard = ({think}) => {
                 </Row>
                 <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
-                        <FavoriteIcon/>{think.good}
+                        {think.good!==0
+                        ?
+                            <FavoriteIcon color='secondary'/>
+                        :
+                            <FavoriteIcon />
+                        }
+                        {think.likes.length}
                     </IconButton>
                     <IconButton aria-label="share">
                         <CheckIcon/>{think.hits}

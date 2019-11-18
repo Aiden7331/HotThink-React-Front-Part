@@ -1,5 +1,5 @@
-import React from 'react';
-import {Col,Row} from 'antd';
+import React, {useCallback, useEffect} from 'react';
+import {Button, Col, Row} from 'antd';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -17,6 +17,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CommentModal from "../../components/comment";
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import TextareaAutosize from "react-textarea-autosize";
+import {useDispatch, useSelector} from "react-redux";
+import {changeField, initialize, like, writeComment} from "../../modules/reducer/freeThink";
+import {Form} from "antd";
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -44,13 +48,62 @@ const useStyles = makeStyles(theme => ({
 
 const FreeThinkRead = ({think}) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const [expanded, setExpanded] = React.useState(false);
 
     const img = <img src="/static/images/image1.jpg"/>;
+    const {title,contents,comment,image,post,error,category,isOpen,id,user,likes} = useSelector(({freeThink,user})=>({
+        title:freeThink.title,
+        contents:freeThink.contents,
+        image:freeThink.image,
+        post:freeThink.freeThink,
+        error:freeThink.freeThinkError,
+        category:freeThink.category,
+        isOpen:freeThink.isOpen,
+        comment:freeThink.comment,
+        id:freeThink.originalPostId,
+        user:user.user,
+        likes:freeThink.likes,
+    }));
 
-    function handleExpandClick() {
-        setExpanded(!expanded);
-    }
+    const onSubmitForm = useCallback((e) => {
+        e.preventDefault();
+        if (!comment || !comment.trim()) {
+            return alert('댓글을 작성하세요');
+        }
+        useEffect(()=>{
+            dispatch(
+                writeComment({
+                    comment,
+                    id,
+                }),
+            )
+        },[dispatch]);
+    },[dispatch,comment,id]);
+
+    const onClickLike = useCallback((e)=>{
+        e.preventDefault();
+        if(!likes.includes(user.email)) {
+            dispatch(like({id}));
+        }else{
+            dispatch(unlike({id}));
+        }
+    },[dispatch,id]);
+
+    //언마운트될때 초기화
+    useEffect(()=>{
+        return()=>{
+            dispatch(initialize());
+        };
+    },[dispatch]);
+
+    const onChangeField = useCallback(payload=>dispatch(changeField(payload)),[
+        dispatch
+    ]);
+
+    const onChangeComment = e =>{
+        onChangeField({key:'comment',value:e.target.value})
+    };
 
     return (
         <Card className={classes.card} style={{maxWidth:'100%',height:'auto'}}>
@@ -100,7 +153,13 @@ const FreeThinkRead = ({think}) => {
                     </CardContent>
                     <CardActions disableSpacing>
                         <IconButton aria-label="add to favorites">
-                            <FavoriteIcon/>{think.good}
+                            {think.likes.includes(user.email)
+                                ?
+                                <FavoriteIcon onClick={onClickLike} color='secondary'/>
+                                :
+                                <FavoriteIcon onClick={onClickLike} />
+                            }
+                            {think.likes.length}
                         </IconButton>
                         <IconButton aria-label="share">
                             <CheckIcon/>{think.hits}
@@ -108,22 +167,32 @@ const FreeThinkRead = ({think}) => {
                         <IconButton aria-label="comment">
                             <ChatBubbleOutlineIcon/>{think.replies.length}
                         </IconButton>
-                        <IconButton
-                            className={clsx(classes.expand, {
-                                [classes.expandOpen]: expanded,
-                            })}
-                            onClick={handleExpandClick}
-                            aria-expanded={expanded}
-                            aria-label="show more"
-                        >
-                            <ExpandMoreIcon />
-                        </IconButton>
                     </CardActions>
-                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                        <CardContent>
-                            <CommentModal replies={think.replies}/>
-                        </CardContent>
-                    </Collapse>
+                    <CardContent>
+                        <CommentModal replies={think.replies}/>
+                    </CardContent>
+                    <div style={{position:'fixed', bottom:'40px',width:'40.5%', overflow:'hidden'}}>
+                        <Form onSubmit={onSubmitForm}>
+                            <TextareaAutosize
+                                style={{
+                                    margin: '5px',
+                                    resize: 'none',
+                                    lineHeight: '20px',
+                                    overflowY: 'hidden',
+                                    width: '98.5%',
+                                    minHeight: '80px',
+                                    height: 'auto',
+                                    display: 'inline-block'
+                                }}
+                                placeholder="댓글을 작성해주세요!"
+                                value={comment}
+                                id="comment"
+                                onChange={onChangeComment}
+                                autoFocus={true}
+                            />
+                            <Button style={{float: 'right'}} htmlType="submit">작성</Button>
+                        </Form>
+                    </div>
                 </Col>
             </Row>
         </Card>

@@ -3,18 +3,19 @@ import {Form, Button,Input} from 'antd';
 import TextareaAutosize from "react-textarea-autosize";
 import ImgForm from "../../components/imgForm";
 import {useDispatch, useSelector} from "react-redux";
-import {initialize, changeField, writeFreeThink} from "../../modules/reducer/freeThink";
+import {initialize, changeField, writeFreeThink, closeModal} from "../../modules/reducer/freeThink";
 
-const FreeThinkWrite = () => {
+const FreeThinkWrite = ({show}) => {
     const imageInput = useRef();
     const dispatch = useDispatch();
-    const {title,contents,image,post,error,category} = useSelector(({freeThink})=>({
+    const {title,contents,image,post,error,category,isOpen} = useSelector(({freeThink})=>({
         title:freeThink.title,
         contents:freeThink.contents,
         image:freeThink.image,
         post:freeThink.freeThink,
         error:freeThink.freeThinkError,
         category:freeThink.category,
+        isOpen:freeThink.isOpen,
     }));
 
     const onSubmitForm = useCallback((e) => {
@@ -31,20 +32,20 @@ const FreeThinkWrite = () => {
                 contents,
                 image,
                 category,
-            })
+            }),
         )
     },[dispatch,title,contents,image,category]);
 
     //성공 혹은 실패시 작업
     useEffect(()=>{
-       if(post){
+       if(!isOpen){
            //success
+           dispatch(closeModal());
        }
-
        if(error){
            console.log(error);
        }
-    },[post,error]);
+    },[post,error,dispatch,isOpen]);
 
     const onChangeField = useCallback(payload=>dispatch(changeField(payload)),[
         dispatch

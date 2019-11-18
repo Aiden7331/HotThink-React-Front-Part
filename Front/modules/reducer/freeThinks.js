@@ -6,18 +6,24 @@ import * as thinkAPI from '../api/think';
 
 //리듀서 생성
 const [LIST_FREE_THINKS,LIST_FREE_THINKS_SUCCESS,LIST_FREE_THINKS_FAILURE] = createRequestActionTypes('freeThinks/LIST_FREE_THINKS');
+//const [WRITE_COMMENT,WRITE_COMMENT_SUCCESS,WRITE_COMMENT_FAILURE] = createRequestActionTypes('freeThinks/WRITE_COMMENT');
 
 
 export const listFreeThinks = createAction(LIST_FREE_THINKS,({sb,sz,pg,category,ob})=>({
     sb,sz,pg,category,ob
 }));
+//export const writeComment = createAction(WRITE_COMMENT,({comment, id})=>({
+//    comment,id
+//}));
 
 
 //사가생성
 const listFreeThinksSaga = createRequestSaga(LIST_FREE_THINKS,thinkAPI.listFreeThinks);
+//const writeCommentSaga = createRequestSaga(WRITE_COMMENT,thinkAPI.writeComment);
 
 export function* freeThinksSaga() {
     yield takeLatest(LIST_FREE_THINKS,listFreeThinksSaga);
+//    yield takeLatest(WRITE_COMMENT,writeCommentSaga);
 }
 
 const initialState={

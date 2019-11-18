@@ -42,7 +42,7 @@ const DashBoard = () => {
                                     <div style={{ display:'inline-block' ,width:'280px'}}>
                                         <h5 style={{fontSize:'30px'}}>{user.name}</h5>
                                         <h5 style={{fontSize:'15px', display:'inline-block'}}>{user.nickName}</h5>
-                                        <TagGroup userPrefer={user.preferenceList}/>
+                                        {/*<TagGroup userPrefer={user.preferenceList}/>*/}
                                     </div>
                                     <div style={{ float:'right', marginTop:'50px', marginRight:'20px' ,position:'absuolute'}}>
                                     <h1>{user.point} Pt</h1>

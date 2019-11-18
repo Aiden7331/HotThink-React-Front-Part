@@ -103,11 +103,8 @@ const Login = () => {
             return;
         }
         if(auth){
-            console.log('로그인 성공');
             localStorage.setItem('token',auth.token);
-            console.log(localStorage.getItem('token'));
             dispatch(check());
-            console.log('check success');
         }
     },[auth,authError,dispatch]);
 
