@@ -19,7 +19,7 @@ import CommentModal from "../../components/comment";
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import TextareaAutosize from "react-textarea-autosize";
 import {useDispatch, useSelector} from "react-redux";
-import {changeField, initialize, like, unlike, writeComment} from "../../modules/reducer/freeThink";
+import {changeField, initialize, like, writeComment} from "../../modules/reducer/freeThink";
 import {Form} from "antd";
 
 const useStyles = makeStyles(theme => ({
@@ -83,13 +83,12 @@ const FreeThinkRead = ({think}) => {
 
     const onClickLike = useCallback((e)=>{
         e.preventDefault();
-        const isLiked = likes.map(v => v.user.email).includes(user.email);
-        if(isLiked) {
-            dispatch(unlike({id}));
-        }else{
+        if(!likes.includes(user.email)) {
             dispatch(like({id}));
+        }else{
+            dispatch(unlike({id}));
         }
-    },[dispatch,id,likes]);
+    },[dispatch,id]);
 
     //언마운트될때 초기화
     useEffect(()=>{
@@ -153,14 +152,14 @@ const FreeThinkRead = ({think}) => {
                         </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
-                        <IconButton onClick={onClickLike} aria-label="add to favorites">
-                            {likes.map(v => v.user.email).includes(user.email)
+                        <IconButton aria-label="add to favorites">
+                            {think.likes.includes(user.email)
                                 ?
-                                <FavoriteIcon color='secondary'/>
+                                <FavoriteIcon onClick={onClickLike} color='secondary'/>
                                 :
-                                <FavoriteIcon />
+                                <FavoriteIcon onClick={onClickLike} />
                             }
-                            {likes.length}
+                            {think.likes.length}
                         </IconButton>
                         <IconButton aria-label="share">
                             <CheckIcon/>{think.hits}

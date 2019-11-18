@@ -43,14 +43,12 @@ const writeFreeThinkSaga = createRequestSaga(WRITE_FREE_THINK,thinkAPI.writeFree
 const updateFreeThinkSaga = createRequestSaga(UPDATE_FREE_THINK,thinkAPI.updateFreeThink);
 const writeCommentSaga = createRequestSaga(WRITE_COMMENT,thinkAPI.writeComment);
 const likeSaga = createRequestSaga(LIKE,thinkAPI.addLike);
-const unLikeSaga = createRequestSaga(UNLIKE,thinkAPI.unLike);
 
 export function* freeThinkSaga() {
     yield takeLatest(WRITE_FREE_THINK,writeFreeThinkSaga);
     yield takeLatest(UPDATE_FREE_THINK,updateFreeThinkSaga);
     yield takeLatest(WRITE_COMMENT,writeCommentSaga);
     yield takeLatest(LIKE,likeSaga);
-    yield takeLatest(UNLIKE,unLikeSaga);
 }
 
 const initialState={
@@ -117,7 +115,7 @@ const freeThink = handleActions(
         [LIKE_SUCCESS]:(state,{payload:userEmail})=>({
             ...state,
             //해당 freeThink의 list에 추가
-            likes:userEmail,
+            likes:state.likes.unshift(userEmail),
         }),
         [LIKE_FAILURE]:(state,{payload:userEmail})=>({
             ...state,
@@ -125,7 +123,7 @@ const freeThink = handleActions(
         [UNLIKE_SUCCESS]:(state,{payload:userEmail})=>({
             ...state,
             //해당 freeThink의 list에서 삭제
-            likes: state.likes.splice(state.likes.findIndex(v => v.user.email === userEmail), 1)
+            likes: state.likes.splice(state.likes.findIndex(v => v.email === userEmail), 1)
         }),
         [UNLIKE_FAILURE]:(state,{payload:userEmail})=>({
             ...state,

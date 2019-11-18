@@ -63,7 +63,8 @@ const initialState={
         pw:'',
     },
     auth:null,
-
+    // loginModalOpen:false,
+    // signUpModalOpen:false,
     authError:null,
 };
 

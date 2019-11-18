@@ -82,10 +82,7 @@ const initialState = {
         pw:'',
         pwck:'',
         preferenceList:[],
-    },
-    userRead:{
-        bdSeq:10,
-    },
+    }
 };
 
 export default handleActions(

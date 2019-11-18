@@ -11,12 +11,15 @@ import { Provider } from 'react-redux';
 import {tempSetUser} from "../modules/reducer/user";
 import {setToken} from "../modules/reducer/auth";
 import {Navbar} from "react-bootstrap";
+import Footer from '../container/main/footer';
+
 
 const HotThink = ({Component,store,pageProps}) => {
     return (
         <>
             <Head>
-                <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png"/>
+                <link rel="icon"
+                      type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png"/>
                 <title>핫띵크 : 핫한 당신의 생각 </title>
                 <link
                     rel="stylesheet"
@@ -48,6 +51,9 @@ const HotThink = ({Component,store,pageProps}) => {
 
             <Component style={{minWidth:'1400px'}}/>
             </Provider>
+
+            <Footer/>
+
         </>
     );
 };
