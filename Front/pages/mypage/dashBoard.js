@@ -8,6 +8,7 @@ import Notice from "../../container/myPage/notice";
 import Login from "../../container/auth/login";
 import UpdateUser from "../../container/myPage/updateUser";
 import {useSelector} from "react-redux";
+import { check } from '../../modules/reducer/user';
 
 const {TabPane} = Tabs;
 
@@ -40,12 +41,12 @@ const DashBoard = () => {
                                 </Button>
                                 <div style={{paddingTop:'70px', marginLeft:'5%'}}>
                                     <div style={{ display:'inline-block' ,width:'280px'}}>
-                                        <h5 style={{fontSize:'30px'}}>{user.name}</h5>
-                                        <h5 style={{fontSize:'15px', display:'inline-block'}}>{user.nickName}</h5>
+                                        <h5 style={{fontSize:'30px'}}>{user?user.name:''}</h5>
+                                        <h5 style={{fontSize:'15px', display:'inline-block'}}>{user?user.nickName:''}</h5>
                                         {/*<TagGroup userPrefer={user.preferenceList}/>*/}
                                     </div>
                                     <div style={{ float:'right', marginTop:'50px', marginRight:'20px' ,position:'absuolute'}}>
-                                    <h1>{user.point} Pt</h1>
+                                    <h1>{user?user.point:1} Pt</h1>
                                     </div>
                                 </div>
                                 <div style={{ width:'100%', textAlign:'center', marginBottom:'50px'}}>
@@ -64,7 +65,7 @@ const DashBoard = () => {
                                     </Avatar>
                                     <Avatar
                                         style={{width: '150px', height: '150px', marginLeft: '5%', marginTop: '30px'}}>
-                                        <h1 style={{marginTop: '65%'}}>{user.realTicket}일</h1>
+                                        <h1 style={{marginTop: '65%'}}>{user?user.realTicket:1}일</h1>
                                     </Avatar>
                                 </div>
                             </div>
@@ -72,13 +73,13 @@ const DashBoard = () => {
                         <div>
                         <Tabs defaultActiveKey="1" size={"large"} tabBarStyle={{width:'100%', textAlign:'center'}} onChange={callback}>
                             <TabPane style={{width:'100%'}} tab="내가 쓴 글" key="1">
-                                <UserWrote user={user.boards}/>
+                                <UserWrote user={user?user.boards:[]}/>
                             </TabPane>
                             <TabPane style={{width:'100%'}} tab="관심 Think" key="2">
                                 <UserWrote/>
                             </TabPane>
                             <TabPane style={{width:'100%'}} tab="스크랩" key="3">
-                                <UserWrote user={user.scraps}/>
+                                <UserWrote user={user?user.scraps:[]}/>
                             </TabPane>
                             <TabPane style={{width:'100%'}} tab="알림" key="4">
                                 <Notice/>

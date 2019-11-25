@@ -69,17 +69,43 @@ export const writeComment = ({comment, id}) =>
     }
 });
 //freeThink 댓글 수정
-export const updateComment = (freeId) => axios.post(`/api/freethink/${freeId}/fan`,{
+export const updateComment = ({updateContents, id,repId}) => axios.put(`/api/freethink/${id}/reply/${repId}`,{contents:`${updateContents}`},{
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
 });
 //freeThink 댓글 삭제
-export const deleteComment = (freeId) => axios.post(`/api/freethink/${freeId}/fan`,{
+export const deleteComment = ({id,repId}) => axios.delete(`/api/freethink/${id}/reply/${repId}`,{
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
 });
+
+//freeThink 대댓글 생성
+export const writeRecomment = ({recomment, id, repId}) =>
+    axios.post(`/api/freethink/${id}/reply/${repId}`,{contents:`${recomment}`},{
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+});
+
+//freeThink 대댓글 수정
+export const updateRecomment = ({recomment, id, repId}) =>
+    axios.put(`/api/freethink/${id}/reply/${repId}`,{contents:`${recomment}`},{
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    });
+
+//freeThink 대댓글 삭제
+export const deleteRecomment = ({ id, repId}) =>
+    axios.delete(`/api/freethink/${id}/reply/${repId}`,{
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    });
+
+
 
 //hotThink 게시글 읽기
 export const readHotThink = () => axios.get('/api/hotthink');

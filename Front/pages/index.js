@@ -179,4 +179,11 @@ const Home = () => {
     );
 };
 
+Home.getInitialProps = async (context) => {
+    const { id } = context.query;
+    const res = await fetch(`http://localhost`);
+    const show = await res.json();
+    return { show };
+};
+
 export default Home;

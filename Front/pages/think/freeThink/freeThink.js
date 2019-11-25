@@ -63,7 +63,7 @@ const FreeThink =() => {
                     })}
                     <Pagination
                         style={{textAlign:'center', margin:'30px'}}
-                        total={freeThinks.length}
+                        total={20}
                         pageSize={size}
                         current={page}
                         onChange={onPageChange}

@@ -15,7 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import CheckIcon from '@material-ui/icons/Check';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import CommentModal from "../../components/comment";
+import CommentModal from "../../components/commentModal";
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import TextareaAutosize from "react-textarea-autosize";
 import {useDispatch, useSelector} from "react-redux";
@@ -23,7 +23,6 @@ import {
     changeField,
     initialize,
     like,
-    setOriginalFreeThink,
     unlike,
     writeComment
 } from "../../modules/reducer/freeThink";
@@ -77,6 +76,7 @@ const FreeThinkRead = ({think}) => {
         likes:freeThink.likes,
         replies:freeThink.replies,
     }));
+
     useEffect(() => {
         const {sb,sz,pg,category,ob} = qs.parse(router.query,{
             ignoreQueryPrefix: true,
@@ -87,8 +87,8 @@ const FreeThinkRead = ({think}) => {
             pg,
             category,
             ob,
-        }))
-    }, [dispatch,router.query,isOpen]);
+        }));
+    }, [dispatch,router.query,isOpen,replies]);
 
 
     const onSubmitForm = useCallback((e) => {
@@ -100,20 +100,9 @@ const FreeThinkRead = ({think}) => {
             writeComment({
                 comment,
                 id,
-                replies,
             }),
         );
-        const {sb,sz,pg,category,ob} = qs.parse(router.query,{
-            ignoreQueryPrefix: true,
-        });
-        dispatch(listFreeThinks({
-            sb,
-            sz,
-            pg,
-            category,
-            ob,
-        }))
-    },[dispatch,comment,id,replies,think,router.query]);
+    },[dispatch,comment,id]);
 
     const onClickLike = useCallback((e)=>{
         e.preventDefault();
@@ -198,11 +187,11 @@ const FreeThinkRead = ({think}) => {
                     </CardContent>
                     <CardActions disableSpacing>
                         <IconButton onClick={onClickLike} aria-label="add to favorites">
-                            {likes.map(v => v.user.email).includes(user.email)
+                            {likes==null||!likes.map(v => v.user.email).includes(user.email)
                                 ?
-                                <FavoriteIcon color='secondary'/>
-                                :
                                 <FavoriteIcon />
+                                :
+                                <FavoriteIcon color='secondary'/>
                             }
                             {likes.length}
                         </IconButton>
@@ -210,11 +199,11 @@ const FreeThinkRead = ({think}) => {
                             <CheckIcon/>{think.hits}
                         </IconButton>
                         <IconButton aria-label="comment">
-                            <ChatBubbleOutlineIcon/>{think.replies.length}
+                            <ChatBubbleOutlineIcon/>{replies.length+replies.map(v=>v.subReplies).length}
                         </IconButton>
                     </CardActions>
                     <CardContent>
-                        <CommentModal replies={think.replies}/>
+                        <CommentModal replies={replies}/>
                     </CardContent>
                     <div style={{position:'fixed', bottom:'40px',width:'40.5%', overflow:'hidden'}}>
                         <Form onSubmit={onSubmitForm}>

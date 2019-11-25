@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -75,7 +75,6 @@ const FreeThinkCard = ({think}) => {
         }))
     };
 
-
     return (
         <>
             <Card className={classes.card} width={1} style={{margin: '10px'}}>
@@ -110,7 +109,7 @@ const FreeThinkCard = ({think}) => {
                 </Row>
                 <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
-                        {think.likes.map(v => v.user.email).includes(user.email)
+                        {!user||think.likes.map(v => v.user.email).includes(user.email)
                             ?
                             <FavoriteIcon color='secondary'/>
                             :

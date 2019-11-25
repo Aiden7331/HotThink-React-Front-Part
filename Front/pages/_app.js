@@ -8,7 +8,7 @@ import rootReducer,{rootSaga} from '../modules/reducer/index';
 import withReduxSaga from "next-redux-saga";
 import withRedux from 'next-redux-wrapper';
 import { Provider } from 'react-redux';
-import {tempSetUser} from "../modules/reducer/user";
+import {tempSetUser,check} from "../modules/reducer/user";
 import {setToken} from "../modules/reducer/auth";
 import {Navbar} from "react-bootstrap";
 import Footer from '../container/main/footer';
@@ -48,11 +48,9 @@ const HotThink = ({Component,store,pageProps}) => {
             <Provider style={{minWidth:'1400px'}} store={store}>
                 <NavigationBar style={{minWidth:'1400px'}}>
                 </NavigationBar>
-
                 <Component style={{minWidth:'1400px'}}/>
+                <Footer/>
             </Provider>
-
-            <Footer/>
 
         </>
     );
