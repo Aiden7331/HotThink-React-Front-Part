@@ -9,14 +9,14 @@ import {listFreeThinks} from "../../modules/reducer/freeThinks";
 const FreeThinkWrite = ({show}) => {
     const imageInput = useRef();
     const dispatch = useDispatch();
-    const {title,contents,image,post,error,category,isOpen} = useSelector(({freeThink})=>({
+    const {title,contents,post,error,category,isOpen,attaches} = useSelector(({freeThink})=>({
         title:freeThink.title,
         contents:freeThink.contents,
-        image:freeThink.image,
         post:freeThink.freeThink,
         error:freeThink.freeThinkError,
         category:freeThink.category,
         isOpen:freeThink.isOpen,
+        attaches:freeThink.imagePaths,
     }));
 
     const onSubmitForm = useCallback((e) => {
@@ -27,15 +27,16 @@ const FreeThinkWrite = ({show}) => {
         if (!contents || !contents.trim()) {
             return alert('게시글을 작성하세요.');
         }
+        console.log(e.target.files);
         dispatch(
             writeFreeThink({
                 title,
                 contents,
-                image,
                 category,
+                attaches,
             }),
         );
-    },[dispatch,title,contents,image,category]);
+    },[dispatch,title,contents,category,attaches]);
 
     //성공 혹은 실패시 작업
     useEffect(()=>{
@@ -65,31 +66,36 @@ const FreeThinkWrite = ({show}) => {
         };
     },[dispatch]);
 
-    const onChangeImages = useCallback((e) => {
-        console.log(e.target.files);
-        const imageFormData = new FormData();
-        [].forEach.call(e.target.files, (f) => {
-            imageFormData.append('image', f);
-        });
-    }, []);
+    const [previewVisible, setPreviewVisible] = useState(false);
+    const [previewImage, setPreviewImage] = useState('');
+    const [fileList, setFileList] = useState([]);
 
-    const onClickImageUpload = useCallback(() => {
+    const handleCancel = () => {
+        setPreviewVisible(false);
+    };
 
-    }, []);
+    const handlePreview = async (file) => {
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj);
+        }
+        setPreviewImage(file.url || file.preview );
+        setPreviewVisible(true);
+    };
 
-    const onRemoveImage = useCallback(index => () => {
-
-    }, []);
+    const handleChange = ({fileList}) => {
+        setFileList(fileList);
+    };
 
     return (
         <>
             <Form style={{margin: '0px 0 10px'}} encType="multipart/form-data" onSubmit={onSubmitForm}>
-                <Input style={{marginBottom:'3px'}} id="title" value={title} onChange={onChangeTitle} placeholder="제목" />
+                <Input style={{marginBottom:'3px',fontFamily: 'Noto Sans KR'}} id="title" value={title} onChange={onChangeTitle} placeholder="제목" />
                 <div style={{
                     height: "auto",
                     overflow: "hidden",
                     background: 'white',
-                    border: '1px solid #e6e6e6'
+                    border: '1px solid #e6e6e6',
+                    borderRadius:'5px'
                 }}>
                     <div style={{overflow: 'hidden', height: 'auto'}}>
                         <TextareaAutosize
@@ -101,28 +107,29 @@ const FreeThinkWrite = ({show}) => {
                                 border: 'none',
                                 width: '98.5%',
                                 minHeight: '80px',
-                                height: 'auto'
+                                height: 'auto',
+                                fontFamily: 'Noto Sans KR',
+                                outline:'none',
                             }}
                             placeholder="당신의 아이디어를 발휘하세요!"
                             value={contents}
                             id="contents"
                             onChange={onChangeContents}
                             autoFocus={true}/>
-                        <hr style={{
-                            borderWidth: '1px 0px 0px 0px',
-                            borderColor: '#e6e6e6',
-                            width: '98%',
-                            align: 'center',
-                            margin:'0px 0px 0px 0px',
-                        }}/>
-
-                        <div style={{margin:'5px'}}>
-                            <input type="file" id="image" value={image} multiple hidden ref={imageInput} onChange={onChangeImages}/>
-                            <ImgForm/>
-                        </div>
                     </div>
                 </div>
-                <Button type="primary" style={{float: 'right',marginTop:'5px', borderRadius: '0'}}
+                <div style={{marginTop:'5px'}}>
+                    <input type="file" id="attaches" multiple hidden ref={imageInput} onChange={handleChange}/>
+                    <ImgForm
+                        previewVisible={previewVisible}
+                        previewImage={previewImage}
+                        fileList={fileList}
+                        handleCancel={handleCancel}
+                        handlePreview={handlePreview}
+                        handleChange={handleChange}
+                    />
+                </div>
+                <Button type="primary" style={{float: 'right',marginTop:'5px', borderRadius: '5px'}}
                         htmlType="submit" >작성</Button>
             </Form>
         </>

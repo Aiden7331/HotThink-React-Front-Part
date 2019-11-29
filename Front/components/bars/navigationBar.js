@@ -55,6 +55,7 @@ const NavigationBar = () => {
                     WebkitBoxShadow: '0px 0px 5px 0px rgba(0,0,0,0.15)',
                     MozBoxShadow: '0px 0px 5px 0px rgba(0,0,0,0.15)',
                     boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.15)',
+                    minWidth:'1400px',
                 }}
                 bg="light" variant="light" sticky="top">
                 <Navbar.Brand>
@@ -83,7 +84,7 @@ const NavigationBar = () => {
                                 sb: 0,
                                 sz: 10,
                                 pg: 1,
-                                category: 'IT서비스',
+                                category: '웹사이트',
                                 ob: 0
                             }
                         }}><a style={{

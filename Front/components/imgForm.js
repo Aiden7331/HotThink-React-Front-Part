@@ -1,5 +1,5 @@
-import React from 'react';
-import { Upload, Icon, Modal } from 'antd';
+import React, {useState} from 'react';
+import {Upload, Icon, Modal} from 'antd';
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -10,60 +10,31 @@ function getBase64(file) {
     });
 }
 
-class ImgForm extends React.Component {
-    state = {
-        previewVisible: false,
-        previewImage: '',
-        fileList: [
-            {
-                uid: '-1',
-                name: 'image.png',
-                status: 'done',
-                url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-            },
-        ],
-    };
+const ImgForm = ({previewVisible,previewImage,fileList,handleCancel,handlePreview,handleChange}) => {
+    const uploadButton = (
+        <div>
+            <Icon type="plus"/>
+            <div className="ant-upload-text">Upload</div>
+        </div>
+    );
 
-    handleCancel = () => this.setState({ previewVisible: false });
-
-    handlePreview = async file => {
-        if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj);
-        }
-
-        this.setState({
-            previewImage: file.url || file.preview,
-            previewVisible: true,
-        });
-    };
-
-    handleChange = ({ fileList }) => this.setState({ fileList });
-
-    render() {
-        const { previewVisible, previewImage, fileList } = this.state;
-        const uploadButton = (
-            <div>
-                <Icon type="plus" />
-                <div className="ant-upload-text">Upload</div>
-            </div>
-        );
-        return (
-            <div className="clearfix">
-                <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    listType="picture-card"
-                    fileList={fileList}
-                    onPreview={this.handlePreview}
-                    onChange={this.handleChange}
-                >
-                    {fileList.length >= 8 ? null : uploadButton}
-                </Upload>
-                <Modal zIndex={3} visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-                    <img alt="example" style={{  }} src={previewImage} />
-                </Modal>
-            </div>
-        );
-    }
-}
+    return (
+        <div className="clearfix">
+            <Upload
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                listType="picture-card"
+                fileList={fileList}
+                onPreview={handlePreview}
+                onChange={handleChange}
+                multiple
+            >
+                {fileList.length >= 8 ? null : uploadButton}
+            </Upload>
+            <Modal zIndex={3} visible={previewVisible} footer={null} onCancel={handleCancel}>
+                <img alt="example" src={previewImage}/>
+            </Modal>
+        </div>
+    )
+};
 
 export default ImgForm;

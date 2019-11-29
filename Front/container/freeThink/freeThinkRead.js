@@ -199,7 +199,7 @@ const FreeThinkRead = ({think}) => {
                             <CheckIcon/>{think.hits}
                         </IconButton>
                         <IconButton aria-label="comment">
-                            <ChatBubbleOutlineIcon/>{replies.length+replies.map(v=>v.subReplies).length}
+                            <ChatBubbleOutlineIcon/>{replies.length}
                         </IconButton>
                     </CardActions>
                     <CardContent>

@@ -78,7 +78,7 @@ const FreeThink =() => {
                 aria-labelledby="example-custom-modal-styling-title"
             >
                 <Modal.Header closeButton>
-                    <Modal.Title id="example-custom-modal-styling-title">
+                    <Modal.Title style={{fontWeight:700}} id="example-custom-modal-styling-title">
                         FreeThink 작성
                     </Modal.Title>
                 </Modal.Header>

@@ -16,7 +16,7 @@ import Footer from '../container/main/footer';
 
 const HotThink = ({Component,store,pageProps}) => {
     return (
-        <>
+        <div>
             <Head>
                 <link rel="icon"
                       type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png"/>
@@ -35,6 +35,7 @@ const HotThink = ({Component,store,pageProps}) => {
                 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
                       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                       crossOrigin="anonymous"/>
+                <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700,900&display=swap" rel="stylesheet"/>
                 <script src="https://unpkg.com/react/umd/react.production.min.js"/>
                 <script
                     src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
@@ -45,14 +46,13 @@ const HotThink = ({Component,store,pageProps}) => {
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/3.11.6/antd.css"/>
                 <script>var Alert = ReactBootstrap.Alert;</script>
             </Head>
-            <Provider style={{minWidth:'1400px'}} store={store}>
-                <NavigationBar style={{minWidth:'1400px'}}>
-                </NavigationBar>
-                <Component style={{minWidth:'1400px'}}/>
+            <Provider store={store}>
+                <NavigationBar />
+                <Component />
                 <Footer/>
             </Provider>
 
-        </>
+        </div>
     );
 };
 

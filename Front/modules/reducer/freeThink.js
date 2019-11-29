@@ -27,8 +27,8 @@ export const changeField = createAction(CHANGE_FIELD,({key,value})=>({
 }));
 export const openModal = createAction(OPEN_MODAL);
 export const closeModal = createAction(CLOSE_MODAL);
-export const writeFreeThink = createAction(WRITE_FREE_THINK,({title,contents,image,category})=>({
-    title, contents, image, category
+export const writeFreeThink = createAction(WRITE_FREE_THINK,({title,contents,category,attaches})=>({
+    title, contents, category,attaches
 }));
 export const updateFreeThink = createAction(UPDATE_FREE_THINK,({id,title,contents,image,category})=>({
     id, title, contents, image, category
@@ -86,8 +86,8 @@ export function* freeThinkSaga() {
 const initialState={
     title:'',
     contents:'',
-    image:'',
-    category:'IT서비스',
+    imagePaths:[],
+    category:'웹사이트',
     originalPostId:null,
     freeThink:null,
     freeThinkError:null,
@@ -202,7 +202,7 @@ const freeThink = handleActions(
         [WRITE_RECOMMENT_SUCCESS]:(state,{payload:replies})=>({
             ...state,
             comment:'',
-            // replies:replies,
+            replies:replies,
         }),
         [WRITE_RECOMMENT_FAILURE]:(state,{payload:error})=>({
             ...state,
@@ -212,7 +212,7 @@ const freeThink = handleActions(
         [UPDATE_RECOMMENT_SUCCESS]:(state,{payload:replies})=>({
             ...state,
             comment:'',
-            // replies:replies,
+            replies:replies,
         }),
         [UPDATE_RECOMMENT_FAILURE]:(state,{payload:error})=>({
             ...state,

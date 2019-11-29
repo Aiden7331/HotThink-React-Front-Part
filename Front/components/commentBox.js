@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import InputRecomment from "../container/freeThink/recomment/inputRecomment";
 import {Button, Comment, Form, Icon} from "antd";
 import TextareaAutosize from "react-textarea-autosize";
@@ -15,18 +15,20 @@ const CommentBox =({item}) => {
     }));
     const repId = item.rpSeq;
 
-    const onSubmitUpdate = useCallback((e) => {
+    const onSubmitUpdate = useCallback(async(e) => {
         e.preventDefault();
         if (!updateContents || !updateContents.trim()) {
             return alert('올바르게 수정해주세요.');
         }
-        dispatch(
+        await dispatch(
             updateComment({
                 updateContents,
                 id,
                 repId,
             }),
         );
+        //댓글 수정 성공시
+        await setUpdateOpen(false);
     },[dispatch,id,updateContents,repId]);
 
     const onChangeUpdate = useCallback((e) => {

@@ -26,6 +26,7 @@ const SubComment = ({item}) => {
                 repId,
             }),
         );
+        setUpdateOpen(false);
     },[dispatch,id,updateContents,repId]);
 
     const onChangeUpdate = useCallback((e) => {

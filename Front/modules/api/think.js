@@ -20,11 +20,11 @@ export const listFreeThinks = ({sb,sz,pg,category,ob}) => {
 };
 
 //freeThink 게시글 작성
-export const writeFreeThink = ({title,contents,image,category}) => {
+export const writeFreeThink = ({title,contents,attaches,category}) => {
     return axios.post(`/api/freethink/${category}`, {
         title,
         contents,
-        image,
+        attaches,
     },{
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -68,12 +68,14 @@ export const writeComment = ({comment, id}) =>
         'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
 });
+
 //freeThink 댓글 수정
 export const updateComment = ({updateContents, id,repId}) => axios.put(`/api/freethink/${id}/reply/${repId}`,{contents:`${updateContents}`},{
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
 });
+
 //freeThink 댓글 삭제
 export const deleteComment = ({id,repId}) => axios.delete(`/api/freethink/${id}/reply/${repId}`,{
     headers: {
@@ -90,8 +92,8 @@ export const writeRecomment = ({recomment, id, repId}) =>
 });
 
 //freeThink 대댓글 수정
-export const updateRecomment = ({recomment, id, repId}) =>
-    axios.put(`/api/freethink/${id}/reply/${repId}`,{contents:`${recomment}`},{
+export const updateRecomment = ({updateContents, id, repId}) =>
+    axios.put(`/api/freethink/${id}/reply/${repId}`,{contents:`${updateContents}`},{
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         }

@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import {useDispatch, useSelector} from "react-redux";
-import {writeRecomment} from "../../../modules/reducer/freeThink";
+import {deleteRecomment, writeRecomment} from "../../../modules/reducer/freeThink";
 import {Form, Button,Icon} from 'antd';
 
 const InputRecomment = ({item,updateOpen,setUpdateOpen,updateContents,setUpdateContents}) => {
@@ -26,6 +26,7 @@ const InputRecomment = ({item,updateOpen,setUpdateOpen,updateContents,setUpdateC
                 repId,
             }),
         );
+        setRecommentOpen(false);
     }, [dispatch, recomment, id, repId]);
 
     const onChangeRecomment = useCallback((e) => {
@@ -47,7 +48,16 @@ const InputRecomment = ({item,updateOpen,setUpdateOpen,updateContents,setUpdateC
     };
 
     const onDelete = () => {
-
+        const check = confirm("답글을 삭제하시겠습니까?");
+        if(check === true){
+            //삭제로직
+            dispatch(
+                deleteRecomment({
+                    id,
+                    repId,
+                })
+            )
+        }
     };
 
     return (
