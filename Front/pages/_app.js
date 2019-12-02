@@ -43,8 +43,7 @@ const HotThink = ({Component,store,pageProps}) => {
                 <script
                     src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
                 />
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/3.11.6/antd.css"/>
-                <script>var Alert = ReactBootstrap.Alert;</script>
+                <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
             </Head>
             <Provider store={store}>
                 <NavigationBar />

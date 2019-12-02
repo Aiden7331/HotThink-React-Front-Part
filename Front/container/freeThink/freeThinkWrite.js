@@ -4,10 +4,8 @@ import TextareaAutosize from "react-textarea-autosize";
 import ImgForm from "../../components/imgForm";
 import {useDispatch, useSelector} from "react-redux";
 import {initialize, changeField, writeFreeThink, closeModal} from "../../modules/reducer/freeThink";
-import {listFreeThinks} from "../../modules/reducer/freeThinks";
 
 const FreeThinkWrite = ({show}) => {
-    const imageInput = useRef();
     const dispatch = useDispatch();
     const {title,contents,post,error,category,isOpen,attaches} = useSelector(({freeThink})=>({
         title:freeThink.title,
@@ -16,7 +14,7 @@ const FreeThinkWrite = ({show}) => {
         error:freeThink.freeThinkError,
         category:freeThink.category,
         isOpen:freeThink.isOpen,
-        attaches:freeThink.imagePaths,
+        attaches:freeThink.attaches,
     }));
 
     const onSubmitForm = useCallback((e) => {
@@ -27,7 +25,6 @@ const FreeThinkWrite = ({show}) => {
         if (!contents || !contents.trim()) {
             return alert('게시글을 작성하세요.');
         }
-        console.log(e.target.files);
         dispatch(
             writeFreeThink({
                 title,
@@ -53,10 +50,10 @@ const FreeThinkWrite = ({show}) => {
         dispatch
     ]);
 
-    const onChangeTitle = e =>{
+    const onChangeTitle = e => {
         onChangeField({key:'title',value:e.target.value})
     };
-    const onChangeContents = e =>{
+    const onChangeContents = e => {
         onChangeField({key:'contents',value:e.target.value})
     };
     //언마운트될때 초기화
@@ -65,26 +62,6 @@ const FreeThinkWrite = ({show}) => {
             dispatch(initialize());
         };
     },[dispatch]);
-
-    const [previewVisible, setPreviewVisible] = useState(false);
-    const [previewImage, setPreviewImage] = useState('');
-    const [fileList, setFileList] = useState([]);
-
-    const handleCancel = () => {
-        setPreviewVisible(false);
-    };
-
-    const handlePreview = async (file) => {
-        if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj);
-        }
-        setPreviewImage(file.url || file.preview );
-        setPreviewVisible(true);
-    };
-
-    const handleChange = ({fileList}) => {
-        setFileList(fileList);
-    };
 
     return (
         <>
@@ -118,17 +95,10 @@ const FreeThinkWrite = ({show}) => {
                             autoFocus={true}/>
                     </div>
                 </div>
-                <div style={{marginTop:'5px'}}>
-                    <input type="file" id="attaches" multiple hidden ref={imageInput} onChange={handleChange}/>
-                    <ImgForm
-                        previewVisible={previewVisible}
-                        previewImage={previewImage}
-                        fileList={fileList}
-                        handleCancel={handleCancel}
-                        handlePreview={handlePreview}
-                        handleChange={handleChange}
-                    />
-                </div>
+                {/*<div style={{marginTop:'5px'}}>*/}
+                {/*    <ImgForm />*/}
+                {/*</div>*/}
+                <ImgForm />
                 <Button type="primary" style={{float: 'right',marginTop:'5px', borderRadius: '5px'}}
                         htmlType="submit" >작성</Button>
             </Form>

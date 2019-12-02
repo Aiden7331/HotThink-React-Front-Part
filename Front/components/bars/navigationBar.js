@@ -59,14 +59,6 @@ const NavigationBar = () => {
                 }}
                 bg="light" variant="light" sticky="top">
                 <Navbar.Brand>
-                    {/*<img*/}
-                    {/*    src='/static/images/logo.png'*/}
-                    {/*    width="30"*/}
-                    {/*    height="30"*/}
-                    {/*    className="d-inline-block align-top"*/}
-                    {/*    alt=""*/}
-                    {/*    style={{color:'red'}}*/}
-                    {/*/>*/}
                     <Link href='/'><a style={{
                         textDecoration:'none',
                         fontStyle: 'italic',

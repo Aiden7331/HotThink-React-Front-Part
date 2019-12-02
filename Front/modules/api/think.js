@@ -106,6 +106,13 @@ export const deleteRecomment = ({ id, repId}) =>
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
     });
+//이미지 업로드
+export const uploadImage = ({formData}) =>
+    axios.post(`/api/images`,{formData},{
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    });
 
 
 

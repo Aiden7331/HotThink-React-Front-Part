@@ -52,7 +52,7 @@ const FreeThink =() => {
             <Row type="flex" justify="center">
                 <Col span={4}><ThinkBar/></Col>
                 <Col span={16}>
-                    <h3 style={{display:'inline-block'}}>프리띵크 > IT</h3>
+                    <h3 style={{display:'inline-block'}}>프리띵크 > 웹사이트</h3>
                     <a onClick={()=>dispatch(openModal())}>
                         <Icon style={{float:'right', marginTop:'10px', marginRight:'10px'}} type="form" />
                     </a>

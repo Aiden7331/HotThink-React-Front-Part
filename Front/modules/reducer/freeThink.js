@@ -2,6 +2,7 @@ import {createAction,handleActions} from 'redux-actions';
 import {takeLatest} from 'redux-saga/effects';
 import createRequestSaga,{createRequestActionTypes} from "../saga/createRequestSaga";
 import * as thinkAPI from '../api/think';
+import produce from "immer";
 
 //리듀서 생성
 const INITIALIZE = 'freeThink/INITIALIZE';
@@ -19,6 +20,7 @@ const [UPDATE_RECOMMENT,UPDATE_RECOMMENT_SUCCESS,UPDATE_RECOMMENT_FAILURE] = cre
 const [DELETE_RECOMMENT,DELETE_RECOMMENT_SUCCESS,DELETE_RECOMMENT_FAILURE] = createRequestActionTypes('freeThink/DELETE_RECOMMENT');
 const [LIKE,LIKE_SUCCESS,LIKE_FAILURE] = createRequestActionTypes('freeThink/LIKE');
 const [UNLIKE,UNLIKE_SUCCESS,UNLIKE_FAILURE] = createRequestActionTypes('freeThink/UNLIKE');
+const [UPLOAD_IMAGE,UPLOAD_IMAGE_SUCCESS,UPLOAD_IMAGE_FAILURE] = createRequestActionTypes('freeThink/UPLOAD_IMAGE');
 
 export const initialize = createAction(INITIALIZE);
 export const setOriginalFreeThink = createAction(SET_ORIGINAL_FREE_THINK,post=>post);
@@ -58,6 +60,10 @@ export const unlike = createAction(UNLIKE,({id})=>({
     id,
 }));
 
+export const uploadImage = createAction(UPLOAD_IMAGE,({attaches})=>({
+    attaches,
+}));
+
 //사가생성
 const writeFreeThinkSaga = createRequestSaga(WRITE_FREE_THINK,thinkAPI.writeFreeThink);
 const updateFreeThinkSaga = createRequestSaga(UPDATE_FREE_THINK,thinkAPI.updateFreeThink);
@@ -86,7 +92,7 @@ export function* freeThinkSaga() {
 const initialState={
     title:'',
     contents:'',
-    imagePaths:[],
+    attaches:[],
     category:'웹사이트',
     originalPostId:null,
     freeThink:null,
@@ -228,6 +234,17 @@ const freeThink = handleActions(
             ...state,
             commentError:error,
         }),
+        //이미지 업로드
+        [UPLOAD_IMAGE_SUCCESS]:(state,{payload:attaches})=>
+            produce(state,draft => {
+                draft.attaches.unshift(attaches);
+            }),
+
+        [UPLOAD_IMAGE_FAILURE]:(state,{payload:error})=>({
+            ...state,
+            commentError:error,
+        }),
+
     },
     initialState,
 );

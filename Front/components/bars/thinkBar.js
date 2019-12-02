@@ -40,9 +40,7 @@ const ThinkBar = () => {
             </span>
                 }
             >
-
-
-                <Menu.Item key="1"><Link href={{ pathname: '/think/freeThink/freeThink', query: { sb:0,sz:10,pg:1,category:'IT서비스',ob:0 }}}><a style={{textDecoration:'none'}}>IT</a></Link></Menu.Item>
+                <Menu.Item key="1"><Link href={{ pathname: '/think/freeThink/freeThink', query: { sb:0,sz:10,pg:1,category:'웹사이트',ob:0 }}}><a style={{textDecoration:'none'}}>웹사이트</a></Link></Menu.Item>
                 <Menu.Item key="2">기계</Menu.Item>
                 <Menu.Item key="3">화학</Menu.Item>
                 <Menu.Item key="4">의류</Menu.Item>
@@ -61,9 +59,9 @@ const ThinkBar = () => {
                 <Menu.Item key="7">
                     <Link href={{
                     pathname: '/think/hotThink/hotThink',
-                    query: { sb:0,sz:10,pg:1,category:'IT서비스',ob:0 }}}
+                    query: { sb:0,sz:10,pg:1,category:'웹사이트',ob:0 }}}
                     >
-                        IT
+                        웹사이트
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="8">기계</Menu.Item>
@@ -85,9 +83,10 @@ const ThinkBar = () => {
                 <Menu.Item key="13">
                     <Link href={{
                         pathname: '/think/realThink/realThink',
-                        query: { sb:0,sz:10,pg:1,category:'IT서비스',ob:0 }}}
-                    >
-                        IT
+                        query: { sb:0,sz:10,pg:1,category:'웹사이트',ob:0 }}}
+                    ><a>
+                        웹사이트
+                    </a>
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="14">기계</Menu.Item>
