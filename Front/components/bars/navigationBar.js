@@ -1,27 +1,77 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
-import { Button } from '@material-ui/core';
+import { Button, Fab, Typography, Box, Snackbar, SnackbarContent, IconButton, Icon } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { Modal } from 'react-bootstrap';
 import Login from '../../container/auth/login';
-import SignUp from '../../container/auth/signup';
 import Link from 'next/Link';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../modules/reducer/user';
-import { authNull } from '../../modules/reducer/auth';
+import { authNull, login } from '../../modules/reducer/auth';
+import SVG from '../../components/config/SVG';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import CloseIcon from '@material-ui/icons/Close';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import { green } from '@material-ui/core/colors';
+import clsx from 'clsx';
+import { check } from '../../modules/reducer/user';
+
 /*
     기능 : 전체 메인페이지의 상단 네비게이션바
     loginShow => 로그인 모달창 개폐에 사용되는 key state
-    signupShow => 로그인 모달창 개폐에 사용되는 key state
     num => 초기네비게이션바 설정 state
     onLogout => 로그아웃시 발생하는 로직
 */
 
+const useStyles = makeStyles(theme => ({
+  fab: {
+    margin: theme.spacing(1),
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+}));
+
+const MySnackbarContentWrapper = ( props ) =>{
+  return (
+    <SnackbarContent
+      style={{ backgroundColor: green[600]}}
+      aria-describedby="client-snackbar"
+      message={
+        <span id="client-snackbar" style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}>
+          <CheckCircleIcon style={{
+            fontSize:20,
+            opacity: 0.9,
+            marginRight: 5,
+          }}/>
+          회원가입 성공!
+        </span>
+      }
+      action={[
+        <IconButton key="close" aria-label="close" color="inherit" onClick={props.onClose} style={{outline:'none'}}>
+          <CloseIcon style={{fontSize:20 }}/>
+        </IconButton>,
+      ]}
+    />
+  );
+};
+
 const NavigationBar = () => {
+  const classes = useStyles();
   const [loginShow, setLoginShow] = useState(false);
-  const [signupShow, setSignupShow] = useState(false);
-  const [num, setNum] = useState(['sub1']);
   const { user } = useSelector(({ user }) => ({ user: user.user }));
   const dispatch = useDispatch();
+  const [state, setState] = useState(false);
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setState(false);
+  };
 
   //로그아웃 발생 이벤트
   const onLogout = () => {
@@ -47,27 +97,63 @@ const NavigationBar = () => {
     }
   }, [user, dispatch]);
 
+  const SVGNameInit = (think) => {
+    if (think === 'Real') {
+      return 'trophy';
+    } else if (think === 'Hot') {
+      return 'fire';
+    } else if (think === 'Think') {
+      return 'bird';
+    }
+  };
+
+  const SVGViewBoxInit = (think) => {
+    if (think === 'Real') {
+      return '0 0 100 100';
+    } else if (think === 'Hot') {
+      return '0 0 846.66 900.325';
+    } else if (think === 'Think') return '0 0 105 105';
+  };
+
+  const thinkColorInit = (think) => {
+    if (think === 'Real') {
+      return '#ffc400';
+    } else if (think === 'Hot') {
+      return '#FF0000';
+    } else if (think === 'Think') return '#005b8f';
+  };
+
+  const thinkURLInit = (think) => {
+    if (think === 'Real') {
+      return '/think/myRealThink';
+    } else if (think === 'Hot') {
+      return '/think/myHotThink';
+    } else if (think === 'Think') return {
+    // '/think/myFreeThink?sb=0&sz=5&pg=1&category=웹사이트&ob=0';
+      pathname: '/think/myFreeThink',
+      query: {
+        sb: 0,
+        sz: 5,
+        pg: 1,
+        category: '웹사이트',
+        ob: 0
+      }
+    };
+  };
   return (
     <>
       <Navbar
         onSelect={false}
         style={{
+          minWidth:1000,
           WebkitBoxShadow: '0px 0px 5px 0px rgba(0,0,0,0.15)',
           MozBoxShadow: '0px 0px 5px 0px rgba(0,0,0,0.15)',
           boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.15)',
         }}
         bg="light" variant="light" sticky="top">
         <Navbar.Brand>
-          {/*<img*/}
-          {/*    src='/static/images/logo.png'*/}
-          {/*    width="30"*/}
-          {/*    height="30"*/}
-          {/*    className="d-inline-block align-top"*/}
-          {/*    alt=""*/}
-          {/*    style={{color:'red'}}*/}
-          {/*/>*/}
           <Link href='/'><a style={{
-            textDecoration:'none',
+            textDecoration: 'none',
             fontStyle: 'italic',
             fontSize: '30px',
             fontFamily: 'Arial',
@@ -75,62 +161,127 @@ const NavigationBar = () => {
             color: 'red'
           }}>{'HotThink'}</a></Link>
         </Navbar.Brand>
-        <Nav className="mr-auto" style={{ fontSize: '13px' }}>
-          <Nav.Item>
-            <Link href={{
-              pathname: '/think/freeThink/freeThink',
-              query: {
-                sb: 0,
-                sz: 10,
-                pg: 1,
-                category: 'IT서비스',
-                ob: 0
-              }
-            }}><a style={{
-              textDecoration: 'none',
-              marginLeft: '10px',
-              color: 'gray',
-              fontWeight: '600'
-            }}>아이디어공유</a></Link></Nav.Item>
-          {/*홍민석 요청으로 href로 분야 보여주는것 삭제*/}
-          {/*<NavDropdown title="Think게시판" id="basic-nav-dropdown" href='/freeThink'>*/}
-          {/*    <NavDropdown.Item href="/freeThink">FreeThink</NavDropdown.Item>*/}
-          {/*    <NavDropdown.Item href="/hotThink" num={{nu
-                  m}}>HotThink</NavDropdown.Item>*/}
-          {/*    <NavDropdown.Item href="/realThink">RealTihnk</NavDropdown.Item>*/}
-          {/*</NavDropdown>*/}
-          {/*<Nav.Item style ={{marginLeft:'5px'}}><Link href="/finished"><a style={{textDecoration:'none', marginLeft:'10px',color:'gray',fontWeight:'600'}}>판매완료</a></Link></Nav.Item>*/}
+        <Nav style={{
+          fontSize: '13px',
+          width: '30%'
+        }}>
+          {
+            ['Real', 'Hot', 'Think'].map(think =>
+              <Nav.Item style={{ marginLeft: '5%' }}>
+                <Link href={user ? thinkURLInit(think) : ''}>
+                {/*  <Link href={user ? '/think/myFreeThink?sb=0&sz=5&pg=1&category=웹사이트&ob=0' : ''}>*/}
+
+                  <a style={{textDecoration:'none'}}>
+                  <Button
+                    onClick={user ? null : () => setLoginShow(true)}
+                    style={{
+                      outline: 'none',
+                      marginLeft: '5%',
+                    }}
+                  >
+                    <li>
+                      <SVG name={SVGNameInit(think)}
+                           width={36} height={36} color={thinkColorInit(think)}
+                           viewBox={SVGViewBoxInit(think)}/>
+                      <div style={{
+                        color: thinkColorInit(think),
+                        fontWeight: 900,
+                        fontFamily: 'Noto Sans KR',
+                      }}>
+                        {think}
+                      </div>
+                    </li>
+                  </Button>
+                  </a>
+                </Link>
+              </Nav.Item>
+            )
+          }
+
+          {/*<Nav.Item>*/}
+          {/*  <Link href={{*/}
+          {/*    pathname: 'user',*/}
+          {/*    query: {*/}
+          {/*      nickName:'10'*/}
+          {/*    },*/}
+          {/*  }}><a style={{*/}
+          {/*    textDecoration: 'none',*/}
+          {/*    marginLeft: '10px',*/}
+          {/*    color: 'gray',*/}
+          {/*    fontWeight: '600'*/}
+          {/*  }}>유저</a></Link></Nav.Item>*/}
         </Nav>
 
-        {
-          user
-            ? <div style={{ float: 'right' }}>
-              <Button size={'small'}
-                      style={{
-                        marginTop: '4px',
-                        marginRight: '10px'
-                      }}
-                      shape={'round'}
-                      onClick={onLogout}
-              >
-                <b style={{
-                  marginLeft: '5px',
-                  color: '#13c276'
-                }}>로그아웃</b>
-              </Button>
-            </div>
-            : <>
-              <Button
-                style={{
-                  color: 'black',
-                }}
-                variant="outlined" onClick={() => setLoginShow(true)}>
-                Who are you ?
-              </Button>
-            </>
+        <Nav className="justify-content-center" style={{ width: '30%' }}>
+          {
+            user
+              ?
+              <>
+                <Link href={'/mypage'}>
+                  <Fab color="primary" variant="round" aria-label="like" className={classes.fab}
+                       onClick={()=>{dispatch(check())}}
+                       style={{
+                         marginRight: '29%',
+                         outline: 'none'
+                       }}
+                  >
+                    <AccountBoxIcon fontSize={'large'}/>
+                  </Fab>
+                </Link>
+              </>
+              :
+              <>
+              </>
+          }
+        </Nav>
+
+        {user ?
+          <>
+            <Nav className="justify-content-end" style={{ width: '30%' }}>
+                <span style={{
+                  fontSize: 20,
+                  fontWeight: 900,
+                  fontFamily: 'Noto Sans KR',
+                }}>{user.nickName}</span>
+              <div style={{
+                fontSize: 15,
+                fontWeight: 500,
+                paddingTop:5,
+                marginRight: '5%',
+                fontFamily: 'Noto Sans KR',
+              }}>&nbsp;&nbsp;님 반가워요!
+              </div>
+              <Link href={'/'}>
+                <Button variant="outlined"
+                        style={{
+                          outline: 'none',
+                          color: 'black'
+                        }}
+                        onClick={onLogout}
+                        startIcon={<ExitToAppIcon/>}
+                >
+                  Quit
+                </Button>
+              </Link>
+            </Nav>
+          </>
+          :
+          <>
+            <Nav className="justify-content-end" style={{
+              width:'30%',
+              float:'right'}}>
+                <Button
+                  style={{
+                    outline: 'none',
+                    color: 'black',
+                  }}
+                  variant="outlined" onClick={() => setLoginShow(true)}>
+                  Who are you ?
+                </Button>
+            </Nav>
+          </>
+
         }
-
-
       </Navbar>
       <Modal
         show={loginShow}
@@ -139,9 +290,18 @@ const NavigationBar = () => {
         aria-labelledby="example-custom-modal-styling-title"
       >
         <Modal.Body>
-          <Login/>
+          <Login show={setLoginShow} snack={setState}/>
         </Modal.Body>
       </Modal>
+      <Snackbar open={state}
+                anchorOrigin={{ horizontal:'center', vertical: 'top'}}
+                autoHideDuration={1000}
+      >
+        <MySnackbarContentWrapper
+          onClose={handleClose}
+        />
+      </Snackbar>
+
     </>
 
   );

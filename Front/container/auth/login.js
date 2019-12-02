@@ -19,18 +19,18 @@ import Router from 'next/router';
 import styled from 'styled-components';
 import { Modal } from 'react-bootstrap';
 import SignUp from './signup';
+import NavigationBar from '../../components/bars/navigationBar';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       HotThink
-      {' '+new Date().getFullYear()}
+      {' ' + new Date().getFullYear()}
       {'.'}
     </Typography>
   );
 }
-
 
 const ErrorMessage = styled.div`
     color: red;
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Login = () => {
+const Login = ( props ) => {
   const [error, setError] = useState(null);
   const [signupShow, setSignupShow] = useState(false);
 
@@ -122,10 +122,12 @@ const Login = () => {
       } catch (e) {
         console.log('localStorage is not working1');
       }
+      props.show(false);
     }
   }, [user]);
 
   return (
+
     <Container component="main" maxWidth="xs">
       <CssBaseline/>
       <div className={classes.paper}>
@@ -176,14 +178,14 @@ const Login = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Button color="primary">
+              <Button color="primary" style={{outline:'none'}}>
                 비밀번호 찾기
               </Button>
             </Grid>
             <Grid item xs style={{
-                textAlign:'end'
+              textAlign: 'end'
             }}>
-              <Button color="primary" onClick={() => setSignupShow(true)}>
+              <Button color="primary" onClick={() => setSignupShow(true)} style={{outline:'none'}}>
                 회원가입
               </Button>
             </Grid>
@@ -194,13 +196,13 @@ const Login = () => {
         <Copyright/>
       </Box>
       <Modal
-        show={signupShow}
+        show={ signupShow }
         onHide={() => setSignupShow(false)}
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
       >
         <Modal.Body>
-          <SignUp/>
+          <SignUp loginShow={props.show} show={setSignupShow} snack={props.snack}/>
         </Modal.Body>
       </Modal>
     </Container>

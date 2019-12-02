@@ -7,8 +7,8 @@ export const login = ({ email, pw }) =>
     axios.post('/api/login/processing', { email, pw });
 
 // 회원가입
-export const register = ({ email, pw, nickName, name, tel}) =>
-    axios.post('/api/user', { email, pw, nickName, name, tel});
+export const register = ({ email, pw, nickName, name, tel, preferenceList}) =>
+    axios.post('/api/user', { email, pw, nickName, name, tel, preferenceList});
 
 // 로그인 상태 확인
 export const check = () => axios.get('/api/login/check', {

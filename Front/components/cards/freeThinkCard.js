@@ -68,13 +68,16 @@ const FreeThinkCard = ({think}) => {
                         action={
                             <PostOptions think={think}/>
                         }
-                        title={think.title}
-                        subheader={think.createAt}
+                        title="타이틀 자리"
+                        subheader="작성 날짜"
+                        // title={think.title}
+                        // subheader={think.createAt}
                     />
                     <Col span={18}>
                         <CardContent style={{display: 'block'}}>
                             <Typography variant="body2" color="textSecondary" component="p">
-                                {think.contents}
+                                내용 있을 자리
+                                {/*{think.contents}*/}
                             </Typography>
                             <a onClick={openCard}>자세히보기</a>
                         </CardContent>
@@ -89,19 +92,23 @@ const FreeThinkCard = ({think}) => {
                 </Row>
                 <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
-                        {think.good!==0
-                        ?
+                        {/*{think.good!==0*/}
+                        {/*?*/}
                             <FavoriteIcon color='secondary'/>
-                        :
+                        {/*:*/}
                             <FavoriteIcon />
-                        }
-                        {think.likes.length}
+                        {/*}*/}
+                        {/*{think.likes.length}*/}
                     </IconButton>
                     <IconButton aria-label="share">
-                        <CheckIcon/>{think.hits}
+                        <CheckIcon/>
+                        33
+                        {/*{think.hits}*/}
                     </IconButton>
                     <IconButton aria-label="comment">
-                        <ChatBubbleOutlineIcon/>{think.replies.length}
+                        <ChatBubbleOutlineIcon/>
+                        댓글
+                        {/*{think.replies.length}*/}
                     </IconButton>
                 </CardActions>
             </Card>
@@ -112,7 +119,7 @@ const FreeThinkCard = ({think}) => {
                 aria-labelledby="example-custom-modal-styling-title"
                 size={'xl'}
             >
-                <FreeThinkRead think={think}/>
+                {/*<FreeThinkRead think={think}/>*/}
             </Modal>
         </>
     );

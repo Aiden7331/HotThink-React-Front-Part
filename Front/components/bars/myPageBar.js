@@ -1,64 +1,162 @@
-import React, {useState} from 'react';
-import {Menu, Icon} from 'antd';
+import React, { useState } from 'react';
+import { Menu, Icon, Button, Switch } from 'antd';
 import Link from 'next/Link';
 
-const {SubMenu} = Menu;
-
-/*
-    내용:마이페이지에서의 좌측 네비게이션바
-    rootSubMenuKeys => 대분류
-    openKeys => 현재 작동중인 대분류
-    onOpenPage => 대분류를 클릭했을 때 발생하는 로직
-*/
+const { SubMenu } = Menu;
 
 const MyPageBar = () => {
-    const rootSubmenuKeys = ['myInfo', 'settings'];
-    const [openKeys, setOpenKeys] = useState(['myInfo']);
+  const [collapsed, setCollapsed] = useState(false);
 
-    const onOpenChange = openKeys => {
-        const latestOpenKey = openKeys.find(key => openKeys.indexOf(key) === 1);
-        if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-            setOpenKeys(openKeys);
-        } else {
-            setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+  const toggleCollapsed = () => {
+    collapsed ? setCollapsed(false) : setCollapsed(true);
+  };
+
+  const onChange = (checked) => {
+    console.log(`switch to ${checked}`);
+  }
+
+  const items = ['dashboard', 'message', 'report', 'trade', 'follow'];
+
+  // const keyInit = (think) => {
+  //   if (think === 'Free Think') {
+  //     return 'sub1';
+  //   } else if (think === 'Hot Think') {
+  //     return 'sub2';
+  //   } else {
+  //     return 'sub3';
+  //   }
+  // };
+
+  const iconTypeInit = (item) => {
+    if (item === 'dashboard') {
+      return 'user';
+    } else if (item === 'message') {
+      return 'message';
+    } else if (item === 'report') {
+      return 'alert';
+    } else if (item === 'trade') {
+      return 'dollar';
+    } else if (item === 'follow'){
+      return 'usergroup-add';
+    }
+  };
+
+  const iconColorInit = (item) => {
+    if (item === 'message') {
+      return '#00CCCC';
+    } else if (item === 'report') {
+      return 'red';
+    } else if (item === 'trade') {
+      return 'green';
+    }
+  };
+
+  const itemTextInit = (item) => {
+    if (item === 'dashboard') {
+      return '마이페이지';
+    } else if (item === 'message') {
+      return '메세지';
+    } else if (item === 'report') {
+      return '신고 내역';
+    } else if (item === 'trade') {
+      return '거래 내역';
+    } else if (item === 'follow'){
+      return '팔로우';
+    }
+  };
+
+  const hrefInit = (item) => {
+    if (item === 'dashboard') {
+      return '';
+    } else if (item === 'message') {
+      return 'message';
+    } else if (item === 'report') {
+      return 'report';
+    } else if (item === 'trade') {
+      return 'mytrade';
+    } else if (item === 'follow') {
+      return 'follow';
+    }
+  };
+  return (
+    <div style={{
+      height: '100%',
+    }}>
+      <Menu
+        style={{
+          height: '100%',
+          backgroundColor: 'white',
+          fontFamily: 'Noto Sans KR',
+          fontWeight: '700',
+          borderColor: '#ced4da',
+          borderWidth: '1px',
+          borderRightStyle: 'solid'
+        }}
+        mode="inline"
+        inlineCollapsed={collapsed}
+      >
+        <div style={{
+          textAlign: 'left',
+          width: '100%',
+          padding: 16,
+        }}>
+          <Button onClick={toggleCollapsed}>
+            <Icon
+              type={collapsed ? 'fullscreen' : 'fullscreen-exit'}
+              style={{ color: '#64b5f6' }}
+            />
+          </Button>
+        </div>
+
+        {
+          items.map(item =>
+            <Menu.Item>
+              <Link href={'/mypage/' + hrefInit(item)}>
+                <span>
+                    <Icon type={iconTypeInit(item)}
+                          style={{
+                            color: iconColorInit(item),
+                            fontSize: 25
+                          }}/>
+                    <span style={{
+                      fontSize: 17,
+                      color: 'black',
+                    }}>{itemTextInit(item)}</span>
+                </span>
+              </Link>
+            </Menu.Item>
+          )
         }
-    };
 
-    return (
-        <Menu
-            mode="inline"
-            openKeys={openKeys}
-            onOpenChange={onOpenChange}
-            style={{display: "inline-block", top: '57px', width: '100%', height: '91vh', position: 'sticky'}}
+        <SubMenu
+          title={
+            <span>
+                  <Icon type="notification"
+                        style={{
+                          color: 'blue',
+                          fontSize: 25
+                        }}
+                  />
+                  <span style={{
+                    color: 'black',
+                    fontSize: 17
+                  }}>
+                      알람 설정
+                  </span>
+                </span>
+          }
         >
-            <SubMenu
-                key="myInfo"
-                title={
-                    <span>
-              <Icon type="mail"/>
-              <span>내 정보</span>
-            </span>
-                }
-            >
-                <Menu.Item key="1" ><Link href='/mypage/dashboard'>홈</Link></Menu.Item>
-                <Menu.Item key="2"><Link href='/mypage/messages'>쪽지</Link></Menu.Item>
-                <Menu.Item key="3"><Link href='/mypage/report'>신고 접수 내용</Link></Menu.Item>
-                <Menu.Item key="4"><Link href='/mypage/mytrade'>거래 내역</Link></Menu.Item>
-            </SubMenu>
-            <SubMenu
-                key="settings"
-                title={
-                    <span>
-              <Icon type="setting"/>
-              <span>설정</span>
-            </span>
-                }
-            >
-                <Menu.Item key="5">프로필 설정</Menu.Item>
-                <Menu.Item key="6">알림 설정</Menu.Item>
-            </SubMenu>
-        </Menu>
-    );
+          <div style={{
+            borderRadius: '10px',
+            padding: '10px',
+            textAlign: 'center',
+          }}>
+            <Switch defaultChecked onChange={onChange}/>
+          </div>
+        </SubMenu>
+      </Menu>
+    </div>
+  );
 };
 
 export default MyPageBar;

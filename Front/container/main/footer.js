@@ -35,45 +35,47 @@ const Footer = () => {
       borderTop: 'solid 1px',
       borderColor: '#ced4da'
     }}>
-      <Grid container style={{ marginLeft: '15%' }}>
+      <Grid container style={{ paddingLeft: '15%', minWidth:1000 }}>
         <Grid item>
           <Box className={styles.Box}>
             <table>
+              <tbody>
               <tr>
                 <td className={styles.td}>
                   <Link
                     style={{
-                      textDecoration:'none',
+                      textDecoration: 'none',
                     }}
                     color="inherit"
-                        underline='none'
-                        href="/usage">
+                    underline='none'
+                    href="/info/usage">
                     이용약관
                   </Link>
                 </td>
                 <td className={styles.td}>
                   <Link
                     style={{
-                      textDecoration:'none',
+                      textDecoration: 'none',
                     }}
                     color="inherit"
                     underline='none'
-                    href="/privacy">
-                  개인정보취급방침
+                    href="/info/privacy">
+                    개인정보취급방침
                   </Link>
                 </td>
                 <td className={styles.td}>
                   <Link
                     style={{
-                      textDecoration:'none',
+                      textDecoration: 'none',
                     }}
                     color="inherit"
                     underline='none'
-                    href="/membership">
-                  멤버십 약관
+                    href="/info/membership">
+                    멤버십 약관
                   </Link>
                 </td>
               </tr>
+              </tbody>
             </table>
           </Box>
           <Box className={styles.Box}>
