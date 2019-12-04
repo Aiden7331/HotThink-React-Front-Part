@@ -59,7 +59,7 @@ const MyFreeThink = () => {
       category,
       ob,
     }))
-  }, [dispatch, router.query,isOpen]);
+  }, [dispatch, router.query, isOpen]);
 
   const onPageChange = (page,size) => {
     setPage(page);

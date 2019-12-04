@@ -41,6 +41,8 @@ import {
 import { Modal } from 'react-bootstrap';
 import FreeThinkUpdate from '../../container/freeThink/freeThinkUpdate';
 import FreeThinkWrite from '../../container/freeThink/freeThinkWrite';
+import qs from 'qs';
+import { listFreeThinks } from '../../modules/reducer/freeThinks';
 
 const useStyles = makeStyles(theme => ({
   justCard: {
@@ -84,7 +86,7 @@ const ThinkCard = ({ think }) => {
   const [grow, setGrow] = useState(false);
   const [updateShow, setUpdateShow] = useState(false);
 
-  const { comment, id, user } = useSelector(({ freeThink, user }) => ({
+  const { comment, id, user, likes } = useSelector(({ freeThink, user }) => ({
     id: freeThink.originalPostId,
     title: freeThink.title,
     contents: freeThink.contents,
@@ -131,6 +133,9 @@ const ThinkCard = ({ think }) => {
   };
 
   const onClickLike = () => {
+    const {sb,sz,pg,category,ob} = qs.parse(router.query,{
+      ignoreQueryPrefix: true,
+    });
     const isLiked = think.likes.map(v => v.user.email)
       .includes(user.email);
     if (isLiked) {
@@ -138,16 +143,23 @@ const ThinkCard = ({ think }) => {
     } else {
       dispatch(like(think.bdSeq));
     }
-    router.push({
-      pathname: '/think/myFreeThink',
-      query: {
-        sb: 0,
-        sz: 5,
-        pg: 1,
-        category: think.category,
-        ob: 0
-      }
-    });
+    dispatch(listFreeThinks({
+      sb,
+      sz,
+      pg,
+      category,
+      ob,
+    }));
+    // router.push({
+    //   pathname: '/think/myFreeThink',
+    //   query: {
+    //     sb: 0,
+    //     sz: 5,
+    //     pg: 1,
+    //     category: think.category,
+    //     ob: 0
+    //   }
+    // });
   };
 
   const onChangeComment = useCallback((e) => dispatch(changeField({
@@ -179,7 +191,11 @@ const ThinkCard = ({ think }) => {
 
   const onClose = () => {
     setUpdateShow(false);
-  }
+  };
+
+  const avatarClick = () => {
+
+  };
   return (
     grow ?
       //자세히보기 했을때
@@ -236,7 +252,8 @@ const ThinkCard = ({ think }) => {
               <CardHeader
                 avatar={
                   <Avatar aria-label="recipe" className={classes.avatar}
-                          src={!!think.user.profileImg}>
+                          src={!!think.user.profileImg}
+                          onClick={()=>router.push("/user?nickName="+think.user.nickName)}>
                     {think.user.profileImage ? '' : <PersonIcon fontSize={'large'}/>}
                   </Avatar>
                 }
@@ -291,8 +308,9 @@ const ThinkCard = ({ think }) => {
                   <Box>
                     <Badge badgeContent={think.likes.length} max={999} color="secondary">
                       <Fab size="small"
-                           color={think.likes == null || !think.likes.map(v => v.user.email)
-                             .includes(user.email) ? 'inherit' : 'secondary'}
+                           color={think.likes == null ||
+                           !think.likes.map(v => v.user.email).includes(user.email)
+                             ? 'inherit' : 'secondary'}
                            className={classes.fab} style={{ outline: 'none' }}
                            onClick={onClickLike}
                       >
@@ -381,7 +399,8 @@ const ThinkCard = ({ think }) => {
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}
-                    src={!!think.user.profileImg}>
+                    src={!!think.user.profileImg}
+                    onClick={()=>router.push("/user?nickName="+think.user.nickName)}>
               {think.user.profileImage ? '' : <PersonIcon fontSize={'large'}/>}
             </Avatar>
           }
@@ -470,9 +489,9 @@ const ThinkCard = ({ think }) => {
             <Col span={20}>
               <IconButton aria-label="add to favorites" style={{ outline: 'none' }}
                           onClick={onClickLike}>
-                {think.likes.length === 0 ||
+                {think.likes.length === 0 ||//빈배열일때
                 !think.likes.map(v => v.user.email)
-                  .includes(user.email)
+                  .includes(user.email)//현재유저가 좋아요안눌렀을때
                   ?
                   <FavoriteBorderIcon/>
                   :

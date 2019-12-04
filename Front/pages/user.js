@@ -7,6 +7,7 @@ import {
   Row,
   Tabs,
   Tag,
+  Button,
 } from 'antd';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -15,7 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import qs from 'qs';
-import { targetUser } from '../modules/reducer/user';
+import { createFollow, deleteFollow, targetUser } from '../modules/reducer/user';
 
 const { TabPane } = Tabs;
 
@@ -55,9 +56,28 @@ const User = () => {
       dispatch(targetUser({ nickName }));
     }, [dispatch, router.query]);
 
-  const { TargetUser } = useSelector(({ user }) => ({
+  const { TargetUser, user } = useSelector(({ user }) => ({
     TargetUser: user.target,
+    user: user.user,
   }));
+
+  const follow = () => {
+    dispatch(createFollow({nickName:TargetUser.nickName}));
+  }
+
+  const unFollow = () => {
+    dispatch(deleteFollow({nickName:TargetUser.nickName}));
+  }
+
+  const checkUser = () => {
+    let check = false;
+    if(TargetUser===null) return check;
+    for(let i in TargetUser.followers){
+      console.log(TargetUser.followers[i].email);
+      if(TargetUser.followers[i].email===user.email) check = true;
+    }
+    return check;
+  }
 
   return (
     <>
@@ -83,7 +103,7 @@ const User = () => {
         </Avatar>
       </div>
 
-      <Row>
+      <Row style={{minWidth:1200}}>
         <Col span={18}>
           <div style={{
             padding: '10%',
@@ -97,6 +117,15 @@ const User = () => {
             fontSize: 48,
             color: '#343a40',
           }}>{TargetUser ? TargetUser.nickName : ''}</span>
+              <Button style={{
+                marginLeft:10,
+                outline:'none',
+                backgroundColor:"#EC008C",
+                color:'white',
+              }}
+                      onClick={checkUser()?unFollow:follow}
+                      disabled={TargetUser?TargetUser.email===user.email:false}
+              >{checkUser()?"언팔로우":"팔로우"}</Button>
             </div>
 
             <div style={{paddingTop:20}}>
