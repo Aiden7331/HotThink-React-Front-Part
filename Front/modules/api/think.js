@@ -139,7 +139,7 @@ export const listRealThinks = ({sb,sz,pg,category,ob}) => {
 export const readRealThink = () => axios.get('/api/realthink');
 
 //realThink 게시글 작성
-export const createRealThink = () => axios.post('/api/realthink');
+export const writeRealThink = () => axios.post('/api/realthink');
 
 //realThink 게시글 수정
 export const updateRealThink = () => axios.put('/api/realthink');
