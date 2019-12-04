@@ -15,9 +15,7 @@ const RealThinkCard = () => {
                             <Card.Text>
                                 아이디어를 공유하고 판매하는 사이트를 생각중입니다.
                             </Card.Text>
-                            <Link href={{
-                                pathname: '/think/realThink/RealThinkRead'}}
-                            ><a>
+                            <Link href='/think/realThink/RealThinkRead'><a>
                                 내용보기
                             </a>
                             </Link>

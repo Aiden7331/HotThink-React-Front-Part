@@ -119,6 +119,22 @@ export const uploadImage = ({formData}) =>
 //hotThink 게시글 읽기
 export const readHotThink = () => axios.get('/api/hotthink');
 
+//realThink 게시글 목록 읽기
+export const listRealThinks = ({sb,sz,pg,category,ob}) => {
+    const queryString = qs.stringify({
+        sb,
+        sz,
+        pg,
+        category,
+        ob,
+    });
+    return axios.get(`/api/realthink?${queryString}`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    });
+};
+
 //realThink 게시글 읽기
 export const readRealThink = () => axios.get('/api/realthink');
 

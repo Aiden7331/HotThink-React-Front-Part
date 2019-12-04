@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteRecomment, writeRecomment} from "../../../modules/reducer/freeThink";
@@ -47,7 +47,8 @@ const InputRecomment = ({item,updateOpen,setUpdateOpen,updateContents,setUpdateC
         setUpdateContents(item.contents);
     };
 
-    const onDelete = () => {
+    const onDelete = useCallback((e) => {
+        e.preventDefault();
         const check = confirm("답글을 삭제하시겠습니까?");
         if(check === true){
             //삭제로직
@@ -58,7 +59,11 @@ const InputRecomment = ({item,updateOpen,setUpdateOpen,updateContents,setUpdateC
                 })
             )
         }
-    };
+    },[dispatch,id,repId]);
+
+    useEffect(()=>{
+
+    },[]);
 
     return (
         <>

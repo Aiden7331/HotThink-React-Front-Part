@@ -10,22 +10,26 @@ const ImgForm = () => {
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [fileList, setFileList] = useState([]);
+    const [attaches,setAttaches] = useState('');
 
     const handleCancel = () => {
         setPreviewVisible(false);
     };
 
-    const handleChange = useCallback(({file,fileList,event}) => {
-        const attaches = file.response;
+    const handleChange = ({file,fileList}) => {
+        const attach = file.response;
         //파일리스트 업데이트
         setFileList(fileList);
         //리스폰 된 값 리덕스에 디스패치
-        dispatch(
-            uploadImage({
-                attaches,
-            })
-        )
-    },[dispatch]);
+        if(attach){
+            setAttaches(attach);
+            dispatch(
+                uploadImage({
+                    attaches
+                })
+            )
+        }
+    };
 
     const uploadButton = (
         <div>
@@ -47,7 +51,6 @@ const ImgForm = () => {
                     headers={{
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }}
-                    withCredentials={true}
                 >
                     {fileList.length >= 8 ? null : uploadButton}
                 </Upload>

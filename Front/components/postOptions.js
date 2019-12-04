@@ -8,7 +8,7 @@ import {Modal} from "react-bootstrap";
 import FreeThinkUpdate from "../container/freeThink/freeThinkUpdate";
 import {deleteFreeThink} from "../modules/api/think";
 import {useDispatch, useSelector} from "react-redux";
-import {setOriginalFreeThink} from "../modules/reducer/freeThink";
+import {initialize, setOriginalFreeThink} from "../modules/reducer/freeThink";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,6 +30,9 @@ const PostOptions = ({think}) => {
 
     const handleClose = () => {
         setAnchorEl(null);
+        dispatch(
+            initialize()
+        )
     };
 
     const onClickDelete = async(e) =>{

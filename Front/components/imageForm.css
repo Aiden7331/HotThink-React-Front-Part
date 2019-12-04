@@ -13,7 +13,7 @@
     zoom: 1;
     display: inline;
 }
-.ant-upload-select-picture-card i {
+.ant-upload-list-picture-card {
     font-size: 32px;
     color: #999;
     float: none;

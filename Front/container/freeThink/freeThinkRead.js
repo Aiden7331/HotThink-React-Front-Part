@@ -62,7 +62,7 @@ const FreeThinkRead = ({think}) => {
     const [expanded, setExpanded] = React.useState(false);
 
     const img = <img src="/static/images/image1.jpg"/>;
-    const {title,contents,comment,image,post,error,category,isOpen,id,user,likes,replies} = useSelector(({freeThinks,freeThink,user})=>({
+    const {title,contents,comment,image,post,error,category,isOpen,id,user,likes,replies} = useSelector(({freeThink,user})=>({
         title:freeThink.title,
         contents:freeThink.contents,
         image:freeThink.image,
@@ -88,8 +88,7 @@ const FreeThinkRead = ({think}) => {
             category,
             ob,
         }));
-    }, [dispatch,router.query,isOpen,replies]);
-
+    }, [dispatch,router.query]);
 
     const onSubmitForm = useCallback((e) => {
         e.preventDefault();
@@ -121,7 +120,8 @@ const FreeThinkRead = ({think}) => {
             pg,
             category,
             ob,
-        }))
+        }));
+        console.log(likes);
     },[dispatch,id,likes,router.query]);
 
     //언마운트될때 초기화
@@ -140,7 +140,7 @@ const FreeThinkRead = ({think}) => {
     };
 
     return (
-        <Card className={classes.card} style={{maxWidth:'100%',height:'auto'}}>
+        <Card className={classes.card} style={{width:'1600px',height:'auto'}}>
             <Row>
                 <Col span={12}>
                     {document.getElementsByClassName('img').naturalHeight>document.getElementsByClassName('box').naturalHeight
@@ -205,7 +205,7 @@ const FreeThinkRead = ({think}) => {
                     <CardContent>
                         <CommentModal replies={replies}/>
                     </CardContent>
-                    <div style={{position:'fixed', bottom:'40px',width:'40.5%', overflow:'hidden'}}>
+                    <div style={{ position:'fixed', bottom:'45px',width:'37%', overflow:'hidden'}}>
                         <Form onSubmit={onSubmitForm}>
                             <TextareaAutosize
                                 style={{
@@ -216,7 +216,7 @@ const FreeThinkRead = ({think}) => {
                                     width: '98.5%',
                                     minHeight: '80px',
                                     height: 'auto',
-                                    display: 'inline-block'
+                                    display: 'inline'
                                 }}
                                 placeholder="댓글을 작성해주세요!"
                                 value={comment}

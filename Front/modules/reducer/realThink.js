@@ -5,22 +5,22 @@ import * as thinkAPI from '../api/think';
 import produce from "immer";
 
 //리듀서 생성
-const INITIALIZE = 'freeThink/INITIALIZE';
-const SET_ORIGINAL_FREE_THINK = 'freeThink/SET_ORIGINAL_FREE_THINK';
-const CHANGE_FIELD = 'freeThink/CHANGE_FIELD';
-const OPEN_MODAL = 'freeThink/OPEN_MODAL';
-const CLOSE_MODAL = 'freeThink/CLOSE_MODAL';
-const [WRITE_FREE_THINK,WRITE_FREE_THINK_SUCCESS,WRITE_FREE_THINK_FAILURE] = createRequestActionTypes('freeThink/WRITE_FREE_THINK');
-const [UPDATE_FREE_THINK,UPDATE_FREE_THINK_SUCCESS,UPDATE_FREE_THINK_FAILURE] = createRequestActionTypes('freeThink/UPDATE_FREE_THINK');
-const [WRITE_COMMENT,WRITE_COMMENT_SUCCESS,WRITE_COMMENT_FAILURE] = createRequestActionTypes('freeThink/WRITE_COMMENT');
-const [UPDATE_COMMENT,UPDATE_COMMENT_SUCCESS,UPDATE_COMMENT_FAILURE] = createRequestActionTypes('freeThink/UPDATE_COMMENT');
-const [DELETE_COMMENT,DELETE_COMMENT_SUCCESS,DELETE_COMMENT_FAILURE] = createRequestActionTypes('freeThink/DELETE_COMMENT');
-const [WRITE_RECOMMENT,WRITE_RECOMMENT_SUCCESS,WRITE_RECOMMENT_FAILURE] = createRequestActionTypes('freeThink/WRITE_RECOMMENT');
-const [UPDATE_RECOMMENT,UPDATE_RECOMMENT_SUCCESS,UPDATE_RECOMMENT_FAILURE] = createRequestActionTypes('freeThink/UPDATE_RECOMMENT');
-const [DELETE_RECOMMENT,DELETE_RECOMMENT_SUCCESS,DELETE_RECOMMENT_FAILURE] = createRequestActionTypes('freeThink/DELETE_RECOMMENT');
-const [LIKE,LIKE_SUCCESS,LIKE_FAILURE] = createRequestActionTypes('freeThink/LIKE');
-const [UNLIKE,UNLIKE_SUCCESS,UNLIKE_FAILURE] = createRequestActionTypes('freeThink/UNLIKE');
-const [UPLOAD_IMAGE,UPLOAD_IMAGE_SUCCESS,UPLOAD_IMAGE_FAILURE] = createRequestActionTypes('freeThink/UPLOAD_IMAGE');
+const INITIALIZE = 'realThink/INITIALIZE';
+const SET_ORIGINAL_FREE_THINK = 'realThink/SET_ORIGINAL_FREE_THINK';
+const CHANGE_FIELD = 'realThink/CHANGE_FIELD';
+const OPEN_MODAL = 'realThink/OPEN_MODAL';
+const CLOSE_MODAL = 'realThink/CLOSE_MODAL';
+const [WRITE_FREE_THINK,WRITE_FREE_THINK_SUCCESS,WRITE_FREE_THINK_FAILURE] = createRequestActionTypes('realThink/WRITE_FREE_THINK');
+const [UPDATE_FREE_THINK,UPDATE_FREE_THINK_SUCCESS,UPDATE_FREE_THINK_FAILURE] = createRequestActionTypes('realThink/UPDATE_FREE_THINK');
+const [WRITE_COMMENT,WRITE_COMMENT_SUCCESS,WRITE_COMMENT_FAILURE] = createRequestActionTypes('realThink/WRITE_COMMENT');
+const [UPDATE_COMMENT,UPDATE_COMMENT_SUCCESS,UPDATE_COMMENT_FAILURE] = createRequestActionTypes('realThink/UPDATE_COMMENT');
+const [DELETE_COMMENT,DELETE_COMMENT_SUCCESS,DELETE_COMMENT_FAILURE] = createRequestActionTypes('realThink/DELETE_COMMENT');
+const [WRITE_RECOMMENT,WRITE_RECOMMENT_SUCCESS,WRITE_RECOMMENT_FAILURE] = createRequestActionTypes('realThink/WRITE_RECOMMENT');
+const [UPDATE_RECOMMENT,UPDATE_RECOMMENT_SUCCESS,UPDATE_RECOMMENT_FAILURE] = createRequestActionTypes('realThink/UPDATE_RECOMMENT');
+const [DELETE_RECOMMENT,DELETE_RECOMMENT_SUCCESS,DELETE_RECOMMENT_FAILURE] = createRequestActionTypes('realThink/DELETE_RECOMMENT');
+const [LIKE,LIKE_SUCCESS,LIKE_FAILURE] = createRequestActionTypes('realThink/LIKE');
+const [UNLIKE,UNLIKE_SUCCESS,UNLIKE_FAILURE] = createRequestActionTypes('realThink/UNLIKE');
+const [UPLOAD_IMAGE,UPLOAD_IMAGE_SUCCESS,UPLOAD_IMAGE_FAILURE] = createRequestActionTypes('realThink/UPLOAD_IMAGE');
 
 export const initialize = createAction(INITIALIZE);
 export const setOriginalFreeThink = createAction(SET_ORIGINAL_FREE_THINK,post=>post);
@@ -29,37 +29,15 @@ export const changeField = createAction(CHANGE_FIELD,({key,value})=>({
 }));
 export const openModal = createAction(OPEN_MODAL);
 export const closeModal = createAction(CLOSE_MODAL);
+export const readFreeThink = createAction(WRITE_FREE_THINK,({title,contents,category,attaches})=>({
+    title, contents, category,attaches
+}));
 export const writeFreeThink = createAction(WRITE_FREE_THINK,({title,contents,category,attaches})=>({
     title, contents, category,attaches
 }));
 export const updateFreeThink = createAction(UPDATE_FREE_THINK,({id,title,contents,image,category})=>({
     id, title, contents, image, category
 }));
-export const writeComment = createAction(WRITE_COMMENT,({comment, id})=>({
-    comment,id
-}));
-export const updateComment = createAction(UPDATE_COMMENT,({updateContents, id,repId})=>({
-    updateContents,id,repId
-}));
-export const deleteComment = createAction(DELETE_COMMENT,({id,repId})=>({
-    id,repId
-}));
-export const writeRecomment = createAction(WRITE_RECOMMENT,({recomment,id,repId})=>({
-    recomment,id,repId
-}));
-export const updateRecomment = createAction(UPDATE_RECOMMENT,({updateContents,id,repId})=>({
-    updateContents,id,repId
-}));
-export const deleteRecomment = createAction(DELETE_RECOMMENT,({id,repId})=>({
-    id,repId
-}));
-export const like = createAction(LIKE,({id})=>({
-    id,
-}));
-export const unlike = createAction(UNLIKE,({id})=>({
-    id,
-}));
-
 export const uploadImage = createAction(UPLOAD_IMAGE,({attaches})=>({
     attaches,
 }));
@@ -76,17 +54,17 @@ const deleteRecommentSaga = createRequestSaga(DELETE_RECOMMENT,thinkAPI.deleteRe
 const likeSaga = createRequestSaga(LIKE,thinkAPI.addLike);
 const unLikeSaga = createRequestSaga(UNLIKE,thinkAPI.unLike);
 
-export function* freeThinkSaga() {
-    yield takeLatest(WRITE_FREE_THINK,writeFreeThinkSaga);
-    yield takeLatest(UPDATE_FREE_THINK,updateFreeThinkSaga);
-    yield takeLatest(WRITE_COMMENT,writeCommentSaga);
-    yield takeLatest(UPDATE_COMMENT,updateCommentSaga);
-    yield takeLatest(DELETE_COMMENT,deleteCommentSaga);
-    yield takeLatest(WRITE_RECOMMENT,writeRecommentSaga);
-    yield takeLatest(UPDATE_RECOMMENT,updateRecommentSaga);
-    yield takeLatest(DELETE_RECOMMENT,deleteRecommentSaga);
-    yield takeLatest(LIKE,likeSaga);
-    yield takeLatest(UNLIKE,unLikeSaga);
+export function* realThinkSaga() {
+    // yield takeLatest(WRITE_FREE_THINK,writeFreeThinkSaga);
+    // yield takeLatest(UPDATE_FREE_THINK,updateFreeThinkSaga);
+    // yield takeLatest(WRITE_COMMENT,writeCommentSaga);
+    // yield takeLatest(UPDATE_COMMENT,updateCommentSaga);
+    // yield takeLatest(DELETE_COMMENT,deleteCommentSaga);
+    // yield takeLatest(WRITE_RECOMMENT,writeRecommentSaga);
+    // yield takeLatest(UPDATE_RECOMMENT,updateRecommentSaga);
+    // yield takeLatest(DELETE_RECOMMENT,deleteRecommentSaga);
+    // yield takeLatest(LIKE,likeSaga);
+    // yield takeLatest(UNLIKE,unLikeSaga);
 }
 
 const initialState={
@@ -95,19 +73,10 @@ const initialState={
     attaches:[],
     category:'웹사이트',
     originalPostId:null,
-    freeThink:null,
-    freeThinkError:null,
-    isOpen:false,
-    comment:'',
-    commentUpdate:'',
-    recomment:'',
-    recommentUpdate:'',
-    replies:[],
-    likes:[],
 };
 
 
-const freeThink = handleActions(
+const realThink = handleActions(
     {
         [INITIALIZE]:state=>initialState,
         [OPEN_MODAL]:(state=>({
@@ -244,11 +213,11 @@ const freeThink = handleActions(
                     };
                     draft.attaches.unshift(attach);
                 }
-        }),
+            }),
         //업로드된 이미지 삭제
 
     },
     initialState,
 );
 
-export default freeThink;
+export default realThink;

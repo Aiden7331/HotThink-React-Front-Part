@@ -4,6 +4,8 @@ import user, {userSaga} from './user';
 import auth, {authSaga} from "./auth";
 import freeThinks , {freeThinksSaga} from "./freeThinks"
 import freeThink , {freeThinkSaga} from "./freeThink"
+import realThinks , {realThinksSaga} from "./realThinks"
+import realThink , {realThinkSaga} from "./realThink"
 import loading from "./loading";
 
 const rootReducer = combineReducers({
@@ -11,11 +13,13 @@ const rootReducer = combineReducers({
     auth,
     loading,
     freeThinks,
-    freeThink
+    freeThink,
+    realThinks,
+    realThink,
 });
 
 export function* rootSaga() {
-    yield all([authSaga(),userSaga(),freeThinksSaga(),freeThinkSaga()]);
+    yield all([authSaga(),userSaga(),freeThinksSaga(),freeThinkSaga(),realThinksSaga(),realThinkSaga()]);
 }
 
 export default rootReducer;
