@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
@@ -18,14 +17,14 @@ const useStyles = makeStyles(theme => ({
   inline: {
     display: 'inline',
   },
-  listContainer:{
-    marginTop: "3px",
-    border: "solid 2px",
-    borderColor: "#ced4da",
-    borderRadius: "10px",
+  listContainer: {
+    marginTop: '3px',
+    border: 'solid 2px',
+    borderColor: '#ced4da',
+    borderRadius: '10px',
     backgroundColor: theme.palette.background.paper,
 
-},
+  },
   avatarContainer: {
     margin: 10,
     width: '15%',
@@ -72,58 +71,57 @@ export default function AlignItemsList() {
     <List className={classes.root}>
       {
         listData.map(data =>
-          <div>
-            <ListItem alignItems="flex-start"
+          <ListItem alignItems="flex-start"
                     className={classes.listContainer}
-            >
-              <ListItemAvatar className={classes.avatarContainer}>
-                <Avatar alt={data.author}
-                        src={data.img}
-                        className={classes.avatar}
-                />
-              </ListItemAvatar>
-              <ListItemText
-                className={classes.textArea}
-                primary={
-                    <Typography
-                      style={{
-                        padding:"20px"
-                      }}
-                    >
-                      <Box
-                        fontSize={24}
-                        fontWeight={700}
-                        fontFamily={'Noto Sans KR'}
-                        className={classes.inline}
-                      >{data.author}{'  '}</Box>
-                      <Box
-                        fontSize={18}
-                        color={"#868e96"}
-                        fontWeight={700}
-                        fontFamily={'Noto Sans KR'}
-                        className={classes.inline}
-                      >{data.job}
-                      </Box>
-                    </Typography>
-                }
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      style={{
-                        fontWeight:"500",
-                        fontFamily:"Noto Sans KR"
-                      }}
-                      component="span"
-                      variant="body3"
-                      color="inherit"
-                    >
-                      {data.contents}
-                    </Typography>
-                  </React.Fragment>
-                }
+                    key={listData.indexOf(data)}
+          >
+            <ListItemAvatar className={classes.avatarContainer}>
+              <Avatar alt={data.author}
+                      src={data.img}
+                      className={classes.avatar}
               />
-            </ListItem>
-          </div>
+            </ListItemAvatar>
+            <ListItemText
+              className={classes.textArea}
+              primary={
+                <Typography
+                  style={{
+                    padding: '20px'
+                  }}
+                >
+                  <Box
+                    fontSize={24}
+                    fontWeight={700}
+                    fontFamily={'Noto Sans KR'}
+                    className={classes.inline}
+                  >{data.author}{'  '}</Box>
+                  <Box
+                    fontSize={18}
+                    color={'#868e96'}
+                    fontWeight={700}
+                    fontFamily={'Noto Sans KR'}
+                    className={classes.inline}
+                  >{data.job}
+                  </Box>
+                </Typography>
+              }
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    style={{
+                      fontWeight: '500',
+                      fontFamily: 'Noto Sans KR'
+                    }}
+                    component="span"
+                    variant="body2"
+                    color="inherit"
+                  >
+                    {data.contents}
+                  </Typography>
+                </React.Fragment>
+              }
+            />
+          </ListItem>
         )
       }
     </List>

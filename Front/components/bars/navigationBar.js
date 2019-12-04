@@ -167,11 +167,10 @@ const NavigationBar = () => {
         }}>
           {
             ['Real', 'Hot', 'Think'].map(think =>
-              <Nav.Item style={{ marginLeft: '5%' }}>
-                <Link href={user ? thinkURLInit(think) : ''}>
+                <Link href={user ? thinkURLInit(think) : ''} key={think}>
                 {/*  <Link href={user ? '/think/myFreeThink?sb=0&sz=5&pg=1&category=웹사이트&ob=0' : ''}>*/}
 
-                  <a style={{textDecoration:'none'}}>
+                  <a style={{textDecoration:'none', marginLeft: '5%'}}>
                   <Button
                     onClick={user ? null : () => setLoginShow(true)}
                     style={{
@@ -194,9 +193,9 @@ const NavigationBar = () => {
                   </Button>
                   </a>
                 </Link>
-              </Nav.Item>
             )
           }
+
 
           {/*<Nav.Item>*/}
           {/*  <Link href={{*/}

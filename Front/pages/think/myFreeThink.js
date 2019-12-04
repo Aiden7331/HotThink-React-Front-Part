@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import qs from 'qs';
 import { listFreeThinks } from '../../modules/reducer/freeThinks';
-import { changeField, closeModal, openModal } from '../../modules/reducer/freeThink';
+import { changeField, closeModal, initialize, openModal } from '../../modules/reducer/freeThink';
 import { Modal } from 'react-bootstrap';
 import FreeThinkWrite from '../../container/freeThink/freeThinkWrite';
 const { SubMenu } = Menu;
@@ -35,12 +35,11 @@ const MyFreeThink = () => {
   };
   const [category, setCategory] = useState(null);
   const [page,setPage] = useState(1);
-  const [size,setSize] = useState(10);
+  const [size,setSize] = useState(5);
 
-  const {freeThinks, user, isOpen} = useSelector(
+  const {freeThinks, isOpen} = useSelector(
     ({freeThinks,loading,user,freeThink})=>({
       freeThinks: freeThinks.freeThinks,
-      error: freeThinks.error,
       loading:loading['freeThinks/LIST_FREE_THINKS'],
       user:user.user,
       isOpen:freeThink.isOpen,
@@ -60,14 +59,14 @@ const MyFreeThink = () => {
       category,
       ob,
     }))
-  }, [dispatch,router.query,isOpen]);
+  }, [dispatch, router.query,isOpen]);
 
   const onPageChange = (page,size) => {
     setPage(page);
     window.scrollTo(0,0);
     router.push({
-      pathname: '/think/freeThink/freeThink',
-      query: { sb:0,sz:size,pg:page,category:'IT서비스',ob:0 }
+      pathname: '/think/myFreeThink',
+      query: { sb:0,sz:size,pg:page,category:category,ob:0 }
     });
   };
 
@@ -122,7 +121,7 @@ const MyFreeThink = () => {
             }}
             mode="inline"
             theme="light"
-            inlineCollapsed={collapsed}
+            // inlineCollapsed={collapsed}
           >
             <div style={{
               textAlign: 'left',
@@ -212,16 +211,19 @@ const MyFreeThink = () => {
           }}>
             {
               freeThinks.map(think =>
-                <ThinkCard user={user} think={think}/>
+                <ThinkCard think={think}/>
               )
             }
           </Content>
 
           <Footer style={{ backgroundColor: '#f5f6f7' }}>
             <Pagination
-              style={{
-                textAlign: 'right',
-              }}/>
+              style={{textAlign:'center', margin:'30px'}}
+              total={20}
+              pageSize={size}
+              current={page}
+              onChange={onPageChange}
+            />
           </Footer>
         </Layout>
       </Layout>
@@ -241,7 +243,7 @@ const MyFreeThink = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FreeThinkWrite/>
+          <FreeThinkWrite category={category}/>
         </Modal.Body>
       </Modal>
     </>

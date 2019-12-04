@@ -11,9 +11,9 @@ import {
 import { listFreeThinks } from '../../modules/reducer/freeThinks';
 const { TextArea } = Input;
 
-const FreeThinkWrite = () => {
+const FreeThinkWrite = ({category}) => {
   const dispatch = useDispatch();
-  const {title,contents,post,error,category,isOpen,attaches} = useSelector(({freeThink})=>({
+  const {title,contents,post,error,isOpen,attaches} = useSelector(({freeThink})=>({
     title:freeThink.title,
     contents:freeThink.contents,
     post:freeThink.freeThink,
@@ -66,6 +66,7 @@ const FreeThinkWrite = () => {
   useEffect(()=>{
     return()=>{
       dispatch(initialize());
+      dispatch(changeField({key:"category", value:category}))
     };
   },[dispatch]);
 
