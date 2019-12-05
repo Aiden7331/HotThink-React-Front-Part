@@ -52,12 +52,13 @@ const FreeThinkCard = ({think}) => {
     const [expanded, setExpanded] = React.useState(false);
     const [readShow, setReadShow] = React.useState(false);
     const dispatch = useDispatch();
-    const {user} = useSelector(({user})=>({
+    const {user,attaches} = useSelector(({user,freeThinks})=>({
         user:user.user,
     }));
 
     const openCard = () => {
         setReadShow(true);
+        console.log(think.attaches[0].path);
         dispatch(setOriginalFreeThink({think}));
     };
 
@@ -102,7 +103,11 @@ const FreeThinkCard = ({think}) => {
                     <Col span={6}>
                         <CardMedia
                             className={classes.media}
-                            image="/static/images/image1.jpg"
+                            image={
+                                think.attaches.length!==0
+                                ? think.attaches[0].path
+                                : '/static/images/image1.jpg'
+                            }
                             title="Paella dish"
                         />
                     </Col>
