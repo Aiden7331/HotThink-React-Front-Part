@@ -32,7 +32,7 @@ const freeThinks = handleActions(
     [LIST_FREE_THINKS_SUCCESS]: (state,{payload:freeThinks}) => ({
       ...state,
       error : null,
-      freeThinks,
+      freeThinks:freeThinks,
     }),
     //프리띵크 읽기 실패
     [LIST_FREE_THINKS_FAILURE]: (state,{payload:error}) => ({

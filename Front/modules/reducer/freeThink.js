@@ -157,10 +157,10 @@ const freeThink = handleActions(
       freeThinkError,
     }),
     //좋아요
-    [LIKE_SUCCESS]:(state,{payload:userEmail})=>({
+    [LIKE_SUCCESS]:(state,{payload:likesList})=>({
       ...state,
       //해당 freeThink의 list에 추가
-      likes:userEmail,
+      likes:likesList,
     }),
     [LIKE_FAILURE]:(state,{payload:userEmail})=>({
       ...state,

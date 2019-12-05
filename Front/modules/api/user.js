@@ -44,4 +44,20 @@ export const targetUser = ({nickName}) => {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
   });
-}
+};
+
+//팔로우 하기
+export const follow = ({nickName}) =>
+  axios.post(`/api/user/follow/${nickName}`, {}, {
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
+  });
+
+//언팔 하기
+export const unfollow = ({nickName}) =>
+  axios.delete(`/api/user/follow/${nickName}`, {
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
+  });

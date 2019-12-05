@@ -52,7 +52,7 @@ export const updateUser = createAction(UPDATEUSER, ({ nickName, pw, tel, prefere
 
 //포인트 충전
 const [POINT_CHARGE, POINT_CHARGE_SUCCESS, POINT_CHARGE_FAILURE]  = createRequestActionTypes('user/POINT_CHARGE');
-export const pointCharge = createAction(POINT_CHARGE, ({point}) => ({ point }))
+export const pointCharge = createAction(POINT_CHARGE, ({point}) => ({ point }));
 const pointChargeSaga = createRequestSaga(POINT_CHARGE, userAPI.pointCharge);
 
 //팔로우 리스트
@@ -64,6 +64,17 @@ const followSaga = createRequestSaga(FOLLOW, userAPI.followList);
 const [TARGETUSER, TARGETUSER_SUCCESS, TARGETUSER_FAILURE]  = createRequestActionTypes('user/TARGET');
 export const targetUser = createAction(TARGETUSER, ({nickName}) => ({nickName}));
 const targetUserSaga = createRequestSaga(TARGETUSER, userAPI.targetUser);
+
+//팔로우 하기
+const [CREATE_FOLLOW, CREATE_FOLLOW_SUCCESS, CREATE_FOLLOW_FAILURE] = createRequestActionTypes('user/CREATE_FOLLOW');
+export const createFollow = createAction(CREATE_FOLLOW, ({nickName}) => ({nickName}));
+const createFollowSaga = createRequestSaga(CREATE_FOLLOW, userAPI.follow);
+//언팔 하기
+
+const [DELETE_FOLLOW, DELETE_FOLLOW_SUCCESS, DELETE_FOLLOW_FAILURE] = createRequestActionTypes('user/DELETE_FOLLOW');
+export const deleteFollow = createAction(DELETE_FOLLOW, ({nickName}) => ({nickName}));
+const deleteFollowSaga = createRequestSaga(DELETE_FOLLOW, userAPI.unfollow);
+
 
 
 const checkSaga = createRequestSaga(CHECK, authAPI.check);
@@ -95,6 +106,8 @@ export function* userSaga() {
   yield takeLatest(POINT_CHARGE, pointChargeSaga);
   yield takeLatest(FOLLOW, followSaga);
   yield takeLatest(TARGETUSER, targetUserSaga);
+  yield takeLatest(CREATE_FOLLOW, createFollowSaga);
+  yield takeLatest(DELETE_FOLLOW, deleteFollowSaga);
 }
 
 const initialState = {
@@ -109,6 +122,8 @@ const initialState = {
     preferenceList: [],
   },
   follow: null,
+  target: null,
+
 };
 
 export default handleActions(
@@ -184,7 +199,31 @@ export default handleActions(
     [TARGETUSER_FAILURE]: (state, {payload: error}) => ({
       ...state,
       checkError: error,
+      target: null,
     }),
+    //팔로우 관련
+    [CREATE_FOLLOW_SUCCESS]: (state, {payload: followers }) =>
+      produce(state, draft => {
+        draft["target"]["followers"] = followers;
+      }),
+    [CREATE_FOLLOW_FAILURE]: (state, {payload: error }) => (
+      {
+        ...state,
+        updateUserError: error,
+      }
+    ),
+    //언팔로우 관련
+    [DELETE_FOLLOW_SUCCESS]: (state, {payload: followers }) =>
+      produce(state, draft => {
+      draft["target"]["followers"] = followers;
+    }),
+    [DELETE_FOLLOW_FAILURE]: (state, {payload: error }) => (
+      {
+        ...state,
+        updateUserError: error,
+      }
+    ),
+
   },
   initialState,
 );

@@ -18,9 +18,9 @@ export default function createRequestSaga(type,request) {
             yield put({
                 type:SUCCESS,
                 payload: response.data,
-
             });
         } catch(e){
+            console.log("사가",e);
             yield put({
                 type:FAILURE,
                 payload: e,
