@@ -1,63 +1,153 @@
-import React from 'react';
-import {Row, Col, Icon, Pagination, Descriptions, Badge} from 'antd'
-import RealThinkCard from "../../../components/cards/realThinkCard";
-import ThinkBar from "../../../components/bars/thinkBar";
+import React, { useEffect, useState } from 'react';
+import Link from 'next/Link';
+import { Row, Col, Icon, Pagination, Descriptions, Badge, Menu, Button, Layout } from 'antd';
+import RealThinkCard from '../../../components/cards/realThinkCard';
+import ThinkBar from '../../../components/bars/thinkBar';
+import Router, { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import qs from 'qs';
+import { listRealThinks } from '../../../modules/reducer/realThinks';
+
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
+
 
 const RealThink = () => {
-    return(
-        <>
-            <Row type="flex" justify="center">
-                <Col span={4}><ThinkBar/></Col>
-                <Col span={16}>
-                    <h3>리얼띵크 > IT <a href="/think/realThink/realThinkWrite"><Icon style={{float:'right', marginTop:'10px', marginRight:'10px'}} type="form" /></a> </h3>
-                    <Descriptions title="User Info" layout="vertical" bordered>
-                        <Descriptions.Item label="Product">Cloud Database</Descriptions.Item>
-                        <Descriptions.Item label="Billing Mode">Prepaid</Descriptions.Item>
-                        <Descriptions.Item label="Automatic Renewal">YES</Descriptions.Item>
-                        <Descriptions.Item label="Order time">2018-04-24 18:00:00</Descriptions.Item>
-                        <Descriptions.Item label="Usage Time" span={2}>
-                            2019-04-24 18:00:00
-                        </Descriptions.Item>
-                        <Descriptions.Item label="Status" span={3}>
-                            <Badge status="processing" text="Running" />
-                        </Descriptions.Item>
-                        <Descriptions.Item label="Negotiated Amount">$80.00</Descriptions.Item>
-                        <Descriptions.Item label="Discount">$20.00</Descriptions.Item>
-                        <Descriptions.Item label="Official Receipts">$60.00</Descriptions.Item>
-                        <Descriptions.Item label="Config Info">
-                            Data disk type: MongoDB
-                            <br />
-                            Database version: 3.4
-                            <br />
-                            Package: dds.mongo.mid
-                            <br />
-                            Storage space: 10 GB
-                            <br />
-                            Replication factor: 3
-                            <br />
-                            Region: East China 1<br />
-                        </Descriptions.Item>
-                    </Descriptions>
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const [collapsed, setCollapsed] = useState(false);
+  const toggleCollapsed = () => {
+    collapsed ? setCollapsed(false) : setCollapsed(true);
+  };
+  const [category, setCategory] = useState(null);
+  const categories = ['Game', 'Design', 'Marketing', 'Mobile', 'IOT', 'WebSite', 'Contents', 'Utility'];
+
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(10);
+  const { realThinks } = useSelector(({ realThinks, loading, user, realThink }) => ({
+    realThinks: realThinks.realThinks,
+    error: realThinks.error,
+    loading: loading['realThinks/LIST_REAL_THINKS'],
+    user: user.user,
+  }));
+
+  useEffect(() => {
+    const { sb, sz, pg, category, ob } = qs.parse(router.query, {
+      ignoreQueryPrefix: true,
+    });
+    dispatch(listRealThinks({
+      sb,
+      sz,
+      pg,
+      category,
+      ob,
+    }));
+  }, [dispatch, router.query]);
+
+  const onPageChange = (page, size) => {
+    setPage(page);
+    window.scrollTo(0, 0);
+    Router.push({
+      pathname: '/think/realThink/realThink',
+      query: {
+        sb: 0,
+        sz: size,
+        pg: page,
+        category: '웹사이트',
+        ob: 0
+      }
+    });
+  };
+
+  return (
+    <>
+      <Layout>
+        <Sider trigger={null} collapsible collapsed={collapsed} theme={'light'}>
+          <Menu
+            style={{
+              height: '100%',
+              fontFamily: 'Noto Sans KR',
+              fontWeight: '700',
+              borderColor: '#ced4da',
+              borderWidth: '1px',
+              borderRightStyle: 'solid'
+            }}
+            mode="inline"
+            theme="light"
+            // inlineCollapsed={collapsed}
+          >
+            <div style={{
+              textAlign: 'left',
+              width: '100%',
+              padding: 16,
+            }}>
+              <Button type="normal" onClick={toggleCollapsed}>
+                <Icon type={collapsed ? 'eye-invisible' : 'eye'}
+                      style={{ color: '#64b5f6' }}
+                      spin={collapsed}
+                />
+              </Button>
+            </div>
+
+            <SubMenu
+              style={{ marginBottom: 10 }}
+              key="sub1"
+              title={
+                <Row>
+                  <span>
+                  <Icon type='global'
+                        style={{
+                          fontSize: 25
+                        }}
+                  />
+                  <span style={{
+                    fontSize: 17
+                  }}>
+                    프리 띵크</span>
+                </span>
+                </Row>
+
+              }
+            >
+              {
+                categories.map(category =>
+                  <Menu.Item key={categories.indexOf(category)}
+                             onClick={() => router.push(
+                               '/think/myFreeThink?sb=0&sz=5&pg=1&category=' + setMenuURL(category) + '&ob=0'
+                             )}>
+                    {category}
+                  </Menu.Item>
+                )
+              }
+            </SubMenu>
+          </Menu>
+        </Sider>
+        <Layout>
+            <Row>
+                <Col span={18}>
+                    <h3>리얼띵크 > IT <Link><a href='/think/realThink/realThinkWrite'><Icon style={{
+                        float: 'right',
+                        marginTop: '10px',
+                        marginRight: '10px'
+                    }} type="form"/></a></Link></h3>
+                    {realThinks.map((v) => {
+                        return (
+                          <>
+                              <RealThinkCard data={v}/>
+                          </>
+                        );
+                    })}
                     <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <RealThinkCard/>
-                    <Pagination style={{textAlign:'center', margin:'30px'}} defaultCurrent={6} total={500} />
+                    <Pagination style={{
+                        textAlign: 'center',
+                        margin: '30px'
+                    }} defaultCurrent={1} total={500}/>
                 </Col>
-                <Col span={4}></Col>
             </Row>
-        </>
-    )
+        </Layout>
+      </Layout>
+    </>
+  );
 };
 
 export default RealThink;

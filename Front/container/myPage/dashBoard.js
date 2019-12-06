@@ -22,6 +22,7 @@ import ProfileUpdate from './profileUpdate';
 import { useDispatch, useSelector } from 'react-redux';
 import { check, initializeUpdateForm, pointCharge } from '../../modules/reducer/user';
 import Link from 'next/Link';
+import FreePass from './freePass';
 
 const DashBoard = ({ user }) => {
   const dispatch = useDispatch();
@@ -82,6 +83,9 @@ const DashBoard = ({ user }) => {
     console.log(list);
     return list;
   };
+
+  //프리패스 모달
+  const [freePass, setFreePass] = useState(false);
 
   return (
     <>
@@ -194,7 +198,9 @@ const DashBoard = ({ user }) => {
               <Fab color="secondary" variant="extended" style={{
                 outline: 'none',
                 marginLeft: 5
-              }}>
+              }}
+                   onClick={() => setFreePass(true)}
+              >
                 프리패스권 구입
               </Fab>
             </Row>
@@ -216,12 +222,12 @@ const DashBoard = ({ user }) => {
           }}>
             <Row>
               <Link href="/mypage/subscribe">
-              <Fab color="secondary" variant="extended" style={{
-                outline: 'none',
-                marginLeft: 20
-              }}>
-                구독권 구입
-              </Fab>
+                <Fab color="secondary" variant="extended" style={{
+                  outline: 'none',
+                  marginLeft: 20
+                }}>
+                  구독권 구입
+                </Fab>
               </Link>
             </Row>
             <Row>
@@ -277,7 +283,10 @@ const DashBoard = ({ user }) => {
                               board =>
                                 <Col span={8} style={{ padding: 10 }}>
                                   <Card className={board.image ? '' : 'text-white'}
-                                        style={{ fontFamily: 'Noto Sans KR', fontWeight:500}}
+                                        style={{
+                                          fontFamily: 'Noto Sans KR',
+                                          fontWeight: 500
+                                        }}
                                   >
                                     <Card.Img
                                       src={board.image ? board.image : '/static/images/default.png'}
@@ -331,7 +340,10 @@ const DashBoard = ({ user }) => {
                               board =>
                                 <Col span={8} style={{ padding: 10 }}>
                                   <Card className={board.image ? '' : 'text-white'}
-                                        style={{ fontFamily: 'Noto Sans KR', fontWeight:500}}
+                                        style={{
+                                          fontFamily: 'Noto Sans KR',
+                                          fontWeight: 500
+                                        }}
                                   >
                                     <Card.Img
                                       src={board.image ? board.image : '/static/images/default.png'}
@@ -389,6 +401,7 @@ const DashBoard = ({ user }) => {
                      style={{ width: '100%' }}
         />
       </Modal>
+      <FreePass show={freePass} setShow={setFreePass}/>
     </>
   );
 

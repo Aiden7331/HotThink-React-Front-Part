@@ -119,11 +119,35 @@ export const uploadImage = ({formData}) =>
 //hotThink 게시글 읽기
 export const readHotThink = () => axios.get('/api/hotthink');
 
+//realThink 게시글 목록 읽기
+export const listRealThinks = ({sb,sz,pg,category,ob}) => {
+  const queryString = qs.stringify({
+    sb,
+    sz,
+    pg,
+    category,
+    ob,
+  });
+  return axios.get(`/api/realthink?${queryString}`, {
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
+  });
+};
+
 //realThink 게시글 읽기
 export const readRealThink = () => axios.get('/api/realthink');
 
 //realThink 게시글 작성
-export const createRealThink = () => axios.post('/api/realthink');
+export const writeRealThink = ({title, contents, category, originalPostId, real}) => {
+  return axios.post(`/api/realthink/${originalPostId}/category/${category}`, {
+    title, contents, real
+  },{
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
+  });
+};
 
 //realThink 게시글 수정
 export const updateRealThink = () => axios.put('/api/realthink');

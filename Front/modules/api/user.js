@@ -61,3 +61,13 @@ export const unfollow = ({nickName}) =>
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
   });
+
+//리얼티켓 구매
+export const realTicket = () =>
+  axios.post('/api/pay/freepass', {
+    "payMethod":"CASH"
+  }, {
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
+  });

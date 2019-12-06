@@ -125,7 +125,16 @@ const NavigationBar = () => {
 
   const thinkURLInit = (think) => {
     if (think === 'Real') {
-      return '/think/myRealThink';
+      return {
+        pathname: '/think/realThink/realThink',
+        query: {
+          sb: 0,
+          sz: 10,
+          pg: 1,
+          category: '웹사이트',
+          ob: 0
+        }
+      };
     } else if (think === 'Hot') {
       return '/think/myHotThink';
     } else if (think === 'Think') return {

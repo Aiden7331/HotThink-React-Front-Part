@@ -1,41 +1,50 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import {Row, Col, Button,Descriptions, Badge} from 'antd';
+import ShowForm from "./ShowForm";
+import ImagesZoom from "./ImagesZoom";
+import {useSelector} from "react-redux";
+
+const data =[
+    {attaches:'/static/images/image1.jpg',contents:1},
+    {attaches:'/static/images/image1.jpg',contents:2},
+    {attaches:'/static/images/image1.jpg',contents:3},
+    {attaches:'/static/images/image1.jpg',contents:4},
+    {attaches:'/static/images/image1.jpg',contents:5},
+    {attaches:'/static/images/image1.jpg',contents:6},
+    {attaches:'/static/images/image1.jpg',contents:7},
+    {attaches:'/static/images/image1.jpg',contents:8},
+    {attaches:'/static/images/image1.jpg',contents:9},
+];
 
 const RealThinkRead = () => {
+    const [showImagesZoom, setShowImagesZoom] = useState(false);
+
+    const {} = useSelector(({})=>({
+
+    }));
+
+    const onZoom = useCallback(() => {
+        setShowImagesZoom(true);
+    }, []);
+
+    const onClose = useCallback(() => {
+        setShowImagesZoom(false);
+    }, []);
+
+    const onBackDrop = useCallback(() => {
+        setShowImagesZoom(false);
+    }, []);
     return (
         <>
             <Row>
                 <Col span={4}></Col>
                 <Col span={16}>
-                    <Descriptions
-                        title="Responsive Descriptions"
-                        bordered
-                        column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
-                    >
-                        <Descriptions.Item label="Product">Cloud Database</Descriptions.Item>
-                        <Descriptions.Item label="Billing">Prepaid</Descriptions.Item>
-                        <Descriptions.Item label="time">18:00:00</Descriptions.Item>
-                        <Descriptions.Item label="Amount">$80.00</Descriptions.Item>
-                        <Descriptions.Item label="Discount">$20.00</Descriptions.Item>
-                        <Descriptions.Item label="Official">$60.00</Descriptions.Item>
-                        <Descriptions.Item label="Config Info">
-                            Data disk type: MongoDB
-                            <br />
-                            Database version: 3.4
-                            <br />
-                            Package: dds.mongo.mid
-                            <br />
-                            Storage space: 10 GB
-                            <br />
-                            Replication factor: 3
-                            <br />
-                            Region: East China 1
-                        </Descriptions.Item>
-                    </Descriptions>
+                    <ShowForm data={data} onZoom={onZoom}/>
                     <a href='/trade'><Button style={{marginLeft:'45%', marginTop:'50px', marginBottom:'50px'}} variant="primary">거래신청</Button></a>
                 </Col>
                 <Col span={4}></Col>
             </Row>
+            {showImagesZoom && <ImagesZoom onClose={onClose} onBackDrop={onBackDrop} data={data}/>}
         </>
     );
 };

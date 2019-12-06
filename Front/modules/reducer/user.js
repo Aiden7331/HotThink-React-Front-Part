@@ -70,10 +70,14 @@ const [CREATE_FOLLOW, CREATE_FOLLOW_SUCCESS, CREATE_FOLLOW_FAILURE] = createRequ
 export const createFollow = createAction(CREATE_FOLLOW, ({nickName}) => ({nickName}));
 const createFollowSaga = createRequestSaga(CREATE_FOLLOW, userAPI.follow);
 //언팔 하기
-
 const [DELETE_FOLLOW, DELETE_FOLLOW_SUCCESS, DELETE_FOLLOW_FAILURE] = createRequestActionTypes('user/DELETE_FOLLOW');
 export const deleteFollow = createAction(DELETE_FOLLOW, ({nickName}) => ({nickName}));
 const deleteFollowSaga = createRequestSaga(DELETE_FOLLOW, userAPI.unfollow);
+
+//리얼티켓
+const [PURCHASE_REALTICKET, PURCHASE_REALTICKET_SUCCESS, PURCHASE_REALTICKET_FAILURE] = createRequestActionTypes('user/PURCHASE_REALTICKET');
+export const purchaseRealTicket = createAction(PURCHASE_REALTICKET);
+const purchaseRealTicketSaga = createRequestSaga(PURCHASE_REALTICKET, userAPI.realTicket);
 
 
 
@@ -108,6 +112,7 @@ export function* userSaga() {
   yield takeLatest(TARGETUSER, targetUserSaga);
   yield takeLatest(CREATE_FOLLOW, createFollowSaga);
   yield takeLatest(DELETE_FOLLOW, deleteFollowSaga);
+  yield takeLatest(PURCHASE_REALTICKET, purchaseRealTicketSaga);
 }
 
 const initialState = {
@@ -223,7 +228,19 @@ export default handleActions(
         updateUserError: error,
       }
     ),
-
+    //리얼티켓
+    [PURCHASE_REALTICKET_SUCCESS]:(state, {payload:user}) =>(
+      {
+        ...state,
+        user: user,
+      }
+    ),
+    [PURCHASE_REALTICKET_FAILURE]:(state, {payload:error}) =>(
+      {
+        ...state,
+        updateUserError: error,
+      }
+    )
   },
   initialState,
 );
