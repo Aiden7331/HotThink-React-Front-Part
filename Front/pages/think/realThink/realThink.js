@@ -48,7 +48,7 @@ const RealThink = () => {
             <Row type="flex" justify="center">
                 <Col span={4}><ThinkBar/></Col>
                 <Col span={16}>
-                    <h3>리얼띵크 > IT <Link href='/think/realThink/realThinkWrite'><a><Icon style={{float:'right', marginTop:'10px', marginRight:'10px'}} type="form" /></a></Link></h3>
+                    <h3>리얼띵크 > IT <Link><a href='/think/realThink/realThinkWrite'><Icon style={{float:'right', marginTop:'10px', marginRight:'10px'}} type="form" /></a></Link></h3>
                     {realThinks.map((v)=>{
                         return(
                          <>

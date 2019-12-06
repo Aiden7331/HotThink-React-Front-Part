@@ -86,14 +86,6 @@ const NavigationBar = () => {
                             fontWeight: '600'
                         }}>아이디어공유</a></Link></Nav.Item>
                     <Link href='/mypage/dashBoard'><a>마이페이지</a></Link>
-                    {/*홍민석 요청으로 href로 분야 보여주는것 삭제*/}
-                    {/*<NavDropdown title="Think게시판" id="basic-nav-dropdown" href='/freeThink'>*/}
-                    {/*    <NavDropdown.Item href="/freeThink">FreeThink</NavDropdown.Item>*/}
-                    {/*    <NavDropdown.Item href="/hotThink" num={{nu
-                  m}}>HotThink</NavDropdown.Item>*/}
-                    {/*    <NavDropdown.Item href="/realThink">RealTihnk</NavDropdown.Item>*/}
-                    {/*</NavDropdown>*/}
-                    {/*<Nav.Item style ={{marginLeft:'5px'}}><Link href="/finished"><a style={{textDecoration:'none', marginLeft:'10px',color:'gray',fontWeight:'600'}}>판매완료</a></Link></Nav.Item>*/}
                 </Nav>
 
                 {

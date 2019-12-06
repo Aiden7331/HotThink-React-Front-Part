@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react';
 import {Row, Col, Button,Descriptions, Badge} from 'antd';
 import ShowForm from "./ShowForm";
 import ImagesZoom from "./ImagesZoom";
+import {useSelector} from "react-redux";
 
 const data =[
     {attaches:'/static/images/image1.jpg',contents:1},
@@ -17,6 +18,10 @@ const data =[
 
 const RealThinkRead = () => {
     const [showImagesZoom, setShowImagesZoom] = useState(false);
+
+    const {} = useSelector(({})=>({
+
+    }));
 
     const onZoom = useCallback(() => {
         setShowImagesZoom(true);

@@ -13,14 +13,18 @@ const [WRITE_REAL_THINK,WRITE_REAL_THINK_SUCCESS,WRITE_REAL_THINK_FAILURE] = cre
 const [UPDATE_REAL_THINK,UPDATE_REAL_THINK_SUCCESS,UPDATE_REAL_THINK_FAILURE] = createRequestActionTypes('realThink/UPDATE_REAL_THINK');
 const [DELETE_REAL_THINK,DELETE_REAL_THINK_SUCCESS,DELETE_REAL_THINK_FAILURE] = createRequestActionTypes('realThink/UPDATE_REAL_THINK');
 const [UPLOAD_IMAGE] = createRequestActionTypes('realThink/UPLOAD_IMAGE');
+const [SET_REAL] = createRequestActionTypes('realThink/SET_REAL');
 
 export const initialize = createAction(INITIALIZE);
 export const setOriginalRealThink = createAction(SET_ORIGINAL_REAL_THINK,post=>post);
+export const setReal = createAction(SET_REAL,post=>post);
 export const changeField = createAction(CHANGE_FIELD,({key,value})=>({
     key,value
 }));
-export const writeRealThink = createAction(WRITE_REAL_THINK,({title,contents,category,attaches})=>({
-    title, contents, category,attaches
+export const writeRealThink = createAction(WRITE_REAL_THINK,({
+     title, contents, difference, originalPostId,real,category
+})=>({
+     title, contents, difference, originalPostId,real,category
 }));
 export const readRealThink = createAction(READ_REAL_THINK,({title,contents,category,attaches})=>({
     title, contents, category,attaches
@@ -46,17 +50,19 @@ export function* realThinkSaga() {
 }
 
 const initialState={
-    inventor:'',
-    rightHolder:'',
     user:'',
     title:'',
     contents:'',
-    difference:'',
-    pMaterial:'',
     attaches:[],
     category:'웹사이트',
-    originalPostId:null,
-    progressRate:0,
+    originalPostId:101,
+    difference:'',
+    inventor:'',
+    rightHolder:'',
+    progressRate:50,
+    pmaterial:'',
+    state:'WAIT',
+    realThink:null,
 };
 
 
@@ -65,29 +71,23 @@ const realThink = handleActions(
         [INITIALIZE]:state=>initialState,
         [SET_ORIGINAL_REAL_THINK]:(state,{payload:{think}})=>({
             ...state,
-            inventor:think.inventor,
-            rightHolder:think.rightHolder,
-            user:think.user,
             title:think.title,
             contents:think.contents,
+            attaches:[],
+            category:'웹사이트',
+            originalPostId:101,
             difference:think.difference,
+            inventor:think.inventor,
+            rightHolder:think.rightHolder,
+            progressRate:think.progressRate,
             pMaterial:think.pMaterial,
-            attaches:think.attaches,
-            category:think.category,
-            originalPostId:think.bdSeq,
-            progressRate: think.progressRate,
         }),
         [CHANGE_FIELD]:(state,{payload:{key,value}}) =>({
             ...state,
             [key]:value,
         }),
-        //리얼띵크 작성
-        [WRITE_REAL_THINK]:state =>({
-            ...state,
-            freeThink:null,
-            freeThinkError: null,
-        }),
-        [WRITE_REAL_THINK_SUCCESS]: (state,{payload:freeThink})=>({
+        //리얼띵크 생성
+        [WRITE_REAL_THINK_SUCCESS]: (state,{payload:realThink})=>({
             ...state,
             freeThink:null,
             isOpen:false,

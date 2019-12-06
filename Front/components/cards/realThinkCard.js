@@ -4,6 +4,9 @@ import {Row,Col,Icon,Tag,Avatar} from 'antd';
 import Link from "next/Link";
 
 const RealThinkCard = ({data}) => {
+    const onRead =() => {
+
+    };
     return(
         <>
             <Card style={{ width: '100%',height:'255px', marginTop:'10px', marginLeft:'10px',marginRight:'10px'}}>
@@ -12,18 +15,19 @@ const RealThinkCard = ({data}) => {
                         <Card.Body>
                             <Avatar style={{display:'inline-block', height:'50px', width:'50px',float:'left'}} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                             <div style={{ float:'left'}}>
-                                <div style={{fontSize:'20px'}}>{data.nickName}</div>
-                                <div style={{fontSize:'15px'}}>{data.title}</div>
+                                <div style={{fontSize:'20px'}}>{data?data.nickName:'등록자'}</div>
+                                <div style={{fontSize:'15px'}}>{data?data.title:'제목'}</div>
                             </div>
                             <Tag style={{float:'right'}} color="cyan">세부분야</Tag>
                             <Card.Text>
                                 <pre style={{marginTop:'70px',overflow:'hidden',textOverflow:'ellipsis',display:'-webkit-box',
                                     wordWrap:'break-word', lineHeight:'1.2em',height:'6em', whiteSpace:'pre-wrap'}}>
-                                    {data.contents}
+                                    {data?data.contents:'내용'}
                                 </pre>
                             </Card.Text>
                             <Link>
-                                <a href='/think/realThink/RealThinkRead'>
+                                <a href='/think/realThink/RealThinkRead'
+                                onClick={onRead}>
                                     내용보기
                                 </a>
                             </Link>

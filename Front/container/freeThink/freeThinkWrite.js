@@ -53,9 +53,11 @@ const FreeThinkWrite = ({show}) => {
     const onChangeTitle = e => {
         onChangeField({key:'title',value:e.target.value})
     };
+
     const onChangeContents = e => {
         onChangeField({key:'contents',value:e.target.value})
     };
+
     //언마운트될때 초기화
     useEffect(()=>{
         return()=>{
