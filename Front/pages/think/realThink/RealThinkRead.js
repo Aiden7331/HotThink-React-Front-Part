@@ -5,15 +5,15 @@ import ImagesZoom from "./ImagesZoom";
 import {useSelector} from "react-redux";
 
 const data =[
-    {attaches:'/static/images/image1.jpg',contents:1},
-    {attaches:'/static/images/image1.jpg',contents:2},
-    {attaches:'/static/images/image1.jpg',contents:3},
-    {attaches:'/static/images/image1.jpg',contents:4},
-    {attaches:'/static/images/image1.jpg',contents:5},
-    {attaches:'/static/images/image1.jpg',contents:6},
-    {attaches:'/static/images/image1.jpg',contents:7},
-    {attaches:'/static/images/image1.jpg',contents:8},
-    {attaches:'/static/images/image1.jpg',contents:9},
+    {attaches:'/static/images/loa1.jpg',contents:'배경이미지'},
+    {attaches:'/static/images/loa2.jpg',contents:'게임 속 배경'},
+    {attaches:'/static/images/loa3.jpg',contents:'게임 플레이 화면1'},
+    {attaches:'/static/images/loa4.jpg',contents:'게임 플레이 화면2'},
+    {attaches:'/static/images/loa5.jpg',contents:'게임 플레이 화면3'},
+    {attaches:'/static/images/loa6.jpg',contents:'게임 플레이 화면4'},
+    {attaches:'/static/images/loa7.jpg',contents:'게임 플레이 화면5'},
+    {attaches:'/static/images/loa8.jpg',contents:'게임 플레이 화면6'},
+    {attaches:'/static/images/loa9.jpg',contents:'게임 플레이 화면7'},
 ];
 
 const RealThinkRead = () => {

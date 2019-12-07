@@ -293,7 +293,7 @@ const NavigationBar = () => {
             user
               ?
               <>
-                <Link href={'/mypage'}>
+                <a href='/mypage'>
                   <Fab color="primary" variant="round" aria-label="like" className={classes.fab}
                        onClick={()=>{dispatch(check())}}
                        style={{
@@ -303,7 +303,7 @@ const NavigationBar = () => {
                   >
                     <AccountBoxIcon fontSize={'large'}/>
                   </Fab>
-                </Link>
+                </a>
               </>
               :
               <>

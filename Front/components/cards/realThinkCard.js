@@ -13,12 +13,32 @@ const RealThinkCard = ({data}) => {
               <Row type="flex" justify="center">
                   <Col span={18}>
                       <Card.Body>
-                          <Avatar style={{display:'inline-block', height:'50px', width:'50px',float:'left'}} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                          {!data.avatar?
+                          <Avatar style={{
+                              display: 'inline-block',
+                              height: '50px',
+                              width: '50px',
+                              float: 'left',
+                              fontSize: '30px',
+                              paddingTop: '10px'
+                          }}>
+                              {data.nickName[0]}
+                          </Avatar>
+                              :
+                              <Avatar style={{
+                                  display: 'inline-block',
+                                  height: '50px',
+                                  width: '50px',
+                                  float: 'left',
+                                  fontSize: '30px',
+                              }} src={data.avatar}>
+                              </Avatar>
+                          }
                           <div style={{ float:'left'}}>
                               <div style={{fontSize:'20px'}}>{data?data.nickName:'등록자'}</div>
                               <div style={{fontSize:'15px'}}>{data?data.title:'제목'}</div>
                           </div>
-                          <Tag style={{float:'right'}} color="cyan">세부분야</Tag>
+                          <Tag style={{float:'right'}} color="cyan">거래대기</Tag>
                           <Card.Text>
                                 <pre style={{marginTop:'70px',overflow:'hidden',textOverflow:'ellipsis',display:'-webkit-box',
                                     wordWrap:'break-word', lineHeight:'1.2em',height:'6em', whiteSpace:'pre-wrap'}}>
@@ -34,7 +54,7 @@ const RealThinkCard = ({data}) => {
                       </Card.Body>
                   </Col>
                   <Col span={6}>
-                      <Card.Img variant="top" src="/static/images/image3.jpg" style={{width:'100%',height:'253px'}} />
+                      <Card.Img variant="top" src={data?data.src:'/static/images/logo.png'} style={{width:'100%',height:'253px'}} />
                   </Col>
               </Row>
           </Card>
