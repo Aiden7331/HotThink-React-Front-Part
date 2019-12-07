@@ -85,7 +85,7 @@ const Follow = () => {
                 fontSize: '20px',
                 color:"#343a40",
               }}>
-                <u>Follower</u>
+                <u>Following</u>
               </Box>
               <Paper className={classes.root}>
                 <Tabs defaultActiveKey="1" tabPosition="left" style={{ width:'100%' }}

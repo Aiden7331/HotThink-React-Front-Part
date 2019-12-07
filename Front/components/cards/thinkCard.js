@@ -162,6 +162,8 @@ const ThinkCard = ({ think }) => {
     // });
   };
 
+  const [scrap, setScrap] = useState(false);
+
   const onChangeComment = useCallback((e) => dispatch(changeField({
     key: 'comment',
     value: e.target.value
@@ -193,8 +195,61 @@ const ThinkCard = ({ think }) => {
     setUpdateShow(false);
   };
 
-  const avatarClick = () => {
-
+  const userImageSet = () => {
+    const nick = think.user.nickName;
+    if(nick==="zeroGone"){
+      return "/static/images/human7.jpg";
+    }else if(nick==="0nbu"||nick==="Onbu"){
+      return "/static/images/human2.jpg";
+    }else if(nick==="불개미"){
+      return "/static/images/human1.jpg";
+    }else if(nick==="moonhuk"){
+      return "/static/images/human3.jpg";
+    }else if(nick==="geogia"){
+      return "/static/images/human9.jpg";
+    }else if(nick==="지워닝"){
+      return "/static/images/human5.jpg";
+    }else if(nick==="smile"||nick==="sohee"){
+      return "/static/images/human6.jpg";
+    }else if(nick==="1"){
+      return "/static/images/human4.jpg";
+    }else if(nick==="wpqkf22"){
+      return "/static/images/human9.jpg";
+    }else if(nick==="123"||nick=="hi seungik"){
+      return "/static/images/human10.jpg";
+    }else{
+      return '';
+    }
+  };
+  const boardImageSet = () => {
+    const title = think.title;
+    if(title === "디바이스마트"){
+      return "/static/image/디바이스마트.png";
+    }else if(title === "fow"){
+      return "/static/image/fow.png";
+    }else if(title === "싸이월드"){
+      return "/static/image/싸이월드.jfif";
+    }else if(title === "디바이스마트"){
+      return "/static/image/디바이스마트.jpg";
+    }else if(title === "디바이스마트"){
+      return "/static/image/디바이스마트.jpg";
+    }else if(title === "디바이스마트"){
+      return "/static/image/디바이스마트.jpg";
+    }else if(title === "디바이스마트"){
+      return "/static/image/디바이스마트.jpg";
+    }else if(title === "디바이스마트"){
+      return "/static/image/디바이스마트.jpg";
+    }else if(title === "디바이스마트"){
+      return "/static/image/디바이스마트.jpg";
+    }else if(title === "디바이스마트"){
+      return "/static/image/디바이스마트.jpg";
+    }else if(title === "디바이스마트"){
+      return "/static/image/디바이스마트.jpg";
+    }else if(title === "디바이스마트"){
+      return "/static/image/디바이스마트.jpg";
+    }else{
+      return "";
+    }
   };
   return (
     grow ?
@@ -252,9 +307,9 @@ const ThinkCard = ({ think }) => {
               <CardHeader
                 avatar={
                   <Avatar aria-label="recipe" className={classes.avatar}
-                          src={!!think.user.profileImg}
+                          src={userImageSet()}
                           onClick={()=>router.push("/user?nickName="+think.user.nickName)}>
-                    {think.user.profileImage ? '' : <PersonIcon fontSize={'large'}/>}
+                    {userImageSet()===''? <PersonIcon fontSize={'large'}/> : ''}
                   </Avatar>
                 }
                 title={
@@ -273,7 +328,7 @@ const ThinkCard = ({ think }) => {
                       fontFamily='Noto Sans KR'
                       fontWeight={500}
                     >
-                      {think.createAt}
+                      {think.createAt.substring(0,10)}
                     </Box>
                   </Typography>
                 }
@@ -321,6 +376,8 @@ const ThinkCard = ({ think }) => {
                 </Col>
                 <Col>
                   <Fab size="small" color="primary" className={classes.fab}
+                       color={scrap?'primary':'inherit'}
+                       onClick={()=>setScrap(!scrap)}
                        style={{ outline: 'none' }}>
                     <BookMarkIcon/>
                   </Fab>
@@ -399,9 +456,9 @@ const ThinkCard = ({ think }) => {
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}
-                    src={!!think.user.profileImg}
+                    src={userImageSet()}
                     onClick={()=>router.push("/user?nickName="+think.user.nickName)}>
-              {think.user.profileImage ? '' : <PersonIcon fontSize={'large'}/>}
+              {userImageSet()==='' ? <PersonIcon fontSize={'large'}/> : ''}
             </Avatar>
           }
           title={
@@ -420,7 +477,7 @@ const ThinkCard = ({ think }) => {
                 fontFamily='Noto Sans KR'
                 fontWeight={500}
               >
-                {think.createAt}
+                {think.createAt.substring(0,10)}
               </Box>
             </Typography>
           }
@@ -471,7 +528,7 @@ const ThinkCard = ({ think }) => {
           <Col span={6}>
             <CardMedia
               className={classes.media}
-              image="/static/images/default.png"
+              image={boardImageSet()===""?"/static/images/default.png":boardImageSet()}
               title="Paella dish"
             />
           </Col>
@@ -498,8 +555,10 @@ const ThinkCard = ({ think }) => {
                   <FavoriteIcon color={'secondary'}/>
                 }
               </IconButton>
-              <IconButton aria-label="share" style={{ outline: 'none' }}>
-                <BookMarkIcon color={'primary'}/>
+              <IconButton aria-label="share" style={{ outline: 'none' }}
+                          onClick={()=>setScrap(!scrap)}>
+                <BookMarkIcon color={scrap?'primary':'inherit'}
+                />
                 {think.hits.length}
               </IconButton>
               <IconButton aria-label="comment" style={{ outline: 'none' }}>

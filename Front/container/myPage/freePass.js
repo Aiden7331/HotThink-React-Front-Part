@@ -66,6 +66,7 @@ const FreePass = ({ show, setShow }) => {
                     onClick={async() => {
                       await dispatch(purchaseRealTicket());
                       await dispatch(check());
+                      setShow(false);
                     }}
 
             >

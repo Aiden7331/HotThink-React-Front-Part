@@ -58,9 +58,9 @@ const useStyles = makeStyles(theme => ({
     fontFamily: 'Noto Sans KR',
     // backgroundColor: 'white',
   },
-  tile:{
-    borderRadius:'20px',
-  },
+  // tile:{
+  //   borderRadius:'20px',
+  // },
   titleBar: {
     background:
       'linear-gradient(to top, rgba(192,192,192,0.7) 0%, rgba(192,192,192,0.4) 30%, rgba(192,192,192,0) 60%)',
@@ -80,151 +80,127 @@ export default function ScrollableTabsButtonForce() {
     setValue(index);
   };
 
-  const categories = ['게임', '디자인', '마켓팅', '모바일', 'IOT', '웹페이지', '컨텐츠', '프로그램'];
+  const categories = ['게임', '디자인', '마켓팅', '모바일', '사물인터넷', '웹사이트', '컨텐츠', '유틸리티'];
 
   const tileData = [
     //게임
     [
       {
-        img: '/static/images/lol.jpg',
-        title: '리그오브레전드',
-        author: 'Riot Games',
+        img: '/static/images/wormax.png',
+        title: 'wormax',
       },
       {
-        img: '/static/images/overwatch.png',
-        title: '오버워치',
-        author: 'Blizzard',
+        img: '/static/images/피카츄배구.png',
+        title: '피카츄배구',
       },
       {
-        img: '/static/images/battleground.jpg',
-        title: '배틀그라운드',
-        author: 'Blue hole',
+        img: '/static/images/오목.png',
+        title: '오목',
       },
     ],
     //디자인
     [
       {
-        img: '/static/images/lol.jpg',
-        title: '리그오브레전드',
-        author: 'Riot Games',
+        img: '/static/images/예민한오리.png',
+        title: '예민한오리',
       },
       {
-        img: '/static/images/overwatch.png',
-        title: '오버워치',
-        author: 'Blizzard',
+        img: '/static/images/경수체.png',
+        title: '경수체 폰트',
       },
       {
-        img: '/static/images/battleground.jpg',
-        title: '배틀그라운드',
-        author: 'Blue hole',
+        img: '/static/images/작업용바지.png',
+        title: '작업용바지 디자인',
       },
     ],
     //마켓팅
     [
       {
-        img: '/static/images/lol.jpg',
-        title: '리그오브레전드',
-        author: 'Riot Games',
+        img: '/static/images/제이디.png',
+        title: '제이디 라이브 영어',
       },
       {
-        img: '/static/images/overwatch.png',
-        title: '오버워치',
-        author: 'Blizzard',
+        img: '/static/images/지도 노출 서비스.png',
+        title: '지도 노출 서비스',
       },
       {
-        img: '/static/images/battleground.jpg',
-        title: '배틀그라운드',
-        author: 'Blue hole',
+        img: '/static/images/글쓰기시간줄이기.png',
+        title: '글쓰기 시간 줄이기 노하우',
       },
     ],
     //모바일
     [
       {
-        img: '/static/images/lol.jpg',
-        title: '리그오브레전드',
-        author: 'Riot Games',
+        img: '/static/images/마리오승익.png',
+        title: '마리오승익',
       },
       {
-        img: '/static/images/overwatch.png',
-        title: '오버워치',
-        author: 'Blizzard',
+        img: '/static/images/펫트너.jpg',
+        title: '펫트너',
       },
       {
-        img: '/static/images/battleground.jpg',
-        title: '배틀그라운드',
-        author: 'Blue hole',
+        img: '/static/images/에브리타임.jpg',
+        title: '에브리타임',
       },
     ],
-    //IOT
+    //사물인터넷
     [
       {
-        img: '/static/images/lol.jpg',
-        title: '리그오브레전드',
-        author: 'Riot Games',
+        img: '/static/images/펀치기.png',
+        title: '자동 복원식 펀치볼 게임기',
       },
       {
-        img: '/static/images/overwatch.png',
-        title: '오버워치',
-        author: 'Blizzard',
+        img: '/static/images/층간소음방지무드등.png',
+        title: '층소방무',
       },
       {
-        img: '/static/images/battleground.jpg',
-        title: '배틀그라운드',
-        author: 'Blue hole',
+        img: '/static/images/마리오승익.png',
+        title: '마리오승익',
       },
     ],
-    //웹페이지
+    //웹사이트
     [
       {
         img: '/static/images/favicon-16x16.png',
         title: '핫띵크',
-        author: '김영곤',
       },
       {
-        img: '/static/images/overwatch.png',
-        title: '오버워치',
-        author: 'Blizzard',
+        img: '/static/images/default.png',
+        title: '성공회대 통합 과제제출시스템',
       },
       {
-        img: '/static/images/battleground.jpg',
-        title: '배틀그라운드',
-        author: 'Blue hole',
+        img: '/static/images/크몽.png',
+        title: '크몽',
       },
     ],
     //컨텐츠
     [
       {
         img: '/static/images/default.png',
-        title: '낚시하기',
-        author: '김영곤',
+        title: '프로젝트 진행하기',
       },
       {
-        img: '/static/images/default.png',
-        title: '잠 자기',
-        author: '강태구',
+        img: '/static/images/영상브이로그.png',
+        title: '영상 브이로그 찍기',
       },
       {
-        img: '/static/images/default.png',
-        title: '코딩하기',
-        author: '김영곤',
+        img: '/static/images/VR.png',
+        title: 'VR',
       },
     ],
     //프로그램
     [
       {
-        img: '/static/images/intelliJ.png',
-        title: '인텔리제이',
-        author: 'JetBrains',
+        img: '/static/images/포토스케이프.png',
+        title: '포토스케이프',
       },
       {
-        img: '/static/images/alzip.jpg',
-        title: '알집',
-        author: 'EastSoft',
+        img: '/static/images/곰캠.png',
+        title: '곰캠',
       },
       {
-        img: '/static/images/battleground.jpg',
-        title: '배틀그라운드',
-        author: 'Blue hole',
+        img: '/static/images/소개팅주선프로그램.jpg',
+        title: '소개팅주선프로그램',
       },
     ],
   ];
@@ -234,9 +210,9 @@ export default function ScrollableTabsButtonForce() {
     else if (category === '디자인') return '/static/images/design.jpg';
     else if (category === '마켓팅') return '/static/images/marketing.jpg';
     else if (category === '모바일') return '/static/images/mobile.jpg';
-    else if (category === 'IOT') return '/static/images/iot.jpg';
-    else if (category === '프로그램') return '/static/images/program.jpg';
-    else if (category === '웹페이지') return '/static/images/webpage.jpg';
+    else if (category === '사물인터넷') return '/static/images/iot.jpg';
+    else if (category === '유틸리티') return '/static/images/program.jpg';
+    else if (category === '웹사이트') return '/static/images/webpage.jpg';
     else if (category === '컨텐츠') return '/static/images/contents.jpg';
   }
 
@@ -265,10 +241,11 @@ export default function ScrollableTabsButtonForce() {
                    icon={
                      <img src={categoryImageFunction(category)}/>
                    }
-                   {...a11yProps(1)}
+                   {...a11yProps(categories.indexOf(category))}
                    style={{
                      fontWeight: '900',
                      fontFamily: 'Noto Sans KR',
+                     outline: 'none',
                    }}
               />
             )
@@ -303,38 +280,44 @@ export default function ScrollableTabsButtonForce() {
                   container
                   justify={'center'}
                 >
-                  <Grid item>
-                    <div
-                      style={{
-                        marginLeft: '15%',
-                        marginRight: '15%',
-                        // width:"100%",
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        justifyContent: 'space-around',
-                        overflow: 'hidden',
-                        // backgroundColor: 'red',
-                        // backgroundColor: theme.palette.background.paper,
-                      }}
-                    >
+                  <Grid item
+                  style={{
+                    marginLeft: '10%',
+                    marginRight: '10%',
+                  }}>
+                    {/*<div*/}
+                    {/*  style={{*/}
+                    {/*    marginLeft: '15%',*/}
+                    {/*    marginRight: '15%',*/}
+                    {/*    // width:"100%",*/}
+                    {/*    display: 'flex',*/}
+                    {/*    flexWrap: 'wrap',*/}
+                    {/*    justifyContent: 'space-around',*/}
+                    {/*    overflow: 'hidden',*/}
+                    {/*    // backgroundColor: 'red',*/}
+                    {/*    // backgroundColor: theme.palette.background.paper,*/}
+                    {/*  }}*/}
+                    {/*>*/}
                       <GridList
-                        cellHeight={240}
+                        cellHeight={300}
+
                         cols={3}
                         spacing={24}
                         style={{
-                          // width: '100%',
+                          width: '100%',
                           // marginLeft: '15%',
                           // marginRight: '15%',
                           flexWrap: 'nowrap',
-                          transform: 'translateZ(0)',
+                          // transform: 'translateZ(0)',
                         }}
                       >
                         {tileData[num].map(tile => (
-                          <GridListTile key={tile.img}
+                          <GridListTile key={tile.title}
                                         className={classes.tile}
                           >
                             <img src={tile.img} alt={tile.title}
                                  style={{
+                                   height:'100%',
                                    opacity: 0.7
                                  }}
                             />
@@ -353,7 +336,7 @@ export default function ScrollableTabsButtonForce() {
                           </GridListTile>
                         ))}
                       </GridList>
-                    </div>
+                    {/*</div>*/}
                   </Grid>
                 </Grid>
               </TabPanel>

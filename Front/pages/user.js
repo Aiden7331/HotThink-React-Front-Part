@@ -36,6 +36,35 @@ const User = () => {
   const classes = useStyles();
   const [crsIndex, setCrsIndex] = useState(0);
   const [direction, setDirection] = useState(null);
+  const [index, setIndex] = useState(0);
+  const 게시물 = () => {
+    if(index===0){
+      return 3.1;
+    }else if(index==1) {
+      return 4.0;
+    }else{
+      return 3.7;
+    }
+  }
+
+    const 투자자 = () => {
+      if(index===0){
+        return 2.5;
+      }else if(index==1) {
+        return 4.8;
+      }else{
+        return 4.2;
+      }
+    }
+
+    const image = () => {
+      if(index===0){
+        return '/static/images/human2.jpg';
+      }else if(index==2) {
+        return '/static/images/human3.jpg';
+      }
+    }
+
 
   const crsHandle = (selectedIndex, e) => {
     setCrsIndex(selectedIndex);
@@ -96,7 +125,9 @@ const User = () => {
             TargetUser.profileImg ?
               ''
               :
-              <Icon type="user-add" style={{ fontSize: 128 }}/>
+              index===1? <Icon type="user-add" style={{ fontSize: 128 }}/>
+                :
+                <img src={image()} style={{height:240}}/>
             :
             ''
           }
@@ -147,7 +178,7 @@ const User = () => {
                   marginTop: '30px',
                 }}>
                   <div>
-                    <Rate style={{ marginTop: '40%' }} allowHalf defaultValue={4.5}/>
+                    <Rate style={{ marginTop: '40%' }} allowHalf value={게시물()}/>
                   </div>
                   <h5 style={{
                     fontSize: '15px',
@@ -164,7 +195,7 @@ const User = () => {
                     marginTop: '30px'
                   }}>
                   <div>
-                    <Rate style={{ marginTop: '40%' }} allowHalf defaultValue={3.5}/>
+                    <Rate style={{ marginTop: '40%' }} allowHalf value={투자자()}/>
                   </div>
                   <h5 style={{
                     fontFamily: 'Noto Sans KR',
@@ -315,7 +346,10 @@ const User = () => {
                     fontWeight: 500,
                     width:'100%'}}
                   onTabClick={
-                    (tab) => {router.push("/user?nickName="+TargetUser.followers[tab].nickName)}
+                    (tab) => {
+                      setIndex(index+1);
+                      router.push("/user?nickName="+TargetUser.followers[tab].nickName)
+                    }
                   }
             >
               {
@@ -347,7 +381,9 @@ const User = () => {
                     fontWeight: 500,
                     width:'100%'}}
                   onTabClick={
-                    (tab) => {router.push("/user?nickName="+TargetUser.followings[tab].nickName)}
+                    (tab) => {
+                      setIndex(index+1);
+                      router.push("/user?nickName="+TargetUser.followings[tab].nickName)}
                   }
             >
               {

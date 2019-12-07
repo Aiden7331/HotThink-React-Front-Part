@@ -174,36 +174,104 @@ const NavigationBar = () => {
           fontSize: '13px',
           width: '30%'
         }}>
-          {
-            ['Real', 'Hot', 'Think'].map(think =>
-                <Link href={user ? thinkURLInit(think) : ''} key={think}>
-                {/*  <Link href={user ? '/think/myFreeThink?sb=0&sz=5&pg=1&category=웹사이트&ob=0' : ''}>*/}
+          {/*{*/}
+          {/*  ['Real', 'Hot', 'Think'].map(think =>*/}
+          {/*      <Link href={user&&think==='Think' ? thinkURLInit(think) : ''} key={think}>*/}
+          {/*      /!*  <Link href={user ? '/think/myFreeThink?sb=0&sz=5&pg=1&category=웹사이트&ob=0' : ''}>*!/*/}
 
-                  <a style={{textDecoration:'none', marginLeft: '5%'}}>
-                  <Button
-                    onClick={user ? null : () => setLoginShow(true)}
-                    style={{
-                      outline: 'none',
-                      marginLeft: '5%',
-                    }}
-                  >
-                    <li>
-                      <SVG name={SVGNameInit(think)}
-                           width={36} height={36} color={thinkColorInit(think)}
-                           viewBox={SVGViewBoxInit(think)}/>
-                      <div style={{
-                        color: thinkColorInit(think),
-                        fontWeight: 900,
-                        fontFamily: 'Noto Sans KR',
-                      }}>
-                        {think}
-                      </div>
-                    </li>
-                  </Button>
-                  </a>
-                </Link>
-            )
-          }
+          {/*        <a style={{textDecoration:'none', marginLeft: '5%'}}>*/}
+          {/*        <Button*/}
+          {/*          onClick={user ? think==='Think'? null : alert("구독권을 구매하세요!") : () => setLoginShow(true)}*/}
+          {/*          style={{*/}
+          {/*            outline: 'none',*/}
+          {/*            marginLeft: '5%',*/}
+          {/*          }}*/}
+          {/*        >*/}
+          {/*          <li>*/}
+          {/*            <SVG name={SVGNameInit(think)}*/}
+          {/*                 width={36} height={36} color={thinkColorInit(think)}*/}
+          {/*                 viewBox={SVGViewBoxInit(think)}/>*/}
+          {/*            <div style={{*/}
+          {/*              color: thinkColorInit(think),*/}
+          {/*              fontWeight: 900,*/}
+          {/*              fontFamily: 'Noto Sans KR',*/}
+          {/*            }}>*/}
+          {/*              {think}*/}
+          {/*            </div>*/}
+          {/*          </li>*/}
+          {/*        </Button>*/}
+          {/*        </a>*/}
+          {/*      </Link>*/}
+          {/*  )*/}
+          {/*}*/}
+
+              <Button
+                onClick={user ? ()=>alert("구독권을 구매하세요!") : () => setLoginShow(true)}
+                style={{
+                  outline: 'none',
+                  marginLeft: '5%',
+                }}
+              >
+                <li>
+                  <SVG name={SVGNameInit('Real')}
+                       width={36} height={36} color={thinkColorInit('Real')}
+                       viewBox={SVGViewBoxInit('Real')}/>
+                  <div style={{
+                    color: thinkColorInit('Real'),
+                    fontWeight: 900,
+                    fontFamily: 'Noto Sans KR',
+                  }}>
+                    Real
+                  </div>
+                </li>
+              </Button>
+
+          <a style={{textDecoration:'none', marginLeft: '5%'}}>
+            <Button
+              onClick={user ? ()=>alert("구독권을 구매하세요!") : () => setLoginShow(true)}
+              style={{
+                outline: 'none',
+                marginLeft: '5%',
+              }}
+            >
+              <li>
+                <SVG name={SVGNameInit('Hot')}
+                     width={36} height={36} color={thinkColorInit('Hot')}
+                     viewBox={SVGViewBoxInit('Hot')}/>
+                <div style={{
+                  color: thinkColorInit('Hot'),
+                  fontWeight: 900,
+                  fontFamily: 'Noto Sans KR',
+                }}>
+                  Hot
+                </div>
+              </li>
+            </Button>
+          </a>
+        <Link href={user ? thinkURLInit('Think') : ''}>
+          <a style={{textDecoration:'none', marginLeft: '5%'}}>
+            <Button
+              onClick={user ? null : () => setLoginShow(true)}
+              style={{
+                outline: 'none',
+                marginLeft: '5%',
+              }}
+            >
+              <li>
+                <SVG name={SVGNameInit('Think')}
+                     width={36} height={36} color={thinkColorInit('Think')}
+                     viewBox={SVGViewBoxInit('Think')}/>
+                <div style={{
+                  color: thinkColorInit('Think'),
+                  fontWeight: 900,
+                  fontFamily: 'Noto Sans KR',
+                }}>
+                  Think
+                </div>
+              </li>
+            </Button>
+          </a>
+        </Link>
 
 
           {/*<Nav.Item>*/}

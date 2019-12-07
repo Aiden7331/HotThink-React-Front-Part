@@ -31,9 +31,9 @@ const DashBoard = ({ user }) => {
   const onClose = () => {
     setVisible(false);
     dispatch(check());
-    console.log(visible);
+    setProfileImage(true);
   };
-
+  const [profileImage, setProfileImage] = useState(false);
   const [crsIndex, setCrsIndex] = useState(0);
   const [direction, setDirection] = useState(null);
 
@@ -87,6 +87,13 @@ const DashBoard = ({ user }) => {
   //프리패스 모달
   const [freePass, setFreePass] = useState(false);
 
+  const TagColor = (board) => {
+    if (board === 'REAL') {
+      return 'gold';
+    } else if (board === 'HOT') {
+      return 'red';
+    }
+  };
   return (
     <>
       <div style={{
@@ -94,14 +101,22 @@ const DashBoard = ({ user }) => {
         height: 120,
         backgroundColor: '#495057'
       }}>
+
         <Avatar size={128} shape={'square'}
                 style={{
                   marginTop: '50px',
                   marginLeft: '5%',
                 }}
         >
-          <Icon type="user-add" style={{ fontSize: 96 }}/>
+          {/*{*/}
+          {/*  profileImage ?*/}
+              <img src={'/static/images/human1.jpg'} style={{height:100}}/>
+          {/*    :*/}
+          {/*    <Icon type="user-add" style={{ fontSize: 96 }}/>*/}
+          {/*}*/}
+
         </Avatar>
+
       </div>
       <Button
         type="primary" shape="round" size={'large'}
@@ -212,7 +227,7 @@ const DashBoard = ({ user }) => {
                   height: '150px',
                 }}>
                 <h2 style={{
-                  marginTop: '55%',
+                  paddingTop: 50,
                 }}>{user ? user.realTicket + ' 개' : ''}</h2>
               </Avatar>
             </Row>
@@ -236,10 +251,11 @@ const DashBoard = ({ user }) => {
                   backgroundColor: '#f1f3f5',
                   width: '150px',
                   height: '150px',
+                  paddingTop: 25,
                 }}>
                 <h2 style={{
                   marginTop: '55%',
-                }}>{user ? user.realTicket + ' 일' : ''}</h2>
+                }}>{user ? ' 3일' : ''}</h2>
               </Avatar>
             </Row>
 
@@ -294,11 +310,28 @@ const DashBoard = ({ user }) => {
                                     <Card.ImgOverlay>
                                       <Card.Title
                                         style={board.image ? '' : { color: 'black' }}
-                                      >{board.title}</Card.Title>
+                                      >
+                                        <Row>
+                                          <Col span={18}>
+                                            {board.title}
+                                          </Col>
+                                          <Col span={6}>
+                                            <Tag color={
+                                              TagColor(board.boardType)
+                                            }>{board.boardType}</Tag>
+                                          </Col>
+                                        </Row>
+                                      </Card.Title>
                                       <Card.Text
                                         style={board.image ? '' : { color: 'black' }}
                                       >{board.contents}</Card.Text>
                                     </Card.ImgOverlay>
+                                    {
+                                      board.boardType === 'HOT' ?
+                                        <Button type={'danger'}>리얼띵크 작성하기</Button>
+                                        :
+                                        ''
+                                    }
                                   </Card>
                                 </Col>
                             )}
