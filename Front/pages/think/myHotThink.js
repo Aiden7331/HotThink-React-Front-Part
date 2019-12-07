@@ -15,6 +15,7 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
+      <>
     <Typography
       style={{ outline: 'none' }}
       component="div"
@@ -26,6 +27,7 @@ function TabPanel(props) {
     >
       <Box p={3}>{children}</Box>
     </Typography>
+    </>
   );
 }
 
@@ -81,7 +83,7 @@ const MyHotThink = () => {
 
   return (
     <>
-      <React.Fragment>
+      <>
         <AppBar position="fixed" color="default" className={classes.appBar}>
           <Tabs
             value={value}
@@ -101,14 +103,9 @@ const MyHotThink = () => {
             }
           </Tabs>
         </AppBar>
-
-      </React.Fragment>
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
+      </>
+      <div
       >
-        <HotThinkPanel/>
         {
           [0,1,2,3,4,5,6,7].map(num =>
             <TabPanel value={value} index={num}>
@@ -116,13 +113,7 @@ const MyHotThink = () => {
             </TabPanel>
           )
         }
-      </SwipeableViews>
-      {/*<Pagination style={{textAlign:'center', margin:'30px'}}*/}
-      {/*            total={20}*/}
-      {/*            pageSize={size}*/}
-      {/*            current={page}*/}
-      {/*            onChange={onPageChange}*/}
-      {/*/>*/}
+      </div>
     </>
   );
 };

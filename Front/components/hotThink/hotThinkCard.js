@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HotThinkCard =()=>{
+const HotThinkCard =({data})=>{
 
   const cardStyles = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -67,17 +67,17 @@ const HotThinkCard =()=>{
             <MoreVertIcon/>
           </IconButton>
         }
-        title="나는 노예다"
-        subheader='작성날짜'
+        title={data.title?data.title:'제목'}
+        subheader={data.date?data.date:'날짜'}
       />
       <CardMedia
         className={cardStyles.media}
-        image="/static/images/human3.jpg"
+        image={data.src?data.src:'/static/images/human3.jpg'}
         title="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          노예 판매합니다.
+          {data.contents?data.contents:'내용'}
         </Typography>
       </CardContent>
       <CardActions disableSpacing
@@ -93,11 +93,8 @@ const HotThinkCard =()=>{
           <IconButton aria-label="zoomIn" >
             <HotThinkModal/>
           </IconButton>
-
         </div>
-
       </CardActions>
-
     </Card>
   )
 };
