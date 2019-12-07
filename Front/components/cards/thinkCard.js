@@ -224,9 +224,9 @@ const ThinkCard = ({ think }) => {
   const boardImageSet = () => {
     const title = think.title;
     if(title === "디바이스마트"){
-      return "/static/image/디바이스마트.png";
+      return "/static/images/디바이스마트.png";
     }else if(title === "fow"){
-      return "/static/image/fow.png";
+      return "/static/images/fow.png";
     }else if(title === "싸이월드"){
       return "/static/image/싸이월드.jfif";
     }else if(title === "디바이스마트"){

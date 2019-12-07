@@ -61,7 +61,7 @@ const MyFreeThink = () => {
     }))
   }, [dispatch, router.query, isOpen]);
 
-  const onPageChange = (page,size) => {
+  const onPageChange = (page) => {
     setPage(page);
     window.scrollTo(0,0);
     router.push({
@@ -210,17 +210,22 @@ const MyFreeThink = () => {
             backgroundColor: '#f5f6f7',
           }}>
             {
-              freeThinks.map(think =>
+              page===1?
+                freeThinks.slice(0,5).map(think =>
                 <ThinkCard think={think}/>
-              )
+                )
+                :
+                freeThinks.slice(5,10).map(think =>
+                  <ThinkCard think={think}/>
+                )
             }
           </Content>
 
           <Footer style={{ backgroundColor: '#f5f6f7' }}>
             <Pagination
               style={{textAlign:'center', margin:'30px'}}
-              total={20}
-              pageSize={size}
+              total={freeThinks.length}
+              pageSize={5}
               current={page}
               onChange={onPageChange}
             />

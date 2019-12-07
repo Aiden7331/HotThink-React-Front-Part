@@ -95,15 +95,17 @@ const RealThink = () => {
               title={
                 <Row>
                   <span>
-                  <Icon type='global'
+                  <Icon type='trophy'
                         style={{
-                          fontSize: 25
+                          color: 'gold',
+                          fontSize: 25,
                         }}
                   />
                   <span style={{
+                    color: 'gold',
                     fontSize: 17
                   }}>
-                    프리 띵크</span>
+                    리얼 띵크</span>
                 </span>
                 </Row>
 
@@ -125,7 +127,7 @@ const RealThink = () => {
         <Layout>
             <Row>
                 <Col span={18}>
-                    <h3>리얼띵크 > IT <Link><a href='/think/realThink/realThinkWrite'><Icon style={{
+                    <h3>리얼띵크 > 웹사이트 <Link><a href='/think/realThink/realThinkWrite'><Icon style={{
                         float: 'right',
                         marginTop: '10px',
                         marginRight: '10px'
