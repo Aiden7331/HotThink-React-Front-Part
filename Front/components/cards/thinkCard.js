@@ -229,8 +229,8 @@ const ThinkCard = ({ think }) => {
       return "/static/images/fow.png";
     }else if(title === "싸이월드"){
       return "/static/image/싸이월드.jfif";
-    }else if(title === "디바이스마트"){
-      return "/static/image/디바이스마트.jpg";
+    }else if(title === "핫띵크!"){
+      return "/static/images/idea.png";
     }else if(title === "디바이스마트"){
       return "/static/image/디바이스마트.jpg";
     }else if(title === "디바이스마트"){
@@ -278,17 +278,9 @@ const ThinkCard = ({ think }) => {
                     <Carousel.Item>
                       <img
                         width={'100%'}
-                        src="/static/images/image1.jpg"
+                        src="/static/images/idea.png"
                         alt="First slide"
                       />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <div>
-                        <img
-                          width={'100%'}
-                          src="/static/images/image2.jpg"
-                          alt="First slide"
-                        /></div>
                     </Carousel.Item>
                     <Carousel.Item>
                       <div>

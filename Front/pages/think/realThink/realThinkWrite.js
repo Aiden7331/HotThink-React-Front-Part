@@ -148,10 +148,9 @@ const ThinkWrite = ({form}) => {
                         <p className="ant-upload-drag-icon">
                             <Icon type="inbox" />
                         </p>
-                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                        <p className="ant-upload-text">업로드 할 파일을 클릭하거나 드래그 해주세요.</p>
                         <p className="ant-upload-hint">
-                            Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                            band files
+                            단일 또는 일괄 업로드를 지원합니다. 회사 데이터 또는 기타 자료 업로드를 엄격히 금지합니다.
                         </p>
                     </Dragger>
                 </Form.Item>

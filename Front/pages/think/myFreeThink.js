@@ -104,7 +104,7 @@ const MyFreeThink = () => {
     } else if (category === 'Design') {
       return '디자인';
     } else if (category === 'Marketing') return '마켓팅';
-  }
+  };
 
   return (
     <>

@@ -1,5 +1,5 @@
-import React from 'react';
-import {Col, Row} from 'antd';
+import React, {useState} from 'react';
+import { Col, Row} from 'antd';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
+import { Carousel } from 'react-bootstrap';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -35,70 +36,70 @@ const useStyles = makeStyles(theme => ({
 
 const TempPanel = () => {
   const classes = useStyles();
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(null);
 
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+    setDirection(e.direction);
+  };
 
   return (
     <Card className={classes.card} style={{maxWidth:'100%',width:'auto',height:'auto'}}>
       <Row>
         <Col span={10} >
-          {document.getElementsByClassName('img').naturalHeight>document.getElementsByClassName('box').naturalHeight
-            ?
-            <div className='box' style={{margin:'5px', width:'100%', float:"left", height:'90vh', background:'#F2F2F2', textAlign:'center'}}>
-              <img className='img' src={`/static/images/image3.jpg`} style={{
-                width: 'auto',
-                height: '100%',
-
-              }}/>
+          {/*{document.getElementsByClassName('img').naturalHeight>document.getElementsByClassName('box').naturalHeight*/}
+          {/*  ?*/}
+          <div className='box' style={{
+            height: '50vh',
+            width: '100%',
+            background: '#212529',
+            display: 'table'
+          }}>
+            <div style={{
+              display: 'table-cell',
+              width: '100%',
+              verticalAlign: 'middle'
+            }}>
+              <Carousel fade
+                        activeIndex={index} direction={direction} onSelect={handleSelect}>
+                <Carousel.Item>
+                  <img
+                      width={'100%'}
+                      src="/static/images/idea.png"
+                      alt="First slide"
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <div>
+                    <img
+                        width={'100%'}
+                        src="/static/images/image3.jpg"
+                        alt="First slide"
+                    /></div>
+                </Carousel.Item>
+              </Carousel>
             </div>
-            :
-            <div className='box' style={{ height:"50vh", width:'100%', background:'#000000', display:'table'}}>
-              <div style={{ display:'table-cell', width:'100%', verticalAlign:'middle'}}>
-                <img className='img' src={`/static/images/human2.jpg`}
-                     style={{
-                       width: '100%',
-                       height: 'auto',
-                       margin:'0 auto'
-                     }}
-                />
-              </div>
-            </div>
-          }
+          </div>
         </Col>
         <Col span={14}>
-          <CardHeader style={{}}
+          <CardHeader
                       avatar={
-                        <Avatar aria-label="recipe" className={classes.avatar}>
-                          H
-                        </Avatar>
+                        <Avatar aria-label="recipe" className={classes.avatar}
+                                src={"/static/images/human7.jpg"}
+                        />
                       }
                       title={
-                        'CEO가되는법'
+                        '핫띵크!'
                       }
                       subheader={
-                        '2019.11.26 PM 10:55'
+                        '2019-12-05 13:12:11'
                       }
-
           />
-          <CardContent style={{borderTop:'3px solid white',borderBottom:'3px solid white', width:'100%' }}>
+          <CardContent style={{borderTop:'3px solid white', width:'100%' }}>
             <Typography variant="body2" color="textSecondary" component="p">
-
-              //내용을 입력<br/>
-              작성자: 강태구<br/>
-              김영곤은 영원히 곤드레만드레~
-              다시 돌아와 주라 너 다시 돌아 와주라~~~~~~~~
-              6202 수업중일 떄 조용히 해주세요.
-              웃고 이야기 하는 소리 너무 크게 들려요..
-              ㅜㅜㅜㅜ  다시 돌아와 주라 너 다시 돌아 와주라~~~~~~~~
-
+              유저가 하나의 아이디어가 있다면 커뮤니티와 같은 프리띵크 게시판에 올립니다. 이 후 유저들에게 일정 크기의 좋아요를 받으면 핫띵크로 넘어가게되고 프리띵크 때 댓글로 유저들에게 피드백 받은 내용을 바탕으로 리얼띵크에 기획한 내용을 자세히 기재하여 팔 수 있는 권리를 얻을 수 있습니다.
             </Typography>
-          </CardContent>
-          <CardContent style={{height:'100%', width:'100%'}}>
-
-            -------------->프리띵크에서 작성한 댓글 포함여부 6202 수업중일 떄 조용히 해주세요.
-            웃고 이야기 하는 소리 너무 크게 들려요.. 6202 수업중일 떄 조용히 해주세요.
-            다시 돌아와 주라 너 다시 돌아 와주라~~~~~~~~
-
-
           </CardContent>
         </Col>
       </Row>

@@ -113,7 +113,7 @@ const dummy = [
     },
     {
         title: 'ProTO',
-        contents: '불법이 아닌 합법적인 도박입니다. 나라에 하는 사업이기 때문에 뒷통수를 맞을 일 또한 없기에 ...',
+        contents: '불법이 아닌 합법적인 도박입니다. 나라에 하는 사업이기 때문에 뒷통수를 맞을 일 또한 없기에...',
         date: '2019-12-07 00:01:59',
         src: '/static/images/프로토.png',
         init:'김',
@@ -121,7 +121,7 @@ const dummy = [
     }
 ];
 
-const MyHotThink = () => {
+const MyHotThink1 = () => {
     const classes = useStyles();
     const theme = useTheme();
 
@@ -150,17 +150,16 @@ const MyHotThink = () => {
         <>
             <div style={{marginLeft:'180px'}}>
                 <div>
-                    <HotThinkCard data={dummy[1]}/>
                     <HotThinkCard data={dummy[0]}/>
                     <HotThinkCard data={dummy[2]}/>
+                    <HotThinkCard data={dummy[3]}/>
                 </div>
                 <div>
-                    <HotThinkCard data={dummy[3]}/>
                     <HotThinkCard data={dummy[4]}/>
                     <HotThinkCard data={dummy[5]}/>
+                    <HotThinkCard data={dummy[6]}/>
                 </div>
                 <div>
-                    <HotThinkCard data={dummy[6]}/>
                     <HotThinkCard data={dummy[7]}/>
                     <HotThinkCard data={dummy[8]}/>
                 </div>
@@ -169,4 +168,4 @@ const MyHotThink = () => {
     );
 };
 
-export default MyHotThink;
+export default MyHotThink1;

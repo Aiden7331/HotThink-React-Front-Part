@@ -226,9 +226,11 @@ const NavigationBar = () => {
                 </li>
               </Button>
 
+          <Link href={user ? thinkURLInit('Hot') : ''}>
+
           <a style={{textDecoration:'none', marginLeft: '5%'}}>
             <Button
-              onClick={user ? ()=>alert("구독권을 구매하세요!") : () => setLoginShow(true)}
+              onClick={user ? null: () => setLoginShow(true)}
               style={{
                 outline: 'none',
                 marginLeft: '5%',
@@ -248,6 +250,8 @@ const NavigationBar = () => {
               </li>
             </Button>
           </a>
+          </Link>
+
         <Link href={user ? thinkURLInit('Think') : ''}>
           <a style={{textDecoration:'none', marginLeft: '5%'}}>
             <Button
@@ -273,6 +277,9 @@ const NavigationBar = () => {
           </a>
         </Link>
 
+          <Link href={user ? '/think/myHotThink1' : ''}>
+            <Button/>
+          </Link>
 
           {/*<Nav.Item>*/}
           {/*  <Link href={{*/}
